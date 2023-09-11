@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif    ;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 1;
     font-weight: 400;
 }
@@ -66,4 +66,3 @@ body {
 .margin-right-sm {
     margin-right: 1.6rem;
 }
-
