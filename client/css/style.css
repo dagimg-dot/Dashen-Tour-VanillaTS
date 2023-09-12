@@ -24,7 +24,7 @@ body {
 }
 
 .hero-img-box {
-    max-width: 100vw;
+    /* max-width: 100vw; */
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url('/client/assets/images/hero.png');
     background-repeat: no-repeat;
@@ -37,13 +37,12 @@ body {
 
 .blur-wrap {
     height: 100vh;
-    width: 45%;
     background: rgba(186, 114, 114, 0.2);
     backdrop-filter: blur(1rem);
+    width: 50%;
 
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .logo {
