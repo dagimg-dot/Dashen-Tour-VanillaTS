@@ -30,10 +30,6 @@ body {
     grid-template-columns: repeat(2, 1fr);
 }
 
-/* .hero-text-box {
-    margin-bottom: 10.4rem;
-} */
-
 .blur-wrap {
     height: inherit;
     background: rgba(186, 114, 114, 0.2);
@@ -41,7 +37,8 @@ body {
     /* width: 50%; */
 
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .unblurred-wrap {
@@ -49,10 +46,6 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-}
-
-.logo {
-    padding-top: 3.2rem;
 }
 
 .heading-primary {
