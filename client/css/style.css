@@ -114,8 +114,8 @@ body {
     font-size: 1.8rem;
 }
 
-.main-nav-list li:last-child {
-    color: black;
+.main-nav-link.btn-fill {
+    color: rgb(87, 83, 83);
 }
 
 .container {
