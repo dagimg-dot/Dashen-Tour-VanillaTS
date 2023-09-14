@@ -25,11 +25,23 @@ body {
     background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url('/client/assets/images/hero.png');
     background-repeat: no-repeat;
     background-size: cover;
+}
 
+.grid {
     display: grid;
+}
+
+.grid-2-cols {
     grid-template-columns: repeat(2, 1fr);
 }
 
+.grid-3-cols {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4-cols {
+    grid-template-columns: repeat(4, 1fr);
+}
 .blur-wrap {
     height: inherit;
     background: rgba(186, 114, 114, 0.2);
