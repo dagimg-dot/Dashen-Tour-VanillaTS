@@ -9,6 +9,10 @@
     --primary: #411D0D;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 html {
     font-size: 62.5%;
 }
@@ -44,8 +48,24 @@ body {
     grid-template-columns: repeat(4, 1fr);
 }
 
+.sub-heading {
+    display: inline-block;
+    font-size: 2.4rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 2.4rem;
+}
+
 .heading-primary {
     font-size: 5.2rem;
+    margin-bottom: 3.2rem;
+}
+
+.heading-secondary {
+    font-size: 3.2rem;
+    letter-spacing: -0.5px;
+    font-weight: bold;
+    color: #333;
     margin-bottom: 3.2rem;
 }
 
