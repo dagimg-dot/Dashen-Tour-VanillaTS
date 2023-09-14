@@ -1,47 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/************************/
+/* HERO SECTION */
+/************************/
 
-:root {
-    --grey: rgb(212, 198, 198);
-}
-
-html {
-    font-size: 62.5%;
-}
-
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    line-height: 1;
-    font-weight: 400;
-    color: var(--grey);
-}
-
-.hero {
-    /* max-width: 100vw; */
-    height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url('/client/assets/images/hero.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.grid {
-    display: grid;
-}
-
-.grid-2-cols {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-3-cols {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-4-cols {
-    grid-template-columns: repeat(4, 1fr);
-}
 .blur-wrap {
     height: inherit;
     background: rgba(186, 114, 114, 0.2);
@@ -60,48 +20,10 @@ body {
     align-items: flex-end;
 }
 
-.heading-primary {
-    font-size: 5.2rem;
-    margin-bottom: 3.2rem;
-}
-
 .hero-description {
     font-size: 2rem;
     line-height: 1.2;
     margin-bottom: 4.8rem;
-}
-
-.btn:link, .btn:visited {
-    text-decoration: none;
-    font-size: 2rem;
-    font-weight: 800;
-    display: inline-block;
-    padding: 1.6rem 3.2rem;
-    border-radius: 9px;
-    transition: all 0.3s;
-}
-
-.btn-fill {
-    background-color: var(--grey);
-    color: rgb(87, 83, 83);
-}
-
-.btn-outline {
-    color: var(--grey);
-    box-shadow: inset 0 0 0 3px var(--grey);
-}
-
-.margin-right-sm {
-    margin-right: 1.6rem;
-}
-
-.btn-fill:hover, .btn-fill:active {
-    background-color: white;
-}
-
-.btn-outline:hover, .btn-outline:active {
-    background-color: var(--grey);
-    color: rgb(87, 83, 83);
 }
 
 .main-nav-list {
@@ -121,16 +43,12 @@ body {
 }
 
 .main-nav-link.btn-fill {
-    color: rgb(87, 83, 83);
+    color: var(--primary);
 }
 
 .main-nav-link:hover, .main-nav-link:active {
     box-shadow: inset 0 0 0 3px #fff;
     border-radius: 9px;
-}
-
-.container {
-    padding: 5.2rem 4.8rem;
 }
 
 .right {
