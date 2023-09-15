@@ -81,6 +81,10 @@
     gap: 3.2rem;
 }
 
+.socials img {
+    cursor: pointer;
+}
+
 /****************************/
 /* TOP DESTINATIONS SECTION */
 /****************************/
