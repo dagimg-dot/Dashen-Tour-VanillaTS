@@ -25,6 +25,7 @@
     "nodemon": "^3.0.1",
     "pino": "^8.14.1",
     "pino-pretty": "^10.1.0",
-    "puppeteer": "^19.11.1"
+    "puppeteer": "^19.11.1",
+    "sqlite3": "^5.1.6"
   }
 }
