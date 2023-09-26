@@ -20,6 +20,7 @@ html {
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter';
     line-height: 1;
     font-weight: 400;
     color: var(--grey);
