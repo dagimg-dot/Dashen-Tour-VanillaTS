@@ -96,6 +96,15 @@ body {
     transition: all 0.3s;
 }
 
+.btn-main {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-main:hover, .btn-main:active {
+    background-color: #552c1a;
+}
+
 .btn-fill {
     background-color: var(--grey);
     color: var(--primary);
