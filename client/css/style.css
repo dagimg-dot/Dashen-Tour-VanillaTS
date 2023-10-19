@@ -146,6 +146,9 @@
     background-color: #eee9e7;
     padding: 4.8rem;
     border-radius: 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .package-header {
@@ -180,7 +183,3 @@
     text-align: center;
     margin-top: 4.8rem;
 }
-
-/****************************/
-/* FOOTER SECTION           */
-/****************************/
