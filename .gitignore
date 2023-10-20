@@ -2,3 +2,4 @@
 .env
 *.db
 *.sql
+/client/assets
