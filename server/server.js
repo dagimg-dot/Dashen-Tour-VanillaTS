@@ -1,11 +1,9 @@
 const express = require("express");
-const { default: registerUser } = require("./api/registerUser");
+const registerUser = require("./api/registerUser");
 
 const app = express();
 
-app.get("/test", () => {
-  console.log("This is a test endpoint");
-});
+app.use(express.json());
 
 app.post("/api/register", registerUser);
 
