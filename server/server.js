@@ -1,14 +1,14 @@
 const express = require("express");
-const registerUser = require("./api/registerUser");
+const router = require("./router/router");
 
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
 app.use(express.json());
 
-app.post("/api/register", registerUser);
+app.use("/", router);
 
-app.listen(port, () => {
-  console.log(`Server listening on ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
