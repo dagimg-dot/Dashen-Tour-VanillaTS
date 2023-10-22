@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const errorHandler = require("../utils/errorHandler");
 
 const registerUser = (req, res) => {
   const { fullName, email, phoneNumber, address, password } = req.body;
@@ -11,22 +12,10 @@ const registerUser = (req, res) => {
     password,
   })
     .then((user) => {
-      if (user) {
-        res.status(201).json({ message: "User registered successfully", user });
-      } else {
-        res.status(400).json({
-          error: {
-            message: "User registration failed",
-          },
-        });
-      }
+      res.status(201).json({ status: 201, message: "Success", user });
     })
-    .catch((err) => {
-      res.status(400).json({
-        error: {
-          message: "User registration failed",
-        },
-      });
+    .catch((error) => {
+      errorHandler(error, res);
     });
 };
 
