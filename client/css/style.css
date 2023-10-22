@@ -135,6 +135,71 @@
 }
 
 /****************************/
+/* TESTIMONIALS SECTION */
+/****************************/
+
+.section-testimonials {
+    background-color: #d3bebe;
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    align-items: center;
+    justify-items: center;
+}
+
+
+.testimonials-container {
+    padding: 8.4rem;
+}
+
+.testimonials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4.8rem;
+    column-gap: 8rem;
+}
+
+.testimonial-img {
+    width: 6.4rem;
+    height: 6.4rem;
+    border-radius: 50%;
+}
+
+.testimonial-text {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    margin-bottom: 1.6rem;
+    font-weight: 700;
+}
+
+.testimonial-name {
+    font-size: 1.6rem;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1.4rem;
+    column-gap: 1.4rem;
+    padding: 1.4rem;
+}
+
+.gallery-item {
+    width: 25rem;
+    height: 25rem;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    transition: all 0.4s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.1);
+}
+
+/****************************/
 /* PACKAGES SECTION */
 /****************************/
 
