@@ -249,7 +249,6 @@
     display: flex;
     gap: 2.4rem;
     padding-left: 10px;
-    justify-content: center;
 }
 
 .address-col {
