@@ -12,7 +12,7 @@ const registerUser = (req, res) => {
     password,
   })
     .then((user) => {
-      res.status(201).json({ status: 201, message: "Success", user });
+      res.status(201).json({ status: 201, message: "Success", data: { user } });
     })
     .catch((error) => {
       errorHandler(error, res);
