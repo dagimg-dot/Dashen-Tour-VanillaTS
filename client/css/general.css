@@ -19,7 +19,7 @@ html {
 
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-family: 'Inter';
     line-height: 1;
     font-weight: 400;
@@ -86,7 +86,7 @@ body {
     margin-bottom: 3.2rem;
 }
 
-.btn:link, .btn:visited {
+.btn, .btn:link, .btn:visited {
     text-decoration: none;
     font-size: 2rem;
     font-weight: 800;
@@ -94,6 +94,9 @@ body {
     padding: 1.6rem 3.2rem;
     border-radius: 9px;
     transition: all 0.3s;
+
+    border: none;
+    cursor: pointer;
 }
 
 .btn-main {
@@ -113,6 +116,19 @@ body {
 .btn-outline {
     color: var(--grey);
     box-shadow: inset 0 0 0 3px var(--grey);
+}
+
+.btn-form {
+    font-family: inherit;
+    background-color: #310808;
+    color: #ddd;
+    align-self: end;
+    padding: 1.2rem;
+}
+
+.btn-form:hover {
+    background-color: #fff;
+    color: #411D0D;
 }
 
 .margin-right-sm {
@@ -142,7 +158,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-} 
+}
 
 .list-item {
     font-size: 1.8rem;
@@ -155,4 +171,9 @@ body {
     width: 3rem;
     height: 3rem;
     fill: var(--primary);
+}
+
+*:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.8rem rgba(167, 154, 149, 0.475);
 }
