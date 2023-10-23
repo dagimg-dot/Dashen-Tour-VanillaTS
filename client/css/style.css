@@ -254,7 +254,7 @@
 /****************************/
 
 .section-cta {
-    padding: 8.4rem 0;
+    padding: 8.4rem 0 12.8rem 0;
 }
 
 .cta {
@@ -337,7 +337,8 @@
 }
 
 .cta-form button {
-    grid-column: 1 / -1;        
+    grid-column: 1 / -1;  
+    margin-top: 1.2rem;      
 }
 
 .cta *:focus {
@@ -350,7 +351,7 @@
 /****************************/
 
 .footer-wrapper {
-    padding: 8.4rem 0;
+    padding: 12.8rem 0;
     background-color: var(--primary);
 }
 
