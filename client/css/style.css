@@ -410,6 +410,7 @@
     display: flex;
     gap: 2.4rem;
     padding-left: 10px;
+    align-items: center;
 }
 
 .address-col {
