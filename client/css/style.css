@@ -250,6 +250,44 @@
 }
 
 /****************************/
+/* FEATURED SECTION */
+/****************************/
+
+.section-featured {
+    padding: 4.8rem 0;
+}
+
+.heading-featured-in {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    font-family: bolder;
+    text-align: center;
+    margin-bottom: 3.2rem;
+    font-family: inherit;
+    color: #888;
+}
+
+.logos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logos img:nth-child(1) {
+    height: 7rem;
+    filter: grayscale(100%);
+    opacity: 50%;
+}
+
+.logos img {
+    height: 10rem;
+    filter: grayscale(100%);
+    opacity: 50%;
+}
+
+
+/****************************/
 /* CTA SECTION */
 /****************************/
 
