@@ -2,6 +2,15 @@
 /* HERO SECTION */
 /************************/
 
+.hero {
+    /* max-width: 100vw; */
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url('../assets/images/destinations/hero.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--grey);
+}
+
 .blur-wrap {
     height: inherit;
     background: rgba(186, 114, 114, 0.2);
@@ -57,7 +66,7 @@
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    background-image: url('/client/assets/images/hero.png');
+    background-image: url('../assets/images/destinations/hero.png');
 
     position: absolute;
     top: 13rem;
