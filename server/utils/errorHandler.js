@@ -8,6 +8,12 @@ const errorHandler = (error, res) => {
           "This email is already associated with an account try to login with your email.",
       },
     });
+  } else {
+    res.status(400).json({
+      error: {
+        message: `${error}`,
+      },
+    });
   }
 };
 
