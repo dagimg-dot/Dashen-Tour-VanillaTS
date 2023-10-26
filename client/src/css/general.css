@@ -8,10 +8,10 @@
     --grey: rgb(212, 198, 198);
     --primary: #411D0D;
 }
-
+/* 
 ::-webkit-scrollbar {
     display: none;
-}
+} */
 
 html {
     font-size: 62.5%;
