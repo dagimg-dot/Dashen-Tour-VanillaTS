@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Frontend of Dashen Tour and Travel website",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "dagimg-dot",
   "license": "ISC",
