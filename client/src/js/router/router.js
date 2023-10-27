@@ -1,3 +1,5 @@
+import PageNotFound from "../views/PageNotFound.js";
+
 class Router {
   constructor(coreElements, routes) {
     this.root = coreElements.rootEl;
@@ -20,7 +22,7 @@ class Router {
       this.currentRoute = route;
       route.controller(this.root, this.css);
     } else {
-      this.root.textContent = "404 - Page not found";
+      this.root.innerHTML = PageNotFound.generateMarkup();
     }
   }
 }
