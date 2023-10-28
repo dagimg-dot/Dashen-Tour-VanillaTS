@@ -4,5 +4,7 @@
 .env
 *.db
 *.sql
-/client/assets
+/client/src/assets
+/client/src/html
+/server/uploads
 .env
