@@ -15,7 +15,6 @@ const upload = (req, res) => {
     message: "Success",
     data: { link },
   });
-  console.log("sent");
 };
 
 module.exports = upload;
