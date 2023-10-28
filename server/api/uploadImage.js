@@ -7,6 +7,7 @@ const upload = (req, res) => {
         message: "No image uploaded",
       },
     });
+    return;
   }
 
   const link = `http://localhost:${process.env.PORT}/uploads/${req.file.filename}`;
