@@ -6,7 +6,7 @@ const upload = require("../config/multer.config");
 const {
   fileSizeLimitErrorHandler,
   extenstionErrorHandler,
-} = require("../utils/uploadErrorHandler");
+} = require("../middlewares/uploadErrorHandler");
 const router = express.Router();
 
 router.post("/api/register", registerUser);
