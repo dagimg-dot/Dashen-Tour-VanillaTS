@@ -1,5 +1,9 @@
 class LoginView {
-  generateMarkup() {
+  render() {
+    return this._generateMarkup();
+  }
+
+  _generateMarkup() {
     return `
             <div class="login-wrapper">
                 <div class="login-form">
@@ -22,12 +26,12 @@ class LoginView {
                     <form class="form-container">
                         <div class="input-wrapper email">
                             <label for="email">Email</label>
-                            <input type="email" required>
+                            <input type="email" required />
                             <span class="error"></span>
                         </div>
                         <div class="input-wrapper password">
                             <label for="password">Password</label>
-                            <input type="password" required>
+                            <input type="password" required />
                             <span class="error"></span>
                         </div>
                         <button type="submit" class="login-btn">Login</button>

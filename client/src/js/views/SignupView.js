@@ -1,5 +1,9 @@
 class SignupView {
-  generateMarkup() {
+  render() {
+    return this._generateMarkup();
+  }
+
+  _generateMarkup() {
     return `
             <div class="signup-wrapper">
                 <div class="signup-form">
