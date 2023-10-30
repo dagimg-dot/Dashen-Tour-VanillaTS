@@ -2,8 +2,7 @@ import PageNotFound from "../views/PageNotFound.js";
 
 class Router {
   constructor(coreElements, routes) {
-    this.root = coreElements.rootEl;
-    this.css = coreElements.css;
+    this.coreElements = coreElements
     this.routes = routes;
     this.currentRoute = null;
   }
@@ -20,7 +19,7 @@ class Router {
 
     if (route) {
       this.currentRoute = route;
-      route.controller(this.root, this.css);
+      route.controller(this.coreElements);
     } else {
       this.root.innerHTML = PageNotFound.generateMarkup();
     }
