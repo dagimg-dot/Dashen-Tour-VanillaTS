@@ -20,7 +20,7 @@ class SignupView {
                             <h1 class="company-name">Dashen Tour</h1>
                         </div>
                         <div class="form-heading">
-                            <h2>Become a member and get discounts</h2>
+                            <h2>Become a member and enjoy your unforgettable trips</h2>
                         </div>
                     </div>
                     <form class="form-container">
