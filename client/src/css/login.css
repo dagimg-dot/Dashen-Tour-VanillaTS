@@ -1,6 +1,7 @@
 :root {
     --primary: #411D0D;
     --grey: rgb(212, 198, 198);
+    --error: rgb(221, 60, 60);
 }
 
 .login-wrapper {
@@ -19,11 +20,16 @@
     background-color: #fff;
     border-radius: 11px;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    max-width: 470px;
 }
 
 .form-header {
     padding: 3.2rem;
     padding-bottom: 0;
+}
+
+.form-heading {
+    line-height: 1.4;
 }
 
 .logo {
@@ -66,15 +72,34 @@ input {
 
 .error {
     font-size: 1.4rem;
-    color: rgb(221, 60, 60);
+    color: var(--error);
     display: none;
 }
 
-.login-btn {
-    padding: 1rem 2.4rem;
-    font-size: 1.8rem;
+.error-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    border: 2px solid var(--error);
+    margin-top: 2rem;
     border-radius: 9px;
-    margin-top: 3rem;
+    color: var(--error);
+    font-size: 1.8rem;
+    /* display: none; */
+}
+
+.close-btn svg { 
+    width: 30px;
+    height: 30px;
+    stroke: var(--error);
+}
+
+.login-btn {
+    padding: 1.2rem 2.4rem;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    border-radius: 9px;
     background-color: var(--primary);
     color: #fff;
     border: none;
