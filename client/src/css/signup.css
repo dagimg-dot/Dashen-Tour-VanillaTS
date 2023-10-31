@@ -107,9 +107,3 @@ input {
 .login-link a {
     color: var(--primary);
 }
-
-/* @media (max-width: 990px) {
-    .signup-wrapper {
-        scale: .8;
-    }
-} */
