@@ -1,6 +1,53 @@
 class LoginView {
+  constructor() {
+    this.virtualDOM = document.createElement("div");
+    this.loginForm = null;
+    this.emailInput = null;
+    this.passwordInput = null;
+    this.loginBtn = null;
+    this.email = "";
+    this.password = "";
+  }
+
   render() {
-    return this._generateMarkup();
+    this._bindElements();
+    this._addEventListeners();
+
+    return this.virtualDOM;
+  }
+
+  _bindElements() {
+    this.virtualDOM.innerHTML = this._generateMarkup();
+
+    this.loginForm = this.virtualDOM.querySelector(".form-container");
+    const loginForm = this.loginForm;
+
+    this.emailInput = loginForm.querySelector(".email > input");
+    this.passwordInput = loginForm.querySelector(".password > input");
+    this.loginBtn = loginForm.querySelector(".login-btn");
+  }
+
+  _addEventListeners() {
+    this.emailInput.addEventListener(
+      "input",
+      () => (this.email = this.emailInput.value)
+    );
+    this.passwordInput.addEventListener(
+      "input",
+      () => (this.password = this.passwordInput.value)
+    );
+    this.loginForm.addEventListener("submit", (ev) => this._handleSubmit(ev));
+  }
+
+  _handleSubmit(ev) {
+    ev.preventDefault();
+
+    const credendtials = {
+      email: this.email,
+      password: this.password,
+    };
+
+    console.log(credendtials);
   }
 
   _generateMarkup() {
