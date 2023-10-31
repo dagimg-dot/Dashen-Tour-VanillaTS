@@ -14,6 +14,7 @@
     justify-content: center;
     height: 100vh;
     font-size: 1.6rem;
+    color: #1a1818;
 }
 
 .login-form {
@@ -23,8 +24,14 @@
     max-width: 470px;
 }
 
+label {
+    color: #1a1818;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
 .form-header {
-    padding: 3.2rem;
+    padding: 2.4rem;
     padding-bottom: 0;
 }
 
@@ -36,19 +43,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.4rem;
-    margin-bottom: 1.6rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 0;
 }
 
 .logo svg {
-    width: 6rem;
+    width: 4rem;
 }
 
 .form-container {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
-    padding: 3.2rem;
+    padding: 2.4rem;
 }
 
 .input-wrapper {
@@ -59,15 +67,14 @@
 
 input {
     background-color: #fff;
-    color: #333;
+    color: #221f1f;
     font-family: inherit;
     width: 100%;
     padding: 1rem;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     border-radius: 9px;
     border: 2px solid var(--grey);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
-    color: #333;
 }
 
 .error {
@@ -85,7 +92,7 @@ input {
     margin-top: 2rem;
     border-radius: 9px;
     color: var(--error);
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     /* display: none; */
 }
 
@@ -97,7 +104,7 @@ input {
 
 .login-btn {
     padding: 1.2rem 2.4rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-top: 2rem;
     border-radius: 9px;
     background-color: var(--primary);
