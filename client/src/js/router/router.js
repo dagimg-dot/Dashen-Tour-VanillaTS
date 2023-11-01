@@ -1,15 +1,27 @@
 import PageNotFound from "../views/PageNotFound.js";
 
 class Router {
-  constructor(coreElements, routes) {
-    this.coreElements = coreElements
-    this.routes = routes;
-    this.currentRoute = null;
-  }
+  coreElements;
+  routes;
+  currentRoute = null;
 
-  init() {
+  init(coreElements, routes) {
+    this.coreElements = coreElements;
+    this.routes = routes;
     window.addEventListener("hashchange", this.handleRouteChange.bind(this));
     this.handleRouteChange();
+  }
+
+  push(path) {
+    const route = this.routes.find((r) => r.path === path);
+
+    if (route) {
+      const newHash = "#" + path;
+      this.currentRoute = route;
+      window.location.hash = newHash;
+    } else {
+      this.root.innerHTML = PageNotFound.generateMarkup();
+    }
   }
 
   handleRouteChange() {
