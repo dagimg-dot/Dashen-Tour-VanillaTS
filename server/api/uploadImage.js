@@ -14,7 +14,7 @@ const upload = (req, res) => {
   res.status(200).json({
     status: "200",
     message: "Success",
-    data: { link },
+    data: { url: link },
   });
 };
 
