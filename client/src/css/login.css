@@ -96,6 +96,10 @@ input {
     /* display: none; */
 }
 
+.close-btn {
+    cursor: pointer;
+}
+
 .close-btn svg { 
     width: 30px;
     height: 30px;
