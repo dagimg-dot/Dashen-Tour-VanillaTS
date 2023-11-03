@@ -1,25 +1,35 @@
+import updateDOM from "../utils/updateDOM.js";
+import morphdom from "morphdom";
+
 class LoginView {
   constructor() {
-    this.virtualDOM = document.createElement("div");
-    this.loginForm = null;
+    this.root = null;
     this.emailInput = null;
     this.passwordInput = null;
+    this.loginForm = null;
     this.loginBtn = null;
-    this.email = "";
-    this.password = "";
   }
 
-  render() {
+  render(state) {
+    this.root = state.rootNode;
+    this.root.innerHTML = this._generateMarkup(state);
     this._bindElements();
-    this._addEventListeners();
+  }
 
-    return this.virtualDOM;
+  update(state) {
+    updateDOM(this.root, this._generateMarkup(state));
+    // morphdom(this.root, this._generateMarkup(state), {
+    //   onBeforeElUpdated: (fromEl, toEl) => {
+    //     if (fromEl.isEqualNode(toEl)) {
+    //       return false;
+    //     }
+    //     return true;
+    //   },
+    // });
   }
 
   _bindElements() {
-    this.virtualDOM.innerHTML = this._generateMarkup();
-
-    this.loginForm = this.virtualDOM.querySelector(".form-container");
+    this.loginForm = this.root.querySelector(".form-container");
     const loginForm = this.loginForm;
 
     this.emailInput = loginForm.querySelector(".email > input");
@@ -27,30 +37,22 @@ class LoginView {
     this.loginBtn = loginForm.querySelector(".login-btn");
   }
 
-  _addEventListeners() {
-    this.emailInput.addEventListener(
-      "input",
-      () => (this.email = this.emailInput.value)
-    );
-    this.passwordInput.addEventListener(
-      "input",
-      () => (this.password = this.passwordInput.value)
-    );
-    this.loginForm.addEventListener("submit", (ev) => this._handleSubmit(ev));
+  getEmailValue() {
+    return this.emailInput.value;
   }
 
-  _handleSubmit(ev) {
-    ev.preventDefault();
-
-    const credendtials = {
-      email: this.email,
-      password: this.password,
-    };
-
-    console.log(credendtials);
+  getPasswordValue() {
+    return this.passwordInput.value;
   }
 
-  _generateMarkup() {
+  handleSubmit(handler) {
+    this.loginForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      handler();
+    });
+  }
+
+  _generateMarkup(state) {
     return `
             <div class="login-wrapper">
                 <div class="login-form">
@@ -73,15 +75,35 @@ class LoginView {
                     <form class="form-container">
                         <div class="input-wrapper email">
                             <label for="email">Email</label>
-                            <input type="email" required />
+                            <input type="email" required value="${
+                              state.credentials.email
+                            }"/>
                             <span class="error"></span>
                         </div>
                         <div class="input-wrapper password">
                             <label for="password">Password</label>
-                            <input type="password" required />
+                            <input type="password" required value="${
+                              state.credentials.password
+                            }"/>
                             <span class="error"></span>
                         </div>
-                        <button type="submit" class="login-btn">Login</button>
+                        ${
+                          state.isInvalid
+                            ? `<div class="error-container">
+                            <span class="message">Incorrect username or password</span>
+                              <div class="close-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path
+                                    d="M17.0206 18.0105C17.294 18.2839 17.7372 18.2839 18.0106 18.0105C18.2839 17.7371 18.2839 17.2939 18.0106 17.0206L12.9901 12.0001L18.0105 6.97967C18.2839 6.7063 18.2839 6.26309 18.0105 5.98972C17.7371 5.71635 17.2939 5.71635 17.0206 5.98972L12.0001 11.0101L6.97969 5.98969C6.70632 5.71633 6.2631 5.71633 5.98974 5.98969C5.71637 6.26306 5.71637 6.70628 5.98974 6.97964L11.0102 12.0001L5.98969 17.0206C5.71633 17.294 5.71633 17.7372 5.98969 18.0105C6.26306 18.2839 6.70628 18.2839 6.97964 18.0105L12.0001 12.99L17.0206 18.0105Z"
+                                    fill="#CCCCCC" />
+                                </svg>
+                              </div>
+                          </div>`
+                            : ""
+                        }
+                        <button type="submit" class="login-btn">${
+                          !state.isLoading ? "Login" : "Logging in"
+                        }</button>
                         <div class="signup-link">
                             <span>Don't have an account?</span>
                             <a href="#/signup">Signup</a>
