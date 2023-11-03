@@ -2,12 +2,16 @@
   "name": "dashen-tour-frontend",
   "version": "1.0.0",
   "description": "Frontend of Dashen Tour and Travel website",
+  "type": "module",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
   "author": "dagimg-dot",
   "license": "ISC",
+  "dependencies": {
+    "morphdom": "^2.7.1"
+  },
   "devDependencies": {
     "parcel": "^2.10.0"
   }
