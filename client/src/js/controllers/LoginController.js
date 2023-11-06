@@ -40,7 +40,7 @@ const LoginController = ({ root, css, title }) => {
     console.log("submitted");
 
     if (state().isLoading) {
-      dispatch({ type: "SET_LOADING", payload: false });
+      dispatch([{ type: "SET_LOADING", payload: false }]);
     } else {
       const email = LoginView.getEmailValue();
       const password = LoginView.getPasswordValue();
