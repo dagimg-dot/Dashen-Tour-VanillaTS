@@ -4,8 +4,10 @@ const useReducer = (reducer, initialState) => {
 
   const getState = () => state;
 
-  const dispatch = (action) => {
-    state = reducer(state, action);
+  const dispatch = (actionList) => {
+    for (let action of actionList) {
+      state = reducer(state, action);
+    }
     listeners.forEach((listener) => listener());
   };
 
