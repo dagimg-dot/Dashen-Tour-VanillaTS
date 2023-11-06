@@ -29,14 +29,14 @@ const LoginController = ({ root, css, title }) => {
 
   // Subscribe to state changes
   subscribe(() => {
-    console.log("updating");
     const newState = state();
-    console.log(newState);
     // Update the view with the new state
     LoginView.update(newState);
   });
 
-  LoginView.handleSubmit(() => {
+  LoginView.handleSubmit((event) => {
+    event.preventDefault();
+
     console.log("submitted");
 
     if (state().isLoading) {
@@ -45,12 +45,15 @@ const LoginController = ({ root, css, title }) => {
       const email = LoginView.getEmailValue();
       const password = LoginView.getPasswordValue();
 
-      dispatch({ type: "SET_CREDENTIALS", payload: { email, password } });
+      dispatch([
+        { type: "SET_CREDENTIALS", payload: { email, password } },
+        { type: "SET_LOADING", payload: true },
+      ]);
 
-      dispatch({ type: "SET_LOADING", payload: true });
       setTimeout(() => {
-        dispatch({ type: "SET_INVALID", payload: true });
+        dispatch([{ type: "SET_INVALID", payload: true }]);
       }, 2000);
+      console.log("first update");
     }
   });
 };
