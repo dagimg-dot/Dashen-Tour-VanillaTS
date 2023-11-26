@@ -31,7 +31,7 @@ const LoginController = ({ root, css, title }) => {
   subscribe(() => {
     const newState = state();
     // Update the view with the new state
-    LoginView.update(newState);
+    LoginView.render(newState);
   });
 
   LoginView.handleSubmit((event) => {
@@ -46,15 +46,19 @@ const LoginController = ({ root, css, title }) => {
       const password = LoginView.getPasswordValue();
 
       dispatch([
-        { type: "SET_CREDENTIALS", payload: { email, password } },
         { type: "SET_LOADING", payload: true },
+        { type: "SET_CREDENTIALS", payload: { email, password } },
       ]);
 
+      // Imitating api request
       setTimeout(() => {
         dispatch([{ type: "SET_INVALID", payload: true }]);
-      }, 2000);
-      console.log("first update");
+      }, 3000);
     }
+  });
+
+  LoginView.handleClose(() => {
+    dispatch([{ type: "SET_INVALID", payload: false }]);
   });
 };
 

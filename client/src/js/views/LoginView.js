@@ -1,31 +1,23 @@
-import updateDOM from "../utils/updateDOM.js";
-import morphdom from "morphdom";
-
 class LoginView {
   constructor() {
+    // Elements
     this.root = null;
     this.emailInput = null;
     this.passwordInput = null;
     this.loginForm = null;
     this.loginBtn = null;
+    this.closeBtn = null;
+
+    // Events
+    this.submitCallback = null;
+    this.closeCallback = null;
   }
 
   render(state) {
     this.root = state.rootNode;
     this.root.innerHTML = this._generateMarkup(state);
     this._bindElements();
-  }
-
-  update(state) {
-    updateDOM(this.root, this._generateMarkup(state));
-    // morphdom(this.root, this._generateMarkup(state), {
-    //   onBeforeElUpdated: (fromEl, toEl) => {
-    //     if (fromEl.isEqualNode(toEl)) {
-    //       return false;
-    //     }
-    //     return true;
-    //   },
-    // });
+    this._attachEventListeners();
   }
 
   _bindElements() {
@@ -35,6 +27,17 @@ class LoginView {
     this.emailInput = loginForm.querySelector(".email > input");
     this.passwordInput = loginForm.querySelector(".password > input");
     this.loginBtn = loginForm.querySelector(".login-btn");
+    this.closeBtn = loginForm.querySelector(".close-btn");
+  }
+
+  _attachEventListeners() {
+    this.loginForm.addEventListener("submit", (event) => {
+      this.submitCallback(event);
+    });
+
+    this.closeBtn.addEventListener("click", () => {
+      this.closeCallback();
+    });
   }
 
   getEmailValue() {
@@ -46,10 +49,11 @@ class LoginView {
   }
 
   handleSubmit(handler) {
-    this.loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      handler();
-    });
+    this.submitCallback = handler;
+  }
+
+  handleClose(handler) {
+    this.closeCallback = handler;
   }
 
   _generateMarkup(state) {
@@ -71,11 +75,11 @@ class LoginView {
                         <div class="form-heading">
                             <h2>Welcome back, Please login to your account</h2>
                         </div>
-                    </div>
+                    </div> 
                     <form class="form-container">
                         <div class="input-wrapper email">
                             <label for="email">Email</label>
-                            <input type="email" required value="${
+                            <input type="text" required value="${
                               state.credentials.email
                             }"/>
                             <span class="error"></span>
@@ -87,9 +91,11 @@ class LoginView {
                             }"/>
                             <span class="error"></span>
                         </div>
-                        ${
+                        <div class="${
                           state.isInvalid
-                            ? `<div class="error-container">
+                            ? `error-container`
+                            : `error-container hidden`
+                        }">
                             <span class="message">Incorrect username or password</span>
                               <div class="close-btn">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,12 +104,10 @@ class LoginView {
                                     fill="#CCCCCC" />
                                 </svg>
                               </div>
-                          </div>`
-                            : ""
-                        }
-                        <button type="submit" class="login-btn">${
-                          !state.isLoading ? "Login" : "Logging in"
-                        }</button>
+                        </div>
+                        <button type="submit" class="login-btn">
+                          ${!state.isLoading ? "Login" : "🔃 Logging In"}  
+                        </button>
                         <div class="signup-link">
                             <span>Don't have an account?</span>
                             <a href="#/signup">Signup</a>
