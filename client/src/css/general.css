@@ -201,3 +201,7 @@ body {
     font-size: 4.8rem;
     color: #ddd;
 }
+
+.hidden {
+    display: none !important;
+}
