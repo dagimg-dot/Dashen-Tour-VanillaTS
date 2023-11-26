@@ -20,6 +20,11 @@ const loginReducer = (state, action) => {
         isInvalid: action.payload,
         isLoading: false,
       };
+    case "SET_EMAIL_ERROR":
+      return {
+        ...state,
+        emailErrorMessage: action.payload
+      }
     default:
       return state;
   }
