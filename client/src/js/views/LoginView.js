@@ -1,16 +1,27 @@
+import updateDOM from "../utils/updateDOM";
+import Spinner from "../components/Spinner";
+
 class LoginView {
   constructor() {
-    // Elements
     this.root = null;
-    this.emailInput = null;
-    this.passwordInput = null;
-    this.loginForm = null;
-    this.loginBtn = null;
-    this.closeBtn = null;
+
+    this.stateFullElements = {
+      emailInput: null,
+      passwordInput: null,
+      emailError: null,
+      errorModal: null,
+      loginBtn: null,
+    };
+
+    this.eventFullElements = {
+      loginForm: null,
+      closeBtn: null,
+    };
 
     // Events
     this.submitCallback = null;
     this.closeCallback = null;
+    this.inputCallback = null;
   }
 
   render(state) {
@@ -20,32 +31,43 @@ class LoginView {
     this._attachEventListeners();
   }
 
-  _bindElements() {
-    this.loginForm = this.root.querySelector(".form-container");
-    const loginForm = this.loginForm;
+  update(state) {
+    updateDOM(this.stateFullElements, this._generateMarkup(state));
+  }
 
-    this.emailInput = loginForm.querySelector(".email > input");
-    this.passwordInput = loginForm.querySelector(".password > input");
-    this.loginBtn = loginForm.querySelector(".login-btn");
-    this.closeBtn = loginForm.querySelector(".close-btn");
+  _bindElements() {
+    const S_refs = Object.keys(this.stateFullElements);
+    const E_refs = Object.keys(this.eventFullElements);
+
+    S_refs.forEach((ref) => {
+      this.stateFullElements[ref] = document.getElementById(ref);
+    });
+
+    E_refs.forEach((ref) => {
+      this.eventFullElements[ref] = document.getElementById("E_" + ref);
+    });
   }
 
   _attachEventListeners() {
-    this.loginForm.addEventListener("submit", (event) => {
+    this.eventFullElements.loginForm.addEventListener("submit", (event) => {
       this.submitCallback(event);
     });
 
-    this.closeBtn.addEventListener("click", () => {
+    this.eventFullElements.closeBtn.addEventListener("click", () => {
       this.closeCallback();
+    });
+
+    this.stateFullElements.emailInput.addEventListener("input", (event) => {
+      this.inputCallback(event);
     });
   }
 
   getEmailValue() {
-    return this.emailInput.value;
+    return this.stateFullElements.emailInput.value;
   }
 
   getPasswordValue() {
-    return this.passwordInput.value;
+    return this.stateFullElements.passwordInput.value;
   }
 
   handleSubmit(handler) {
@@ -54,6 +76,10 @@ class LoginView {
 
   handleClose(handler) {
     this.closeCallback = handler;
+  }
+
+  handleInput(handler) {
+    this.inputCallback = handler;
   }
 
   _generateMarkup(state) {
@@ -76,37 +102,43 @@ class LoginView {
                             <h2>Welcome back, Please login to your account</h2>
                         </div>
                     </div> 
-                    <form class="form-container">
+                    <form id="E_loginForm" class="form-container">
                         <div class="input-wrapper email">
                             <label for="email">Email</label>
-                            <input type="text" required value="${
+                            <input id="emailInput" type="text" required value="${
                               state.credentials.email
                             }"/>
-                            <span class="error"></span>
-                        </div>
-                        <div class="input-wrapper password">
+                            <span id="emailError" class="error">${
+                              state.emailErrorMessage
+                            }</span>
+                            </div>
+                          <div class="input-wrapper password">
                             <label for="password">Password</label>
-                            <input type="password" required value="${
+                            <input id="passwordInput" type="password" required value="${
                               state.credentials.password
                             }"/>
                             <span class="error"></span>
                         </div>
-                        <div class="${
+                        <div id="errorModal" class="${
                           state.isInvalid
                             ? `error-container`
                             : `error-container hidden`
                         }">
-                            <span class="message">Incorrect username or password</span>
-                              <div class="close-btn">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path
-                                    d="M17.0206 18.0105C17.294 18.2839 17.7372 18.2839 18.0106 18.0105C18.2839 17.7371 18.2839 17.2939 18.0106 17.0206L12.9901 12.0001L18.0105 6.97967C18.2839 6.7063 18.2839 6.26309 18.0105 5.98972C17.7371 5.71635 17.2939 5.71635 17.0206 5.98972L12.0001 11.0101L6.97969 5.98969C6.70632 5.71633 6.2631 5.71633 5.98974 5.98969C5.71637 6.26306 5.71637 6.70628 5.98974 6.97964L11.0102 12.0001L5.98969 17.0206C5.71633 17.294 5.71633 17.7372 5.98969 18.0105C6.26306 18.2839 6.70628 18.2839 6.97964 18.0105L12.0001 12.99L17.0206 18.0105Z"
-                                    fill="#CCCCCC" />
-                                </svg>
-                              </div>
+                              <span class="message">Incorrect username or password</span>
+                                <div id="E_closeBtn" class="close-btn">
+                                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                      d="M17.0206 18.0105C17.294 18.2839 17.7372 18.2839 18.0106 18.0105C18.2839 17.7371 18.2839 17.2939 18.0106 17.0206L12.9901 12.0001L18.0105 6.97967C18.2839 6.7063 18.2839 6.26309 18.0105 5.98972C17.7371 5.71635 17.2939 5.71635 17.0206 5.98972L12.0001 11.0101L6.97969 5.98969C6.70632 5.71633 6.2631 5.71633 5.98974 5.98969C5.71637 6.26306 5.71637 6.70628 5.98974 6.97964L11.0102 12.0001L5.98969 17.0206C5.71633 17.294 5.71633 17.7372 5.98969 18.0105C6.26306 18.2839 6.70628 18.2839 6.97964 18.0105L12.0001 12.99L17.0206 18.0105Z"
+                                      fill="#CCCCCC" />
+                                  </svg>
+                                </div>
                         </div>
-                        <button type="submit" class="login-btn">
-                          ${!state.isLoading ? "Login" : "🔃 Logging In"}  
+                        <button id="loginBtn" type="submit" class="login-btn">
+                          ${
+                            !state.isLoading
+                              ? "<span>Login</span>"
+                              : `<div class="logging-in">${Spinner()} <span>Logging In</span></div>`
+                          }  
                         </button>
                         <div class="signup-link">
                             <span>Don't have an account?</span>
