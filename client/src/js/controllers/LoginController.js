@@ -11,6 +11,7 @@ const LoginController = ({ root, css, title }) => {
     },
     isLoading: false,
     isInvalid: false,
+    emailErrorMessage: "",
   };
 
   (() => {
@@ -31,8 +32,10 @@ const LoginController = ({ root, css, title }) => {
   subscribe(() => {
     const newState = state();
     // Update the view with the new state
-    LoginView.render(newState);
+    LoginView.update(newState);
   });
+
+  // Event Handlers
 
   LoginView.handleSubmit((event) => {
     event.preventDefault();
@@ -59,6 +62,10 @@ const LoginController = ({ root, css, title }) => {
 
   LoginView.handleClose(() => {
     dispatch([{ type: "SET_INVALID", payload: false }]);
+  });
+
+  LoginView.handleInput((event) => {
+    dispatch([{ type: "SET_EMAIL_ERROR", payload: event.target.value }]);
   });
 };
 
