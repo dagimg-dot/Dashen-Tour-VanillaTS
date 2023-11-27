@@ -1,12 +1,14 @@
 const loginReducer = (state, action) => {
   switch (action.type) {
-    case "SET_CREDENTIALS":
+    case "SET_EMAIL":
       return {
         ...state,
-        credentials: {
-          email: action.payload.email,
-          password: action.payload.password,
-        },
+        email: action.payload,
+      };
+    case "SET_PASSWORD":
+      return {
+        ...state,
+        password: action.payload,
       };
     case "SET_LOADING":
       return {
@@ -23,8 +25,13 @@ const loginReducer = (state, action) => {
     case "SET_EMAIL_ERROR":
       return {
         ...state,
-        emailErrorMessage: action.payload
-      }
+        emailErrorMessage: action.payload,
+      };
+    case "SET_PASSWORD_ERROR":
+      return {
+        ...state,
+        passwordErrorMessage: action.payload,
+      };
     default:
       return state;
   }
