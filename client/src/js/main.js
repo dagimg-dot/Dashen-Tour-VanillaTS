@@ -1,6 +1,6 @@
 import App from "./App.js";
 
-const root = document.getElementById("app");
+const root = document.getElementById("root");
 const dynamicCss = document.getElementById("dynamic-css");
 const dynamicTitle = document.getElementById("dynamic-title");
 
