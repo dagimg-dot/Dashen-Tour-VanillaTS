@@ -5,13 +5,12 @@ import LoginView from "../views/LoginView.js";
 const LoginController = ({ root, css, title }) => {
   const initialState = {
     rootNode: root,
-    credentials: {
-      email: "",
-      password: "",
-    },
+    email: "",
+    emailErrorMessage: "",
+    password: "",
+    passwordErrorMessage: "",
     isLoading: false,
     isInvalid: false,
-    emailErrorMessage: "",
   };
 
   (() => {
@@ -36,7 +35,6 @@ const LoginController = ({ root, css, title }) => {
   });
 
   // Event Handlers
-
   LoginView.handleSubmit((event) => {
     event.preventDefault();
 
@@ -45,27 +43,32 @@ const LoginController = ({ root, css, title }) => {
     if (state().isLoading) {
       dispatch([{ type: "SET_LOADING", payload: false }]);
     } else {
-      const email = LoginView.getEmailValue();
-      const password = LoginView.getPasswordValue();
-
-      dispatch([
-        { type: "SET_LOADING", payload: true },
-        { type: "SET_CREDENTIALS", payload: { email, password } },
-      ]);
+      dispatch([{ type: "SET_LOADING", payload: true }]);
 
       // Imitating api request
       setTimeout(() => {
         dispatch([{ type: "SET_INVALID", payload: true }]);
+        console.log(state());
       }, 3000);
     }
   });
 
-  LoginView.handleClose(() => {
+  LoginView.handleClose((event) => {
     dispatch([{ type: "SET_INVALID", payload: false }]);
   });
 
-  LoginView.handleInput((event) => {
-    dispatch([{ type: "SET_EMAIL_ERROR", payload: event.target.value }]);
+  LoginView.handleEmailInput((event) => {
+    dispatch([
+      { type: "SET_EMAIL", payload: event.target.value },
+      { type: "SET_EMAIL_ERROR", payload: event.target.value },
+    ]);
+  });
+
+  LoginView.handlePasswordInput((event) => {
+    dispatch([
+      { type: "SET_PASSWORD", payload: event.target.value },
+      { type: "SET_PASSWORD_ERROR", payload: event.target.value },
+    ]);
   });
 };
 
