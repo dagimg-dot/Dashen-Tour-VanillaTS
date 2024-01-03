@@ -60,8 +60,8 @@ const LoginController = ({ root, css, title }) => {
 
   LoginView.handleLogoClick(() => {
     const router = useRouter();
-    router.push("/")
-  })
+    router.push("/");
+  });
 
   LoginView.handleEmailInput((event) => {
     dispatch([
