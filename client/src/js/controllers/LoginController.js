@@ -1,4 +1,5 @@
 import useReducer from "../hooks/useReducer.js";
+import useRouter from "../hooks/useRouter.js";
 import reducer from "../reducers/LoginReducer.js";
 import LoginView from "../views/LoginView.js";
 
@@ -56,6 +57,11 @@ const LoginController = ({ root, css, title }) => {
   LoginView.handleClose((event) => {
     dispatch([{ type: "SET_INVALID", payload: false }]);
   });
+
+  LoginView.handleLogoClick(() => {
+    const router = useRouter();
+    router.push("/")
+  })
 
   LoginView.handleEmailInput((event) => {
     dispatch([
