@@ -80,7 +80,6 @@ input {
 .error {
     font-size: 1.4rem;
     color: var(--error);
-    display: none;
 }
 
 .error-container {
@@ -93,7 +92,6 @@ input {
     border-radius: 9px;
     color: var(--error);
     font-size: 1.4rem;
-    /* display: none; */
 }
 
 .close-btn {
@@ -116,6 +114,13 @@ input {
     border: none;
     transition: all 0.3s;
 }
+
+.logging-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
 
 .login-btn:hover {
     background-color: #5a2b17;
