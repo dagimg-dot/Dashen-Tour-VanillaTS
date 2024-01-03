@@ -5,81 +5,82 @@ class LoginView {
   constructor() {
     this.root = null;
 
-    this.stateFullElements = {
-      emailInput: null,
-      passwordInput: null,
-      emailError: null,
-      errorModal: null,
-      loginBtn: null,
+    // Reactive Elements
+    this.ReactiveElements = {
+      emailError: undefined,
+      passwordError: undefined,
+      errorModal: undefined,
+      loginBtn: undefined,
+      passwordInput: { event: "input", el: undefined, cb: undefined },
+      emailInput: { event: "input", el: undefined, cb: undefined },
+      loginForm: { event: "submit", el: undefined, cb: undefined },
+      closeBtn: { event: "click", el: undefined, cb: undefined },
     };
-
-    this.eventFullElements = {
-      loginForm: null,
-      closeBtn: null,
-    };
-
-    // Events
-    this.submitCallback = null;
-    this.closeCallback = null;
-    this.inputCallback = null;
   }
 
   render(state) {
     this.root = state.rootNode;
     this.root.innerHTML = this._generateMarkup(state);
     this._bindElements();
-    this._attachEventListeners();
+    // this._attachEventListeners();
+
+    // Test - Passed, except Callbacks
+    // console.log(this.getElements());
   }
 
   update(state) {
-    updateDOM(this.stateFullElements, this._generateMarkup(state));
+    const elements = this.getElements();
+    updateDOM(elements, this._generateMarkup(state));
+    // console.log(this.getElements());
   }
 
   _bindElements() {
-    const S_refs = Object.keys(this.stateFullElements);
-    const E_refs = Object.keys(this.eventFullElements);
+    const refs = Object.keys(this.ReactiveElements);
 
-    S_refs.forEach((ref) => {
-      this.stateFullElements[ref] = document.getElementById(ref);
-    });
-
-    E_refs.forEach((ref) => {
-      this.eventFullElements[ref] = document.getElementById("E_" + ref);
+    refs.forEach((ref) => {
+      if (typeof this.ReactiveElements[ref] === "object") {
+        this.ReactiveElements[ref].el = document.getElementById(ref);
+      } else {
+        this.ReactiveElements[ref] = document.getElementById(ref);
+      }
     });
   }
 
   _attachEventListeners() {
-    this.eventFullElements.loginForm.addEventListener("submit", (event) => {
-      this.submitCallback(event);
-    });
+    const refs = Object.keys(this.ReactiveElements);
 
-    this.eventFullElements.closeBtn.addEventListener("click", () => {
-      this.closeCallback();
-    });
-
-    this.stateFullElements.emailInput.addEventListener("input", (event) => {
-      this.inputCallback(event);
+    refs.forEach((ref) => {
+      if (Object.keys(this.ReactiveElements[ref]).includes("event")) {
+        const elObj = this.ReactiveElements[ref];
+        elObj.el.addEventListener(elObj.event, elObj.cb);
+      }
     });
   }
 
-  getEmailValue() {
-    return this.stateFullElements.emailInput.value;
-  }
-
-  getPasswordValue() {
-    return this.stateFullElements.passwordInput.value;
+  getElements() {
+    return {
+      ReactiveElements: this.ReactiveElements,
+    };
   }
 
   handleSubmit(handler) {
-    this.submitCallback = handler;
+    this.ReactiveElements.loginForm.el["onsubmit"] = handler;
+    this.ReactiveElements.loginForm.cb = handler;
   }
 
   handleClose(handler) {
-    this.closeCallback = handler;
+    this.ReactiveElements.closeBtn.el["onclick"] = handler;
+    this.ReactiveElements.closeBtn.cb = handler;
   }
 
-  handleInput(handler) {
-    this.inputCallback = handler;
+  handleEmailInput(handler) {
+    this.ReactiveElements.emailInput.el["oninput"] = handler;
+    this.ReactiveElements.emailInput.cb = handler;
+  }
+
+  handlePasswordInput(handler) {
+    this.ReactiveElements.passwordInput.el["oninput"] = handler;
+    this.ReactiveElements.passwordInput.cb = handler;
   }
 
   _generateMarkup(state) {
@@ -102,11 +103,11 @@ class LoginView {
                             <h2>Welcome back, Please login to your account</h2>
                         </div>
                     </div> 
-                    <form id="E_loginForm" class="form-container">
+                    <form id="loginForm" onsubmit="" class="form-container">
                         <div class="input-wrapper email">
                             <label for="email">Email</label>
                             <input id="emailInput" type="text" required value="${
-                              state.credentials.email
+                              state.email
                             }"/>
                             <span id="emailError" class="error">${
                               state.emailErrorMessage
@@ -115,17 +116,17 @@ class LoginView {
                           <div class="input-wrapper password">
                             <label for="password">Password</label>
                             <input id="passwordInput" type="password" required value="${
-                              state.credentials.password
+                              state.password
                             }"/>
-                            <span class="error"></span>
+                            <span id="passwordError" class="error">${
+                              state.passwordErrorMessage
+                            }</span>
                         </div>
-                        <div id="errorModal" class="${
-                          state.isInvalid
-                            ? `error-container`
-                            : `error-container hidden`
+                        <div id="errorModal" class="error-container${
+                          state.isInvalid ? `` : ` hidden`
                         }">
                               <span class="message">Incorrect username or password</span>
-                                <div id="E_closeBtn" class="close-btn">
+                                <div id="closeBtn" onclick="" class="close-btn">
                                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                       d="M17.0206 18.0105C17.294 18.2839 17.7372 18.2839 18.0106 18.0105C18.2839 17.7371 18.2839 17.2939 18.0106 17.0206L12.9901 12.0001L18.0105 6.97967C18.2839 6.7063 18.2839 6.26309 18.0105 5.98972C17.7371 5.71635 17.2939 5.71635 17.0206 5.98972L12.0001 11.0101L6.97969 5.98969C6.70632 5.71633 6.2631 5.71633 5.98974 5.98969C5.71637 6.26306 5.71637 6.70628 5.98974 6.97964L11.0102 12.0001L5.98969 17.0206C5.71633 17.294 5.71633 17.7372 5.98969 18.0105C6.26306 18.2839 6.70628 18.2839 6.97964 18.0105L12.0001 12.99L17.0206 18.0105Z"
@@ -137,7 +138,9 @@ class LoginView {
                           ${
                             !state.isLoading
                               ? "<span>Login</span>"
-                              : `<div class="logging-in">${Spinner()} <span>Logging In</span></div>`
+                              : `<div class="logging-in">${Spinner(
+                                  {}
+                                )} <span>Logging In</span></div>`
                           }  
                         </button>
                         <div class="signup-link">
