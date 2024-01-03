@@ -9,9 +9,7 @@
   },
   "author": "dagimg-dot",
   "license": "ISC",
-  "dependencies": {
-    "morphdom": "^2.7.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "parcel": "^2.10.0"
   }
