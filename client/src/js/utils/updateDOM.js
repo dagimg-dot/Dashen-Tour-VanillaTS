@@ -3,6 +3,10 @@ const createVirtualDOM = (content) => {
   return range.createContextualFragment(content);
 };
 
+const getElementFromDOM = (id) => {
+  return document.getElementById(id);
+};
+
 const updateDOM = (elements, vDomStr) => {
   const { ReactiveElements } = elements;
   const vDOM = createVirtualDOM(vDomStr);
@@ -11,9 +15,10 @@ const updateDOM = (elements, vDomStr) => {
 
   refs.forEach((ref) => {
     const vDomEl = vDOM.getElementById(ref);
-    const DomEl = ReactiveElements[ref];
+    let DomEl = ReactiveElements[ref];
 
     if (Object.keys(ReactiveElements[ref]).includes("event")) {
+      DomEl.el = getElementFromDOM(ref);
       // if (!vDomEl.isEqualNode(DomEl.el)) {
       //   DomEl.el.innerHTML = vDomEl.innerHTML;
       // }
@@ -21,8 +26,10 @@ const updateDOM = (elements, vDomStr) => {
       if (vDomEl.getAttribute("class") !== DomEl.el.getAttribute("class")) {
         DomEl.el.setAttribute("class", vDomEl.getAttribute("class"));
       }
-      console.log(DomEl);
+      const event = `on${DomEl.event}`;
+      DomEl.el[event] = DomEl.cb;
     } else {
+      DomEl = getElementFromDOM(ref);
       if (!vDomEl.isEqualNode(DomEl)) {
         DomEl.innerHTML = vDomEl.innerHTML;
       }
