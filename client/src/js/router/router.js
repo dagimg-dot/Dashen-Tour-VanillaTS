@@ -28,7 +28,7 @@ class Router {
       this.currentRoute = route;
       window.location.hash = newHash;
     } else {
-      this.renderPageNoteFound();
+      this.renderPageNotFound();
     }
   }
 
