@@ -8,7 +8,7 @@
     background-image: linear-gradient(#5e29298e, #6122228c), url("../assets/images/destinations/019.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +46,7 @@ label {
     gap: 1rem;
     margin-bottom: 1rem;
     padding-top: 0;
+    cursor: pointer;
 }
 
 .logo svg {
@@ -98,7 +99,7 @@ input {
     cursor: pointer;
 }
 
-.close-btn svg { 
+.close-btn svg {
     width: 30px;
     height: 30px;
     stroke: var(--error);
@@ -120,7 +121,7 @@ input {
     align-items: center;
     justify-content: center;
     gap: 1rem;
-  }
+}
 
 .login-btn:hover {
     background-color: #5a2b17;
