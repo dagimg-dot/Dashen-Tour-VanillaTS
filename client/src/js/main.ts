@@ -1,12 +1,14 @@
-import App from "./App.js";
+import { CoreElements } from "./types/types";
 
-const root = document.getElementById("root");
-const dynamicCss = document.getElementById("dynamic-css");
-const dynamicTitle = document.getElementById("dynamic-title");
+import App from "./App";
 
-const coreElements = {
+const root = document.getElementById("root") as HTMLDivElement;
+const dynamicTitle = document.getElementById(
+  "dynamic-title"
+) as HTMLTitleElement;
+
+const coreElements: CoreElements = {
   root,
-  css: dynamicCss,
   title: dynamicTitle,
 };
 

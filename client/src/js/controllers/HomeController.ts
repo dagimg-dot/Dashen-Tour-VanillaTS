@@ -1,10 +1,7 @@
-import HomeView from "../views/HomeView.js";
+import HomeView from "../views/HomeView";
 
-const HomeController = ({ root, css, title }) => {
-  // This is for parcel
-  //   css.setAttribute("href", "/index.c92073ef.css");
-
-  css.setAttribute("href", "./src/css/style.css");
+const HomeController = ({ root, title }) => {
+  title.innerText = "Dashen Tour"
   root.innerHTML = HomeView.generateMarkup();
 };
 

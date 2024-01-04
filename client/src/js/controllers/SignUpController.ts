@@ -1,11 +1,7 @@
-import SignupView from "../views/SignupView.js";
+import SignupView from "../views/SignupView";
 
-const SignUpController = ({ root, css, title }) => {
-  // This is for parcel
-  //   css.setAttribute("href", "/index.e72899e1.css");
-  
-  css.setAttribute("href", "./src/css/signup.css");
-  title.innerText = "Dashen Tour - Signup"
+const SignUpController = ({ root, title }) => {
+  title.innerText = "Dashen Tour - Signup";
   root.innerHTML = SignupView.render();
 };
 

@@ -1,9 +1,11 @@
-import useReducer from "../hooks/useReducer.js";
-import useRouter from "../hooks/useRouter.js";
-import reducer from "../reducers/LoginReducer.js";
-import LoginView from "../views/LoginView.js";
+import { CoreElements } from "../types/types";
 
-const LoginController = ({ root, css, title }) => {
+import useReducer from "../hooks/useReducer";
+import useRouter from "../hooks/useRouter";
+import reducer from "../reducers/LoginReducer";
+import LoginView from "../views/LoginView";
+
+const LoginController = ({ root, title }: CoreElements) => {
   const initialState = {
     rootNode: root,
     email: "",
@@ -15,11 +17,6 @@ const LoginController = ({ root, css, title }) => {
   };
 
   (() => {
-    // This is for live server
-    // css.setAttribute("href", "./src/css/login.css");
-
-    // This is for parcel
-    css.setAttribute("href", "/index.4cdbd4fe.css");
     title.innerText = "Dashen Tour - Login";
 
     // Initial Render
@@ -33,6 +30,7 @@ const LoginController = ({ root, css, title }) => {
     const newState = state();
     // Update the view with the new state
     LoginView.update(newState);
+    console.log(newState);
   });
 
   // Event Handlers
