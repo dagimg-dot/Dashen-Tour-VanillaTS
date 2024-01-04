@@ -434,7 +434,7 @@ class HomeView {
                               d="M57.1913 83V32.3648L46.913 37V28.5L57.1913 23.4906V4.69811L67.9214 0H68.4861V22.5L81.2421 28.5L83 24.0126L78.5 35.5L68.4861 31V78.3019L57.7561 83H57.1913Z"
                               fill="white" />
                       </svg>
-                      <h1 class="company-name">Dashen Tour</h1>
+                      <h1 class="hero-company-name">Dashen Tour</h1>
                   </a>
                   <ul class="social-links">
                       <li>
