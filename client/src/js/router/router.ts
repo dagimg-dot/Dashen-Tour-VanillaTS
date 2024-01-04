@@ -1,18 +1,20 @@
-import PageNotFound from "../views/PageNotFound.js";
+import { CoreElements, Route } from "../types/types";
+
+import PageNotFound from "../views/PageNotFound";
 
 class Router {
-  coreElements;
-  routes;
-  currentRoute = null;
+  coreElements: CoreElements;
+  routes: Route[];
+  currentRoute: Route | null;
 
-  init(coreElements, routes) {
+  init(coreElements: CoreElements, routes: Route[]) {
     this.coreElements = coreElements;
     this.routes = routes;
     window.addEventListener("hashchange", this.handleRouteChange.bind(this));
     this.handleRouteChange();
   }
 
-  getRoute(route) {
+  getRoute(route: string) {
     return this.routes.find((r) => r.path === route);
   }
 
@@ -20,7 +22,7 @@ class Router {
     this.coreElements.root.innerHTML = PageNotFound.generateMarkup();
   }
 
-  push(path) {
+  push(path: string) {
     const route = this.getRoute(path);
 
     if (route) {
