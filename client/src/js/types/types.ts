@@ -31,3 +31,5 @@ export type EventFullElement = {
   el: HTMLElement | null;
   cb: EventCallBack | null;
 };
+
+export interface HTMLTemplateLiteral extends String {}
