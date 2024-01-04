@@ -8,16 +8,16 @@ const getElementFromDOM = (id) => {
 };
 
 const updateDOM = (elements, vDomStr) => {
-  const { ReactiveElements } = elements;
+  const { reactiveElements } = elements;
   const vDOM = createVirtualDOM(vDomStr);
 
-  const refs = Object.keys(ReactiveElements);
+  const refs = Object.keys(reactiveElements);
 
   refs.forEach((ref) => {
     const vDomEl = vDOM.getElementById(ref);
-    let DomEl = ReactiveElements[ref];
+    let DomEl = reactiveElements[ref];
 
-    if (Object.keys(ReactiveElements[ref]).includes("event")) {
+    if (Object.keys(reactiveElements[ref]).includes("event")) {
       DomEl.el = getElementFromDOM(ref);
       // if (!vDomEl.isEqualNode(DomEl.el)) {
       //   DomEl.el.innerHTML = vDomEl.innerHTML;
