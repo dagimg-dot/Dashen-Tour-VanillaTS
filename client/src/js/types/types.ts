@@ -23,3 +23,11 @@ export type PageAction<T> = {
 export type State = {
   rootNode: HTMLDivElement;
 };
+
+export type EventCallBack = (event: Event) => void;
+
+export type EventFullElement = {
+  event: string;
+  el: HTMLElement | null;
+  cb: EventCallBack | null;
+};
