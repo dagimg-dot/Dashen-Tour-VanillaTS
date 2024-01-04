@@ -1,40 +1,40 @@
-import { LoginState } from "../types/loginTypes";
+import { LoginReactiveElements, LoginState } from "../types/loginTypes";
+import {
+  HTMLTemplateLiteral,
+  EventCallBack,
+  EventFullElement,
+} from "../types/types";
 
 import updateDOM from "../utils/updateDOM";
 import Spinner from "../components/Spinner";
 import "../../css/login.css";
-import { isEventFull, isObject } from "../utils/utilityFuncs";
+import { isObject } from "../utils/utilityFuncs";
 
 class LoginView {
   root: HTMLDivElement | null;
 
   // Reactive Elements
-  reactiveElements = {
-    emailError: undefined,
-    passwordError: undefined,
-    errorModal: undefined,
-    loginBtn: undefined,
-    passwordInput: { event: "input", el: undefined, cb: undefined },
-    emailInput: { event: "input", el: undefined, cb: undefined },
-    loginForm: { event: "submit", el: undefined, cb: undefined },
-    closeBtn: { event: "click", el: undefined, cb: undefined },
-    logo: { event: "click", el: undefined, cb: undefined },
+  reactiveElements: LoginReactiveElements = {
+    emailError: null,
+    passwordError: null,
+    errorModal: null,
+    loginBtn: null,
+    passwordInput: { event: "input", el: null, cb: null },
+    emailInput: { event: "input", el: null, cb: null },
+    loginForm: { event: "submit", el: null, cb: null },
+    closeBtn: { event: "click", el: null, cb: null },
+    logo: { event: "click", el: null, cb: null },
   };
 
   render(state: LoginState) {
     this.root = state.rootNode;
-    this.root!.innerHTML = this._generateMarkup(state);
+    this.root!.innerHTML = this._generateMarkup(state) as string;
     this._bindElements();
-    // this._attachEventListeners();
-
-    // Test - Passed, except Callbacks
-    // console.log(this.getElements());
   }
 
   update(state: LoginState) {
     const elements = this.getElements();
     updateDOM(elements, this._generateMarkup(state));
-    // console.log(this.getElements());
   }
 
   _bindElements() {
@@ -42,56 +42,42 @@ class LoginView {
 
     refs.forEach((ref) => {
       if (isObject(this.reactiveElements[ref])) {
-        this.reactiveElements[ref].el = document.getElementById(ref);
+        const reactive: EventFullElement = this.reactiveElements[ref];
+        reactive.el = document.getElementById(ref);
       } else {
         this.reactiveElements[ref] = document.getElementById(ref);
       }
     });
   }
 
-  _attachEventListeners() {
-    const refs = Object.keys(this.reactiveElements);
+  getElements = () => this.reactiveElements;
 
-    refs.forEach((ref) => {
-      if (isEventFull(this.reactiveElements[ref])) {
-        const elObj = this.reactiveElements[ref];
-        elObj.el.addEventListener(elObj.event, elObj.cb);
-      }
-    });
-  }
-
-  getElements() {
-    return {
-      reactiveElements: this.reactiveElements,
-    };
-  }
-
-  handleSubmit(handler) {
-    this.reactiveElements.loginForm.el["onsubmit"] = handler;
+  handleSubmit(handler: EventCallBack) {
+    this.reactiveElements.loginForm.el!["onsubmit"] = handler;
     this.reactiveElements.loginForm.cb = handler;
   }
 
-  handleClose(handler) {
-    this.reactiveElements.closeBtn.el["onclick"] = handler;
+  handleClose(handler: EventCallBack) {
+    this.reactiveElements.closeBtn.el!["onclick"] = handler;
     this.reactiveElements.closeBtn.cb = handler;
   }
 
-  handleEmailInput(handler) {
-    this.reactiveElements.emailInput.el["oninput"] = handler;
+  handleEmailInput(handler: EventCallBack) {
+    this.reactiveElements.emailInput.el!["oninput"] = handler;
     this.reactiveElements.emailInput.cb = handler;
   }
 
-  handlePasswordInput(handler) {
-    this.reactiveElements.passwordInput.el["oninput"] = handler;
+  handlePasswordInput(handler: EventCallBack) {
+    this.reactiveElements.passwordInput.el!["oninput"] = handler;
     this.reactiveElements.passwordInput.cb = handler;
   }
 
-  handleLogoClick(handler) {
-    this.reactiveElements.logo.el["onclick"] = handler;
+  handleLogoClick(handler: EventCallBack) {
+    this.reactiveElements.logo.el!["onclick"] = handler;
     this.reactiveElements.logo.cb = handler;
   }
 
-  _generateMarkup(state: LoginState) {
+  _generateMarkup(state: LoginState): HTMLTemplateLiteral {
     return `
             <div class="login-wrapper">
                 <div class="login-form">
