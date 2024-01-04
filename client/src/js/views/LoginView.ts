@@ -3,6 +3,7 @@ import { LoginState } from "../types/loginTypes";
 import updateDOM from "../utils/updateDOM";
 import Spinner from "../components/Spinner";
 import "../../css/login.css";
+import { isEventFull, isObject } from "../utils/utilityFuncs";
 
 class LoginView {
   root: HTMLDivElement | null;
@@ -40,7 +41,7 @@ class LoginView {
     const refs = Object.keys(this.reactiveElements);
 
     refs.forEach((ref) => {
-      if (typeof this.reactiveElements[ref] === "object") {
+      if (isObject(this.reactiveElements[ref])) {
         this.reactiveElements[ref].el = document.getElementById(ref);
       } else {
         this.reactiveElements[ref] = document.getElementById(ref);
@@ -52,7 +53,7 @@ class LoginView {
     const refs = Object.keys(this.reactiveElements);
 
     refs.forEach((ref) => {
-      if (Object.keys(this.reactiveElements[ref]).includes("event")) {
+      if (isEventFull(this.reactiveElements[ref])) {
         const elObj = this.reactiveElements[ref];
         elObj.el.addEventListener(elObj.event, elObj.cb);
       }

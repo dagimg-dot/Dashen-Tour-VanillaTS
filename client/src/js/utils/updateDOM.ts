@@ -1,3 +1,5 @@
+import { isEventFull } from "./utilityFuncs";
+
 const createVirtualDOM = (content) => {
   const range = document.createRange();
   return range.createContextualFragment(content);
@@ -17,7 +19,7 @@ const updateDOM = (elements, vDomStr) => {
     const vDomEl = vDOM.getElementById(ref);
     let DomEl = reactiveElements[ref];
 
-    if (Object.keys(reactiveElements[ref]).includes("event")) {
+    if (isEventFull(DomEl)) {
       DomEl.el = getElementFromDOM(ref);
       // if (!vDomEl.isEqualNode(DomEl.el)) {
       //   DomEl.el.innerHTML = vDomEl.innerHTML;
