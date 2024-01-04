@@ -81,7 +81,6 @@ input {
 .error {
     font-size: 1.1rem;
     color: rgb(221, 60, 60);
-    display: none;
 }
 
 .signup-btn {
