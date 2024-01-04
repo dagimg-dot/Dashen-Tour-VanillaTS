@@ -1,4 +1,10 @@
-const loginReducer = (state, action) => {
+import { PageAction } from "../types/types";
+import { LoginState, LOGINACTIONS } from "../types/loginTypes";
+
+const loginReducer = (
+  state: LoginState,
+  action: PageAction<LOGINACTIONS>
+): LoginState => {
   switch (action.type) {
     case "SET_EMAIL":
       return {

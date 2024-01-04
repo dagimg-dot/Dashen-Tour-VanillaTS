@@ -1,6 +1,6 @@
-import Router from "../router/router.js";
+import Router from "../router/router";
 
-let router = null;
+let router: Router | null;
 
 const useRouter = () => {
   if (!router) {
