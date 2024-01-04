@@ -1,27 +1,28 @@
+import { LoginState } from "../types/loginTypes";
+
 import updateDOM from "../utils/updateDOM";
 import Spinner from "../components/Spinner";
+import "../../css/login.css";
 
 class LoginView {
-  constructor() {
-    this.root = null;
+  root: HTMLDivElement | null;
 
-    // Reactive Elements
-    this.ReactiveElements = {
-      emailError: undefined,
-      passwordError: undefined,
-      errorModal: undefined,
-      loginBtn: undefined,
-      passwordInput: { event: "input", el: undefined, cb: undefined },
-      emailInput: { event: "input", el: undefined, cb: undefined },
-      loginForm: { event: "submit", el: undefined, cb: undefined },
-      closeBtn: { event: "click", el: undefined, cb: undefined },
-      logo: { event: "click", el: undefined, cb: undefined },
-    };
-  }
+  // Reactive Elements
+  reactiveElements = {
+    emailError: undefined,
+    passwordError: undefined,
+    errorModal: undefined,
+    loginBtn: undefined,
+    passwordInput: { event: "input", el: undefined, cb: undefined },
+    emailInput: { event: "input", el: undefined, cb: undefined },
+    loginForm: { event: "submit", el: undefined, cb: undefined },
+    closeBtn: { event: "click", el: undefined, cb: undefined },
+    logo: { event: "click", el: undefined, cb: undefined },
+  };
 
-  render(state) {
+  render(state: LoginState) {
     this.root = state.rootNode;
-    this.root.innerHTML = this._generateMarkup(state);
+    this.root!.innerHTML = this._generateMarkup(state);
     this._bindElements();
     // this._attachEventListeners();
 
@@ -29,30 +30,30 @@ class LoginView {
     // console.log(this.getElements());
   }
 
-  update(state) {
+  update(state: LoginState) {
     const elements = this.getElements();
     updateDOM(elements, this._generateMarkup(state));
     // console.log(this.getElements());
   }
 
   _bindElements() {
-    const refs = Object.keys(this.ReactiveElements);
+    const refs = Object.keys(this.reactiveElements);
 
     refs.forEach((ref) => {
-      if (typeof this.ReactiveElements[ref] === "object") {
-        this.ReactiveElements[ref].el = document.getElementById(ref);
+      if (typeof this.reactiveElements[ref] === "object") {
+        this.reactiveElements[ref].el = document.getElementById(ref);
       } else {
-        this.ReactiveElements[ref] = document.getElementById(ref);
+        this.reactiveElements[ref] = document.getElementById(ref);
       }
     });
   }
 
   _attachEventListeners() {
-    const refs = Object.keys(this.ReactiveElements);
+    const refs = Object.keys(this.reactiveElements);
 
     refs.forEach((ref) => {
-      if (Object.keys(this.ReactiveElements[ref]).includes("event")) {
-        const elObj = this.ReactiveElements[ref];
+      if (Object.keys(this.reactiveElements[ref]).includes("event")) {
+        const elObj = this.reactiveElements[ref];
         elObj.el.addEventListener(elObj.event, elObj.cb);
       }
     });
@@ -60,36 +61,36 @@ class LoginView {
 
   getElements() {
     return {
-      ReactiveElements: this.ReactiveElements,
+      reactiveElements: this.reactiveElements,
     };
   }
 
   handleSubmit(handler) {
-    this.ReactiveElements.loginForm.el["onsubmit"] = handler;
-    this.ReactiveElements.loginForm.cb = handler;
+    this.reactiveElements.loginForm.el["onsubmit"] = handler;
+    this.reactiveElements.loginForm.cb = handler;
   }
 
   handleClose(handler) {
-    this.ReactiveElements.closeBtn.el["onclick"] = handler;
-    this.ReactiveElements.closeBtn.cb = handler;
+    this.reactiveElements.closeBtn.el["onclick"] = handler;
+    this.reactiveElements.closeBtn.cb = handler;
   }
 
   handleEmailInput(handler) {
-    this.ReactiveElements.emailInput.el["oninput"] = handler;
-    this.ReactiveElements.emailInput.cb = handler;
+    this.reactiveElements.emailInput.el["oninput"] = handler;
+    this.reactiveElements.emailInput.cb = handler;
   }
 
   handlePasswordInput(handler) {
-    this.ReactiveElements.passwordInput.el["oninput"] = handler;
-    this.ReactiveElements.passwordInput.cb = handler;
+    this.reactiveElements.passwordInput.el["oninput"] = handler;
+    this.reactiveElements.passwordInput.cb = handler;
   }
 
   handleLogoClick(handler) {
-    this.ReactiveElements.logo.el["onclick"] = handler;
-    this.ReactiveElements.logo.cb = handler;
+    this.reactiveElements.logo.el["onclick"] = handler;
+    this.reactiveElements.logo.cb = handler;
   }
 
-  _generateMarkup(state) {
+  _generateMarkup(state: LoginState) {
     return `
             <div class="login-wrapper">
                 <div class="login-form">
@@ -144,9 +145,7 @@ class LoginView {
                           ${
                             !state.isLoading
                               ? "<span>Login</span>"
-                              : `<div class="logging-in">${Spinner(
-                                  {}
-                                )} <span>Logging In</span></div>`
+                              : `<div class="logging-in">${Spinner()} <span>Logging In</span></div>`
                           }  
                         </button>
                         <div class="signup-link">

@@ -1,3 +1,5 @@
+import "../../css/style.css"
+
 class HomeView {
   generateMarkup() {
     return `

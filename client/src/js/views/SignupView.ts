@@ -1,3 +1,5 @@
+import "../../css/signup.css"
+
 class SignupView {
   render() {
     return this._generateMarkup();
