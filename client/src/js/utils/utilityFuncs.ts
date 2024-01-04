@@ -1,5 +1,5 @@
 const isObject = (variable: unknown) => {
-  return typeof variable === "object";
+  return typeof variable === "object" && variable !== null;
 };
 
 const isEventFull = (variable: Object) => {
