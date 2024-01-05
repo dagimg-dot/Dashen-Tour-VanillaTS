@@ -33,4 +33,7 @@ export interface HTMLTemplateLiteral extends String {}
 
 export type Reducer<S, A> = (state: S, action: A) => S;
 
-export type UpdateDOM<RE> = (reactiveElements: RE) => void;
+export type UpdateDOM<RE> = (
+  reactiveElements: RE,
+  vDomStr: HTMLTemplateLiteral
+) => void;
