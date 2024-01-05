@@ -10,21 +10,21 @@ export interface LoginState extends State {
 }
 
 export type LOGINACTIONS =
-  | "SET_EMAIL"
-  | "SET_PASSWORD"
-  | "SET_LOADING"
-  | "SET_INVALID"
-  | "SET_EMAIL_ERROR"
-  | "SET_PASSWORD_ERROR";
+  | { type: "SET_EMAIL"; payload: string }
+  | { type: "SET_EMAIL_ERROR"; payload: string }
+  | { type: "SET_PASSWORD"; payload: string }
+  | { type: "SET_PASSWORD_ERROR"; payload: string }
+  | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_INVALID"; payload: boolean };
 
 export type LoginReactiveElements = {
   emailError: HTMLSpanElement | null;
   passwordError: HTMLSpanElement | null;
   errorModal: HTMLDivElement | null;
   loginBtn: HTMLButtonElement | null;
-  passwordInput: EventFullElement;
-  emailInput: EventFullElement;
-  loginForm: EventFullElement;
-  closeBtn: EventFullElement;
-  logo: EventFullElement;
+  passwordInput: EventFullElement<InputEvent>;
+  emailInput: EventFullElement<InputEvent>;
+  loginForm: EventFullElement<SubmitEvent>;
+  closeBtn: EventFullElement<MouseEvent>;
+  logo: EventFullElement<MouseEvent>;
 };
