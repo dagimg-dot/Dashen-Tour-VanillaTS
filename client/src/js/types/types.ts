@@ -10,26 +10,23 @@ export type Route = {
   controller: Controller;
 };
 
-export type Action = {
-  type: string;
+export interface PageAction<T extends { type: string }> {
+  type: T["type"];
   payload: any;
-};
-
-export type PageAction<T> = {
-  type: T;
-  payload: any;
-};
+}
 
 export type State = {
   rootNode: HTMLDivElement;
 };
 
-export type EventCallBack = (event: Event) => void;
+export type EventCallBack<T> = (event: T) => void;
 
-export type EventFullElement = {
+export type EventFullElement<T> = {
   event: string;
   el: HTMLElement | null;
-  cb: EventCallBack | null;
+  cb: EventCallBack<T> | null;
 };
 
 export interface HTMLTemplateLiteral extends String {}
+
+export type Reducer<S, A> = (state: S, action: A) => S;
