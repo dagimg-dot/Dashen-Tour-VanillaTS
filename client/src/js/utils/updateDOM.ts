@@ -10,7 +10,10 @@ const getElementFromDOM = (id: string) => {
   return document.getElementById(id);
 };
 
-const updateDOM = (reactiveElements, vDomStr: HTMLTemplateLiteral) => {
+const updateDOM = <PageReactiveElements extends {}>(
+  reactiveElements: PageReactiveElements,
+  vDomStr: HTMLTemplateLiteral
+) => {
   const vDOM = createVirtualDOM(vDomStr);
 
   const refs = Object.keys(reactiveElements);
@@ -19,7 +22,7 @@ const updateDOM = (reactiveElements, vDomStr: HTMLTemplateLiteral) => {
     const vDomEl = vDOM.getElementById(ref) as HTMLElement;
 
     if (isEventFull(reactiveElements[ref])) {
-      const DomEl: EventFullElement = reactiveElements[ref];
+      const DomEl: EventFullElement<Event> = reactiveElements[ref];
       DomEl.el = getElementFromDOM(ref) as HTMLElement;
       // if (!vDomEl.isEqualNode(DomEl.el)) {
       //   DomEl.el.innerHTML = vDomEl.innerHTML;

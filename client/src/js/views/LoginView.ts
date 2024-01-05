@@ -1,9 +1,5 @@
 import { LoginReactiveElements, LoginState } from "../types/loginTypes";
-import {
-  HTMLTemplateLiteral,
-  EventCallBack,
-  EventFullElement,
-} from "../types/types";
+import { HTMLTemplateLiteral, EventCallBack } from "../types/types";
 
 import updateDOM from "../utils/updateDOM";
 import Spinner from "../components/Spinner";
@@ -34,7 +30,7 @@ class LoginView {
 
   update(state: LoginState) {
     const elements = this.getElements();
-    updateDOM(elements, this._generateMarkup(state));
+    updateDOM<LoginReactiveElements>(elements, this._generateMarkup(state));
   }
 
   _bindElements() {

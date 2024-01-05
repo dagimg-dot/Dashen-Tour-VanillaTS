@@ -32,3 +32,5 @@ export type EventFullElement<T> = {
 export interface HTMLTemplateLiteral extends String {}
 
 export type Reducer<S, A> = (state: S, action: A) => S;
+
+export type UpdateDOM<RE> = (reactiveElements: RE) => void;
