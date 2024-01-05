@@ -1,17 +1,28 @@
-const useReducer = (reducer, initialState) => {
+import { Reducer } from "../types/types";
+
+type ReducerReturnType<S, A> = [
+  () => S,
+  (actionList: A[]) => void,
+  (listener: () => void) => () => void
+];
+
+const useReducer = <S, A>(
+  reducer: Reducer<S, A>,
+  initialState: S
+): ReducerReturnType<S, A> => {
   let state = initialState;
-  const listeners = [];
+  const listeners: Array<() => void> = [];
 
-  const getState = () => state;
+  const getState = (): S => state;
 
-  const dispatch = (actionList) => {
+  const dispatch = (actionList: A[]) => {
     for (let action of actionList) {
       state = reducer(state, action);
     }
     listeners.forEach((listener) => listener());
   };
 
-  const subscribe = (listener) => {
+  const subscribe = (listener: () => void) => {
     listeners.push(listener);
     return () => {
       const index = listeners.indexOf(listener);
