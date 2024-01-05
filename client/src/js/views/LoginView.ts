@@ -1,5 +1,10 @@
 import { LoginReactiveElements, LoginState } from "../types/loginTypes";
-import { HTMLTemplateLiteral, EventCallBack } from "../types/types";
+import {
+  HTMLTemplateLiteral,
+  EventCallBack,
+  ReactiveElements,
+  EventFullElement,
+} from "../types/types";
 
 import updateDOM from "../utils/updateDOM";
 import Spinner from "../components/Spinner";
@@ -30,7 +35,7 @@ class LoginView {
 
   update(state: LoginState) {
     const elements = this.getElements();
-    updateDOM<LoginReactiveElements>(elements, this._generateMarkup(state));
+    updateDOM(elements, this._generateMarkup(state));
   }
 
   _bindElements() {
@@ -38,7 +43,8 @@ class LoginView {
 
     refs.forEach((ref) => {
       if (isObject(this.reactiveElements[ref])) {
-        this.reactiveElements[ref].el = document.getElementById(ref);
+        const eventFull = this.reactiveElements[ref] as EventFullElement<Event>;
+        eventFull.el = document.getElementById(ref);
       } else {
         this.reactiveElements[ref] = document.getElementById(ref);
       }

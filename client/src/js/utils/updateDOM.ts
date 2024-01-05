@@ -1,4 +1,8 @@
-import { EventFullElement, HTMLTemplateLiteral } from "../types/types";
+import {
+  EventFullElement,
+  HTMLTemplateLiteral,
+  ReactiveElements,
+} from "../types/types";
 import { isEventFull } from "./utilityFuncs";
 
 const createVirtualDOM = (content: HTMLTemplateLiteral) => {
@@ -10,8 +14,8 @@ const getElementFromDOM = (id: string) => {
   return document.getElementById(id);
 };
 
-const updateDOM = <PageReactiveElements extends {}>(
-  reactiveElements: PageReactiveElements,
+const updateDOM = (
+  reactiveElements: ReactiveElements,
   vDomStr: HTMLTemplateLiteral
 ) => {
   const vDOM = createVirtualDOM(vDomStr);
@@ -21,8 +25,8 @@ const updateDOM = <PageReactiveElements extends {}>(
   refs.forEach((ref) => {
     const vDomEl = vDOM.getElementById(ref) as HTMLElement;
 
-    if (isEventFull(reactiveElements[ref])) {
-      const DomEl: EventFullElement<Event> = reactiveElements[ref];
+    if (isEventFull(reactiveElements[ref]!)) {
+      const DomEl = reactiveElements[ref] as EventFullElement<Event>;
       DomEl.el = getElementFromDOM(ref) as HTMLElement;
       // if (!vDomEl.isEqualNode(DomEl.el)) {
       //   DomEl.el.innerHTML = vDomEl.innerHTML;
