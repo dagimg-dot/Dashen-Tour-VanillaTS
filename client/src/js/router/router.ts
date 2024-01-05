@@ -1,4 +1,4 @@
-import { CoreElements, Route } from "../types/types";
+import { CoreElements, Route, RoutePath } from "../types/types";
 
 import PageNotFound from "../views/PageNotFound";
 
@@ -22,7 +22,7 @@ class Router {
     this.coreElements.root.innerHTML = PageNotFound.generateMarkup();
   }
 
-  push(path: string) {
+  push(path: RoutePath) {
     const route = this.getRoute(path);
 
     if (route) {

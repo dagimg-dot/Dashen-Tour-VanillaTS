@@ -5,8 +5,10 @@ export type CoreElements = {
 
 export type Controller = (coreElements: CoreElements) => void;
 
+export type RoutePath = "" | "/" | "/signup" | "/login";
+
 export type Route = {
-  path: string;
+  path: RoutePath;
   controller: Controller;
 };
 
