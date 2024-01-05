@@ -42,8 +42,7 @@ class LoginView {
 
     refs.forEach((ref) => {
       if (isObject(this.reactiveElements[ref])) {
-        const reactive: EventFullElement = this.reactiveElements[ref];
-        reactive.el = document.getElementById(ref);
+        this.reactiveElements[ref].el = document.getElementById(ref);
       } else {
         this.reactiveElements[ref] = document.getElementById(ref);
       }
@@ -52,27 +51,27 @@ class LoginView {
 
   getElements = () => this.reactiveElements;
 
-  handleSubmit(handler: EventCallBack) {
+  handleSubmit(handler: EventCallBack<SubmitEvent>) {
     this.reactiveElements.loginForm.el!["onsubmit"] = handler;
     this.reactiveElements.loginForm.cb = handler;
   }
 
-  handleClose(handler: EventCallBack) {
+  handleClose(handler: EventCallBack<MouseEvent>) {
     this.reactiveElements.closeBtn.el!["onclick"] = handler;
     this.reactiveElements.closeBtn.cb = handler;
   }
 
-  handleEmailInput(handler: EventCallBack) {
+  handleEmailInput(handler: EventCallBack<InputEvent>) {
     this.reactiveElements.emailInput.el!["oninput"] = handler;
     this.reactiveElements.emailInput.cb = handler;
   }
 
-  handlePasswordInput(handler: EventCallBack) {
+  handlePasswordInput(handler: EventCallBack<InputEvent>) {
     this.reactiveElements.passwordInput.el!["oninput"] = handler;
     this.reactiveElements.passwordInput.cb = handler;
   }
 
-  handleLogoClick(handler: EventCallBack) {
+  handleLogoClick(handler: EventCallBack<MouseEvent>) {
     this.reactiveElements.logo.el!["onclick"] = handler;
     this.reactiveElements.logo.cb = handler;
   }
@@ -132,7 +131,10 @@ class LoginView {
                           ${
                             !state.isLoading
                               ? "<span>Login</span>"
-                              : `<div class="logging-in">${Spinner()} <span>Logging In</span></div>`
+                              : `<div class="logging-in">
+                                  ${Spinner()} 
+                                  <span>Logging In</span>
+                                </div>`
                           }  
                         </button>
                         <div class="signup-link">

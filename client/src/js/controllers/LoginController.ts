@@ -1,4 +1,5 @@
 import { CoreElements } from "../types/types";
+import { LoginState, LOGINACTIONS } from "../types/loginTypes";
 
 import useReducer from "../hooks/useReducer";
 import useRouter from "../hooks/useRouter";
@@ -6,7 +7,7 @@ import reducer from "../reducers/LoginReducer";
 import LoginView from "../views/LoginView";
 
 const LoginController = ({ root, title }: CoreElements) => {
-  const initialState = {
+  const initialState: LoginState = {
     rootNode: root,
     email: "",
     emailErrorMessage: "",
@@ -23,7 +24,10 @@ const LoginController = ({ root, title }: CoreElements) => {
     LoginView.render(initialState);
   })();
 
-  const [state, dispatch, subscribe] = useReducer(reducer, initialState);
+  const [state, dispatch, subscribe] = useReducer<LoginState, LOGINACTIONS>(
+    reducer,
+    initialState
+  );
 
   // Subscribe to state changes
   subscribe(() => {
@@ -52,7 +56,7 @@ const LoginController = ({ root, title }: CoreElements) => {
     }
   });
 
-  LoginView.handleClose((event) => {
+  LoginView.handleClose(() => {
     dispatch([{ type: "SET_INVALID", payload: false }]);
   });
 
