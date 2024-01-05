@@ -21,9 +21,9 @@ export type State = {
   rootNode: HTMLDivElement;
 };
 
-export type EventCallBack<T> = (event: T) => void;
+export type EventCallBack<T extends Event> = (event: T) => void;
 
-export type EventFullElement<T> = {
+export type EventFullElement<T extends Event> = {
   event: string;
   el: HTMLElement | null;
   cb: EventCallBack<T> | null;
