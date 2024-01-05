@@ -66,16 +66,18 @@ const LoginController = ({ root, title }: CoreElements) => {
   });
 
   LoginView.handleEmailInput((event) => {
+    const target = event.target as HTMLInputElement;
     dispatch([
-      { type: "SET_EMAIL", payload: event.target.value },
-      { type: "SET_EMAIL_ERROR", payload: event.target.value },
+      { type: "SET_EMAIL", payload: target.value },
+      { type: "SET_EMAIL_ERROR", payload: target.value },
     ]);
   });
 
   LoginView.handlePasswordInput((event) => {
+    const target = event.target as HTMLInputElement;
     dispatch([
-      { type: "SET_PASSWORD", payload: event.target.value },
-      { type: "SET_PASSWORD_ERROR", payload: event.target.value },
+      { type: "SET_PASSWORD", payload: target.value },
+      { type: "SET_PASSWORD_ERROR", payload: target.value },
     ]);
   });
 };
