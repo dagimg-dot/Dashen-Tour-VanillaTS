@@ -52,23 +52,24 @@ class LoginView {
     this.reactiveElements.loginForm.cb = handler;
   }
 
-  handleClose(handler: EventCallBack<MouseEvent>) {
-    this.reactiveElements.closeBtn.el!["onclick"] = handler;
+  handleClose(handler: EventCallBack<PointerEvent>) {
+    this.reactiveElements.closeBtn.el!["onclick"] = handler as EventListener;
     this.reactiveElements.closeBtn.cb = handler;
   }
 
   handleEmailInput(handler: EventCallBack<InputEvent>) {
-    this.reactiveElements.emailInput.el!["oninput"] = handler;
+    this.reactiveElements.emailInput.el!["oninput"] = handler as EventListener;
     this.reactiveElements.emailInput.cb = handler;
   }
 
   handlePasswordInput(handler: EventCallBack<InputEvent>) {
-    this.reactiveElements.passwordInput.el!["oninput"] = handler;
+    this.reactiveElements.passwordInput.el!["oninput"] =
+      handler as EventListener;
     this.reactiveElements.passwordInput.cb = handler;
   }
 
-  handleLogoClick(handler: EventCallBack<MouseEvent>) {
-    this.reactiveElements.logo.el!["onclick"] = handler;
+  handleLogoClick(handler: EventCallBack<PointerEvent>) {
+    this.reactiveElements.logo.el!["onclick"] = handler as EventListener;
     this.reactiveElements.logo.cb = handler;
   }
 

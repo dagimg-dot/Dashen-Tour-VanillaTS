@@ -25,6 +25,6 @@ export type LoginReactiveElements = {
   passwordInput: EventFullElement<InputEvent>;
   emailInput: EventFullElement<InputEvent>;
   loginForm: EventFullElement<SubmitEvent>;
-  closeBtn: EventFullElement<MouseEvent>;
-  logo: EventFullElement<MouseEvent>;
+  closeBtn: EventFullElement<PointerEvent>;
+  logo: EventFullElement<PointerEvent>;
 };
