@@ -1,15 +1,17 @@
-.spinner {
-    animation: spin 2s linear infinite;
-    color: #fff;
+.loader {
+    width: 24px;
     height: 24px;
+    border-radius: 50%;
+
+    border-top: 4px solid rgba(255, 255, 255, 1);
+    border-left: 4px solid rgba(255, 255, 255, 1);
+    border-right: 4px solid rgba(255, 255, 255, 0);
+
+    animation: spin 0.5s infinite linear;
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }
