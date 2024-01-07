@@ -1,16 +1,14 @@
 {
   "name": "dashen-tour-frontend",
-  "version": "1.0.0",
-  "description": "Frontend of Dashen Tour and Travel website",
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "author": "dagimg-dot",
-  "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
-    "parcel": "^2.10.0"
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
   }
 }
