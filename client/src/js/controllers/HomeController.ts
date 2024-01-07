@@ -1,7 +1,8 @@
+import { CoreElements } from "../types/types";
 import HomeView from "../views/HomeView";
 
-const HomeController = ({ root, title }) => {
-  title.innerText = "Dashen Tour"
+const HomeController = ({ root, title }: CoreElements) => {
+  title.innerText = "Dashen Tour";
   root.innerHTML = HomeView.generateMarkup();
 };
 

@@ -2,7 +2,6 @@ import { LoginReactiveElements, LoginState } from "../types/loginTypes";
 import {
   HTMLTemplateLiteral,
   EventCallBack,
-  ReactiveElements,
   EventFullElement,
 } from "../types/types";
 
@@ -12,7 +11,7 @@ import "../../css/login.css";
 import { isObject } from "../utils/utilityFuncs";
 
 class LoginView {
-  root: HTMLDivElement | null;
+  root: HTMLDivElement | null = null;
 
   // Reactive Elements
   reactiveElements: LoginReactiveElements = {

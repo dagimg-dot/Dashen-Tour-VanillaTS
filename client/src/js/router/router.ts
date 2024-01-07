@@ -3,9 +3,9 @@ import { CoreElements, Route, RoutePath } from "../types/types";
 import PageNotFound from "../views/PageNotFound";
 
 class Router {
-  coreElements: CoreElements;
-  routes: Route[];
-  currentRoute: Route | null;
+  coreElements!: CoreElements;
+  routes!: Route[];
+  currentRoute!: Route | null;
 
   init(coreElements: CoreElements, routes: Route[]) {
     this.coreElements = coreElements;

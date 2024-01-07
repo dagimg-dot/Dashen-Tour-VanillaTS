@@ -35,7 +35,8 @@ const updateDOM = (
       if (vDomEl.getAttribute("class") !== DomEl.el.getAttribute("class")) {
         DomEl.el.setAttribute("class", vDomEl.getAttribute("class") as string);
       }
-      const event = `on${DomEl.event}`;
+      const event = "on" + DomEl.event;
+      //@ts-ignore
       DomEl.el[event] = DomEl.cb;
     } else {
       const DomEl = getElementFromDOM(ref) as HTMLElement;
