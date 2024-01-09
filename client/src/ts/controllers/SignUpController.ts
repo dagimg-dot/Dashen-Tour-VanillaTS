@@ -7,10 +7,10 @@ const SignUpController = ({ root, title }: CoreElements) => {
     rootNode: root,
   };
 
-  () => {
+  (() => {
     title.innerText = "Dashen Tour - Signup";
     SignupView.render(initialState);
-  };
+  })();
 };
 
 export default SignUpController;
