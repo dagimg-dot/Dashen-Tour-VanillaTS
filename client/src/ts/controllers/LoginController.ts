@@ -37,6 +37,14 @@ const LoginController = ({ root, title }: CoreElements) => {
     // console.log(newState);
   });
 
+  const resetForm = (formContainer: HTMLFormElement) => {
+    dispatch([
+      { type: "SET_EMAIL", payload: "" },
+      { type: "SET_PASSWORD", payload: "" },
+    ]);
+    formContainer.reset();
+  };
+
   // Event Handlers
   LoginView.handleSubmit((event) => {
     event.preventDefault();
@@ -69,6 +77,7 @@ const LoginController = ({ root, title }: CoreElements) => {
       // Imitating api request
       setTimeout(() => {
         dispatch([{ type: "SET_INVALID", payload: true }]);
+        resetForm(formContainer);
         console.log(state());
       }, 3000);
     }
