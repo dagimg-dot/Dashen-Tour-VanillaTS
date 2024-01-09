@@ -1,17 +1,63 @@
 import { html, render } from "lit-html";
 import "../../css/signup.css";
-import { SignUpState } from "../types/signupTypes";
+import { SignUpState, SignupReactiveElements } from "../types/signupTypes";
+import Spinner from "../components/Spinner";
+import { EventCallBack } from "../types/types";
 
 class SignupView {
   root: HTMLDivElement | null = null;
 
+  reactiveElements: SignupReactiveElements = {
+    fullNameInput: null,
+    fullNameError: null,
+    emailInput: null,
+    emailError: null,
+    passwordInput: null,
+    passwordError: null,
+    confirmPasswordInput: null,
+    confirmPasswordError: null,
+    signUpBtn: null,
+    signUpForm: null,
+  };
+
   render(state: SignUpState) {
     this.root = state.rootNode;
     this._renderView(state);
+    this._bindElements();
   }
 
   update(state: SignUpState) {
     this._renderView(state);
+  }
+
+  _bindElements() {
+    const refs = Object.keys(this.reactiveElements);
+
+    refs.forEach((ref) => {
+      this.reactiveElements[ref] = document.getElementById(ref);
+    });
+  }
+
+  handleSubmit(handler: EventCallBack<SubmitEvent>) {
+    this.reactiveElements.signUpForm!["onsubmit"] = handler;
+  }
+
+  handleFullNameInput(handler: EventCallBack<InputEvent>) {
+    this.reactiveElements.fullNameInputInput!["oninput"] =
+      handler as EventListener;
+  }
+
+  handleEmailInput(handler: EventCallBack<InputEvent>) {
+    this.reactiveElements.emailInput!["oninput"] = handler as EventListener;
+  }
+
+  handlePasswordInput(handler: EventCallBack<InputEvent>) {
+    this.reactiveElements.passwordInput!["oninput"] = handler as EventListener;
+  }
+
+  handleConfirmPasswordInput(handler: EventCallBack<InputEvent>) {
+    this.reactiveElements.confirmPasswordInput!["oninput"] =
+      handler as EventListener;
   }
 
   _renderView(state: SignUpState) {
@@ -45,38 +91,63 @@ class SignupView {
                 <h2>Become a member and enjoy your unforgettable trips</h2>
               </div>
             </div>
-            <form class="form-container">
+            <form id="signUpForm" class="form-container">
               <div class="input-wrapper full-name">
                 <label for="full-name">Full Name</label>
-                <input type="text" required />
-                <span class="error"></span>
+                <input
+                  type="text"
+                  id="fullNameInput"
+                  required
+                  value="${state.fullName}"
+                />
+                <span id="fullNameError" class="error"
+                  >${state.fullNameErrorMessage}</span
+                >
               </div>
               <div class="input-wrapper email">
                 <label for="email">Email</label>
-                <input type="email" required />
-                <span class="error"></span>
-              </div>
-              <div class="input-wrapper phonenumber">
-                <label for="phonenumber">Phone Number</label>
-                <input type="text" required />
-                <span class="error"></span>
-              </div>
-              <div class="input-wrapper address">
-                <label for="address">Address</label>
-                <input type="text" required />
-                <span class="error"></span>
+                <input
+                  id="emailInput"
+                  type="text"
+                  required
+                  value="${state.email}"
+                />
+                <span id="emailError" class="error"
+                  >${state.emailErrorMessage}</span
+                >
               </div>
               <div class="input-wrapper password">
                 <label for="password">Password</label>
-                <input type="password" required />
-                <span class="error"></span>
+                <input
+                  id="passwordInput"
+                  type="password"
+                  required
+                  value="${state.password}"
+                />
+                <span id="passwordError" class="error"
+                  >${state.passwordErrorMessage}</span
+                >
               </div>
               <div class="input-wrapper confirm-password">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" required />
-                <span class="error"></span>
+                <input
+                  id="confirmPasswordInput"
+                  type="password"
+                  required
+                  value="${state.confirmPassword}"
+                />
+                <span id="confirmPasswordError" class="error"
+                  >${state.confirmPasswordErrorMessage}</span
+                >
               </div>
-              <button type="submit" class="signup-btn">Signup</button>
+              <button id="signUpBtn" type="submit" class="signup-btn">
+                ${!state.isLoading
+                  ? html`<span>Signup</span>`
+                  : html`<div class="signing-up">
+                      ${Spinner()}
+                      <span>Signing Up</span>
+                    </div>`}
+              </button>
               <div class="login-link">
                 <span>Already have an account?</span>
                 <a href="#/login">Login</a>
