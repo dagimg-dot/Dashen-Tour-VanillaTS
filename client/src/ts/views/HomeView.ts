@@ -21,7 +21,7 @@ class HomeView {
           <section class="section-hero">
             <div class="hero grid grid-2-cols">
               <div class="blur-wrap">
-                <div class="logo container-p">
+                <div class="main-logo container-p">
                   <img
                     src="./src/assets/icons/company-logo.svg"
                     alt="company logo"
