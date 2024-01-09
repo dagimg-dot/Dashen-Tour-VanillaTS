@@ -34,7 +34,7 @@ const LoginController = ({ root, title }: CoreElements) => {
     const newState = state();
     // Update the view with the new state
     LoginView.update(newState);
-    console.log(newState);
+    // console.log(newState);
   });
 
   // Event Handlers
@@ -65,20 +65,46 @@ const LoginController = ({ root, title }: CoreElements) => {
     router.push("/");
   });
 
+  const validateEmailField = (value: string) => {
+    const distpachEmailError = (error: string) => {
+      dispatch([{ type: "SET_EMAIL_ERROR", payload: error }]);
+    };
+
+    if (value == "") {
+      distpachEmailError("Email is required");
+    } else if (value.match("^[a-zA-Z0-9_]+@[a-zA-Z]+[.]+com$") === null) {
+      distpachEmailError("Invalid Email");
+    } else {
+      distpachEmailError("");
+    }
+  };
+
+  const validatePasswordField = (value: string) => {
+    const dispatchPasswordError = (error: string) => {
+      dispatch([{ type: "SET_PASSWORD_ERROR", payload: error }]);
+    };
+
+    if (value == "") {
+      dispatchPasswordError("Password is required");
+    } else if (value.length < 8) {
+      dispatchPasswordError("Password must be at least 8 characters");
+    } else {
+      dispatchPasswordError("");
+    }
+  };
+
   LoginView.handleEmailInput((event) => {
     const target = event.target as HTMLInputElement;
-    dispatch([
-      { type: "SET_EMAIL", payload: target.value },
-      { type: "SET_EMAIL_ERROR", payload: target.value },
-    ]);
+    dispatch([{ type: "SET_EMAIL", payload: target.value }]);
+
+    validateEmailField(target.value);
   });
 
   LoginView.handlePasswordInput((event) => {
     const target = event.target as HTMLInputElement;
-    dispatch([
-      { type: "SET_PASSWORD", payload: target.value },
-      { type: "SET_PASSWORD_ERROR", payload: target.value },
-    ]);
+    dispatch([{ type: "SET_PASSWORD", payload: target.value }]);
+
+    validatePasswordField(target.value);
   });
 };
 
