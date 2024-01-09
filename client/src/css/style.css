@@ -22,10 +22,6 @@
     justify-content: space-between;
 }
 
-.logo {
-    /* padding: 0; */
-}
-
 .unblurred-wrap {
     display: flex;
     flex-direction: column;
