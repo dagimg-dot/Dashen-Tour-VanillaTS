@@ -1,9 +1,16 @@
+import { SignUpState } from "../types/signupTypes";
 import { CoreElements } from "../types/types";
 import SignupView from "../views/SignupView";
 
 const SignUpController = ({ root, title }: CoreElements) => {
-  title.innerText = "Dashen Tour - Signup";
-  root.innerHTML = SignupView.render();
+  const initialState: SignUpState = {
+    rootNode: root,
+  };
+
+  () => {
+    title.innerText = "Dashen Tour - Signup";
+    SignupView.render(initialState);
+  };
 };
 
 export default SignUpController;
