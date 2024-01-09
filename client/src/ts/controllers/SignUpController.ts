@@ -167,6 +167,7 @@ const SignUpController = ({ root, title }: CoreElements) => {
     dispatch([{ type: "SET_PASSWORD", payload: target.value }]);
 
     validatePasswordField(target.value);
+    confirmPasswordField(state().confirmPassword);
   });
 
   SignupView.handleConfirmPasswordInput((event) => {
