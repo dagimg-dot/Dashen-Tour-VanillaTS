@@ -19,7 +19,7 @@ class Router {
   }
 
   renderPageNotFound() {
-    this.coreElements.root.innerHTML = PageNotFound.generateMarkup();
+    PageNotFound.renderView(this.coreElements.root);
   }
 
   push(path: RoutePath) {
