@@ -43,7 +43,7 @@ class SignupView {
   }
 
   handleFullNameInput(handler: EventCallBack<InputEvent>) {
-    this.reactiveElements.fullNameInputInput!["oninput"] =
+    this.reactiveElements.fullNameInput!["oninput"] =
       handler as EventListener;
   }
 
