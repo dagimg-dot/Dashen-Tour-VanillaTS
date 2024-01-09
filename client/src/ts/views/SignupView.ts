@@ -7,14 +7,14 @@ class SignupView {
 
   render(state: SignUpState) {
     this.root = state.rootNode;
-    this._generateMarkup(state);
+    this._renderView(state);
   }
 
   update(state: SignUpState) {
-    this._generateMarkup(state);
+    this._renderView(state);
   }
 
-  _generateMarkup(state: SignUpState) {
+  _renderView(state: SignUpState) {
     render(
       html`
         <div class="signup-wrapper">

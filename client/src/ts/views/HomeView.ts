@@ -7,14 +7,14 @@ class HomeView {
 
   render(state: HomeState) {
     this.root = state.rootNode;
-    this._generateMarkup(state);
+    this._renderView(state);
   }
 
   update(state: HomeState) {
-    this._generateMarkup(state);
+    this._renderView(state);
   }
 
-  _generateMarkup(state: HomeState) {
+  _renderView(state: HomeState) {
     render(
       html`
         <main>

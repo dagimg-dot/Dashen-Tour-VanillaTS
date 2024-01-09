@@ -23,12 +23,12 @@ class LoginView {
 
   render(state: LoginState) {
     this.root = state.rootNode;
-    this._generateMarkup(state);
+    this._renderView(state);
     this._bindElements();
   }
 
   update(state: LoginState) {
-    this._generateMarkup(state);
+    this._renderView(state);
   }
 
   _bindElements() {
@@ -61,7 +61,7 @@ class LoginView {
     this.reactiveElements.logo!["onclick"] = handler as EventListener;
   }
 
-  _generateMarkup(state: LoginState) {
+  _renderView(state: LoginState) {
     render(
       html`
         <div class="login-wrapper">
