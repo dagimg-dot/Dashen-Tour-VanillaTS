@@ -45,18 +45,16 @@ const LoginController = ({ root, title }: CoreElements) => {
     formContainer.reset();
   };
 
-  // Event Handlers
-  LoginView.handleSubmit((event) => {
-    event.preventDefault();
-
-    const formContainer = event.target as HTMLFormElement;
+  const checkError = (formContainer: HTMLFormElement): boolean => {
+    let errorFound = false;
 
     if (state().emailErrorMessage !== "") {
       const emailInput = formContainer.querySelector(
         "#emailInput"
       ) as HTMLInputElement;
       emailInput.focus();
-      return;
+      errorFound = true;
+      return errorFound;
     }
 
     if (state().passwordErrorMessage !== "") {
@@ -64,6 +62,20 @@ const LoginController = ({ root, title }: CoreElements) => {
         "#passwordInput"
       ) as HTMLInputElement;
       paswordInput.focus();
+      errorFound = true;
+      return errorFound;
+    }
+
+    return errorFound;
+  };
+
+  // Event Handlers
+  LoginView.handleSubmit((event) => {
+    event.preventDefault();
+
+    const formContainer = event.target as HTMLFormElement;
+
+    if (checkError(formContainer)) {
       return;
     }
 
