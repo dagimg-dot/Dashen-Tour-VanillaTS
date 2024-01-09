@@ -1,15 +1,10 @@
+import { html } from "lit-html";
 import "../../css/components/spinner.css";
-import { HTMLTemplateLiteral } from "../types/types";
 
-const Spinner = (): HTMLTemplateLiteral => {
-  const template = `
-        <div class="loader"></div>
-    `;
+const Spinner = () => {
+  const template = html` <div class="loader"></div> `;
 
-  const container = document.createElement("div");
-  container.innerHTML = template;
-
-  return container.innerHTML;
+  return template;
 };
 
 export default Spinner;
