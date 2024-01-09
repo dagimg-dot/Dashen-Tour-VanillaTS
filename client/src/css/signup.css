@@ -38,6 +38,7 @@ label {
 .form-heading {
     line-height: 1.4;
     font-size: 1.6rem;
+    text-align: center;
 }
 
 .logo {
@@ -75,7 +76,7 @@ input {
     background-color: #fff;
     color: #221f1f;
     font-family: inherit;
-    font-weight: bold;
+    /* font-weight: bold; */
     width: 100%;
     padding: .8rem;
     font-size: 1.2rem;
