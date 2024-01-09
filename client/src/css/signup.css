@@ -21,12 +21,13 @@
     border-radius: 11px;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
     max-width: 470px;
+    scale: 0.85;
 }
 
 label {
     color: #1a1818;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .form-header {
@@ -36,6 +37,7 @@ label {
 
 .form-heading {
     line-height: 1.4;
+    font-size: 1.6rem;
 }
 
 .logo {
@@ -45,6 +47,10 @@ label {
     gap: 1rem;
     margin-bottom: 1rem;
     padding-top: 0;
+}
+
+.company-name {
+    font-size: 3.2rem;
 }
 
 .logo svg {
@@ -84,7 +90,7 @@ input {
 }
 
 .signup-btn {
-    padding: .8rem 2rem;
+    padding: 1.2rem 2.4rem;
     font-size: 1.6rem;
     border-radius: 9px;
     margin-top: 1.5rem;
@@ -93,6 +99,14 @@ input {
     border: none;
     transition: all 0.3s;
 }
+
+.signing-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 
 .signup-btn:hover {
     background-color: #5a2b17;
