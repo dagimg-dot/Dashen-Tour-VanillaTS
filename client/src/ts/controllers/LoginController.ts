@@ -41,6 +41,24 @@ const LoginController = ({ root, title }: CoreElements) => {
   LoginView.handleSubmit((event) => {
     event.preventDefault();
 
+    const formContainer = event.target as HTMLFormElement;
+
+    if (state().emailErrorMessage !== "") {
+      const emailInput = formContainer.querySelector(
+        "#emailInput"
+      ) as HTMLInputElement;
+      emailInput.focus();
+      return;
+    }
+
+    if (state().passwordErrorMessage !== "") {
+      const paswordInput = formContainer.querySelector(
+        "#passwordInput"
+      ) as HTMLInputElement;
+      paswordInput.focus();
+      return;
+    }
+
     console.log("submitted");
 
     if (state().isLoading) {
