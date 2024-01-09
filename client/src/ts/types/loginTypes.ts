@@ -1,4 +1,4 @@
-import { EventFullElement, ReactiveElements, State } from "./types";
+import { ReactiveElements, State } from "./types";
 
 export interface LoginState extends State {
   email: string;
@@ -22,9 +22,9 @@ export type LoginReactiveElements = ReactiveElements & {
   passwordError: HTMLSpanElement | null;
   errorModal: HTMLDivElement | null;
   loginBtn: HTMLButtonElement | null;
-  passwordInput: EventFullElement<InputEvent>;
-  emailInput: EventFullElement<InputEvent>;
-  loginForm: EventFullElement<SubmitEvent>;
-  closeBtn: EventFullElement<PointerEvent>;
-  logo: EventFullElement<PointerEvent>;
+  passwordInput: HTMLInputElement | null;
+  emailInput: HTMLInputElement | null;
+  loginForm: HTMLFormElement | null;
+  closeBtn: HTMLButtonElement | null;
+  logo: HTMLDivElement | null;
 };

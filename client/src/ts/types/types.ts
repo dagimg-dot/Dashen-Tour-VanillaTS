@@ -23,16 +23,10 @@ export type State = {
 
 export type EventCallBack<T extends Event> = (event: T) => void;
 
-export type EventFullElement<T extends Event> = {
-  event: string;
-  el: HTMLElement | null;
-  cb: EventCallBack<T> | null;
-};
-
 export interface HTMLTemplateLiteral extends String {}
 
 export type Reducer<S, A> = (state: S, action: A) => S;
 
-type ReactiveElement = EventFullElement<Event> | HTMLElement | null;
+type ReactiveElement = HTMLElement | null;
 
 export type ReactiveElements = Record<string, ReactiveElement>;
