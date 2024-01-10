@@ -1,7 +1,7 @@
 const multer = require("multer");
 const crypto = require("crypto");
 
-const upload = multer({
+const uploadConfig = multer({
   limits: {
     fileSize: 2 * 1024 * 1024, // 5MB limit
   },
@@ -17,4 +17,4 @@ const upload = multer({
   }),
 });
 
-module.exports = upload;
+module.exports = uploadConfig;
