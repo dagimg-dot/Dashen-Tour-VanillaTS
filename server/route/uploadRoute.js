@@ -1,12 +1,12 @@
-const express = require("express");
-const uploadConfig = require("../config/multer.config");
-const upload = require("../controller/uploadController");
-const {
+import { Router } from "express";
+import uploadConfig from "../config/multer.config.js";
+import upload from "../controller/uploadController.js";
+import {
   fileSizeLimitErrorHandler,
   extenstionErrorHandler,
-} = require("../middlewares/uploadErrorHandler");
+} from "../middlewares/uploadErrorHandler.js";
 
-const uploadRouter = express.Router();
+const uploadRouter = Router();
 
 uploadRouter.post(
   "/api/upload",
@@ -16,4 +16,4 @@ uploadRouter.post(
   upload
 );
 
-module.exports = uploadRouter;
+export default uploadRouter;

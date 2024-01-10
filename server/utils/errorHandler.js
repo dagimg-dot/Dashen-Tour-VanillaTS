@@ -1,4 +1,4 @@
-const { UniqueConstraintError } = require("sequelize");
+import { UniqueConstraintError } from "sequelize";
 
 const errorHandler = (error, res) => {
   if (error instanceof UniqueConstraintError) {
@@ -17,4 +17,4 @@ const errorHandler = (error, res) => {
   }
 };
 
-module.exports = errorHandler;
+export default errorHandler;

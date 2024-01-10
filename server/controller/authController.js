@@ -1,7 +1,7 @@
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 
-const User = require("../model/user");
-const errorHandler = require("../utils/errorHandler");
+import User from "../model/user.js";
+import errorHandler from "../utils/errorHandler.js";
 
 const login = (req, res) => {
   const { email, password } = req.body;
@@ -61,4 +61,4 @@ const registerUser = (req, res) => {
   });
 };
 
-module.exports = { login, registerUser };
+export { login, registerUser };

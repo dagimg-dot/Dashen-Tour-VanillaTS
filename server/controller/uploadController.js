@@ -1,4 +1,4 @@
-require("../config/env.config");
+import "../config/env.config.js";
 
 const upload = (req, res) => {
   if (!req.file) {
@@ -18,4 +18,4 @@ const upload = (req, res) => {
   });
 };
 
-module.exports = upload;
+export default upload;

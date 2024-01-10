@@ -1,4 +1,4 @@
-const sequelize = require("sequelize");
+import sequelize from "sequelize";
 
 const connectDB = new sequelize({
   dialect: "sqlite",
@@ -10,4 +10,4 @@ connectDB
   .then(() => console.log("Database setup successfull!"))
   .catch((error) => console.log("error: ", error));
 
-module.exports = connectDB;
+export default connectDB;

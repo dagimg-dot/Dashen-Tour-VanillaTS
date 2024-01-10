@@ -1,10 +1,10 @@
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
-require("./config/env.config");
-const authRouter = require("./route/authRoute");
-const uploadRouter = require("./route/uploadRoute");
-const undefinedRouteHandler = require("./utils/undefinedRouteHandler");
+import "./config/env.config.js";
+import authRouter from "./route/authRoute.js";
+import uploadRouter from "./route/uploadRoute.js";
+import undefinedRouteHandler from "./utils/undefinedRouteHandler.js";
 
 const PORT = process.env.PORT;
 const app = express();

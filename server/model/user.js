@@ -1,6 +1,6 @@
-const sequelize = require("sequelize");
-const DT = sequelize.DataTypes;
-const connectDB = require("../config/database");
+import { DataTypes } from "sequelize";
+const DT = DataTypes;
+import connectDB from "../config/database.js";
 
 const User = connectDB.define("user", {
   fullName: {
@@ -29,4 +29,4 @@ const User = connectDB.define("user", {
   },
 });
 
-module.exports = User;
+export default User;

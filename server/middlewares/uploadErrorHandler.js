@@ -1,10 +1,10 @@
-const multer = require("multer");
-const fs = require("fs");
+import { MulterError } from "multer";
+import { unlinkSync } from "fs";
 
 const allowedExtensions = [".jpg", ".jpeg", ".png"];
 
 const fileSizeLimitErrorHandler = (err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
+  if (err instanceof MulterError) {
     if (err.code === "LIMIT_FILE_SIZE") {
       return res.status(413).json({
         error: {
@@ -25,7 +25,7 @@ const extenstionErrorHandler = (req, res, next) => {
 
   if (!allowedExtensions.includes(fileExtension)) {
     // Delete the uploaded file
-    fs.unlinkSync(file.path);
+    unlinkSync(file.path);
 
     res.status(400).json({
       error: {
@@ -37,4 +37,4 @@ const extenstionErrorHandler = (req, res, next) => {
     next();
   }
 };
-module.exports = { fileSizeLimitErrorHandler, extenstionErrorHandler };
+export { fileSizeLimitErrorHandler, extenstionErrorHandler };
