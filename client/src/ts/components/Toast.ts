@@ -42,7 +42,7 @@ const ErrorIcon = `
 type ToastProps = {
   type: "SUCCESS" | "ERROR";
   message: string;
-  duration: number;
+  duration?: number;
 };
 
 class Toast {
@@ -52,7 +52,7 @@ class Toast {
     this.root = root;
   }
 
-  showToast({ type, message, duration }: ToastProps) {
+  showToast({ type, message, duration = 3000 }: ToastProps) {
     let template;
 
     if (type == "ERROR") {
