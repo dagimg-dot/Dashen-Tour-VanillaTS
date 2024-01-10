@@ -3,7 +3,6 @@ import "../../css/signup.css";
 import { SignUpState, SignupReactiveElements } from "../types/signupTypes";
 import Spinner from "../components/Spinner";
 import { EventCallBack } from "../types/types";
-import Toast from "../components/Toast";
 
 class SignupView {
   root: HTMLDivElement | null = null;
@@ -63,7 +62,6 @@ class SignupView {
   _renderView(state: SignUpState) {
     render(
       html`
-        ${state.isInvalid ? Toast("Email already exists") : ``}
         <div class="signup-wrapper">
           <div class="signup-form">
             <div class="form-header">
