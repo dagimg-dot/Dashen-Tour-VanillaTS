@@ -111,7 +111,7 @@ const LoginController = ({ root, title }: CoreElements) => {
 
     if (value == "") {
       distpachEmailError("Email is required");
-    } else if (value.match("^[a-zA-Z0-9_]+@[a-zA-Z]+[.]+com$") === null) {
+    } else if (value.match("^[a-zA-Z0-9_.]+@[a-zA-Z]+[.]+com$") === null) {
       distpachEmailError("Invalid Email");
     } else {
       distpachEmailError("");
