@@ -4,6 +4,7 @@ import HomeController from "./controllers/HomeController";
 import SignUpController from "./controllers/SignUpController";
 import LoginController from "./controllers/LoginController";
 import useRouter from "./hooks/useRouter";
+import useToast from "./hooks/useToast";
 
 const routes: Route[] = [
   { path: "", controller: HomeController },
@@ -14,5 +15,7 @@ const routes: Route[] = [
 
 export default function App(coreElements: CoreElements) {
   const router = useRouter();
+  const toast = useToast();
+  toast.init(coreElements.root);
   router.init(coreElements, routes);
 }
