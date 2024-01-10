@@ -1,43 +1,48 @@
 :root {
-    --notification-background: #313e2c;
-    --notification-primary: #aaec8a;
+    --toast-background: #fff;
+    --toast-primary: #5b943e;
+    --error: rgb(221, 60, 60);
 }
 
-.notification {
+.toast {
     position: absolute;
-    width: 260px;
-    /* left: 0; */
+    width: 270px;
     top: 15px;
     right: 0;
-    /* bottom: 24px; */
     margin-left: auto;
     margin-right: auto;
-    border-radius: 6px;
-    background-color: var(--notification-background);
-    color: var(--notification-primary);
+    border-radius: 6px 0 0 6px;
+    background-color: var(--toast-background);
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
     transform: translateX(0);
     opacity: 0;
     visibility: hidden;
     animation: fade-in 3s linear;
+    padding: 3px 0 3px 3px;
 }
 
-.notification__icon {
-    height: 22px;
-    width: 22px;
-    margin-right: 6px;
-    padding-top: 1px;
-    fill: var(--notification-primary);
+.toast-error {
+    color: var(--error);
 }
 
-.notification__body {
+.toast-success {
+    color: var(--toast-primary)
+}
+
+.toast-message {
+    font-size: 15px;
+}
+
+.toast-body {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    gap: 1.5rem;
     padding: 16px 8px;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
 }
 
-.notification__progress {
+.toast-progress {
     position: absolute;
     left: 4px;
     bottom: 4px;
@@ -45,9 +50,16 @@
     height: 3px;
     transform: scaleX(0);
     transform-origin: left;
-    background: linear-gradient(to right, var(--notification-background), var(--notification-primary));
     border-radius: inherit;
     animation: progress 2.5s 0.3s linear;
+}
+
+.toast-progress-success {
+    background: linear-gradient(to right, var(--toast-background), var(--toast-primary));
+}
+
+.toast-progress-error {
+    background: linear-gradient(to right, var(--toast-background), var(--error));
 }
 
 @keyframes fade-in {
