@@ -1,4 +1,5 @@
 import useReducer from "../hooks/useReducer";
+import useToast from "../hooks/useToast";
 import reducer from "../reducers/SignUpReducer";
 import { SIGNUPACTIONS, SignUpState } from "../types/signupTypes";
 import { CoreElements } from "../types/types";
@@ -102,6 +103,12 @@ const SignUpController = ({ root, title }: CoreElements) => {
       // Imitating api request
       setTimeout(() => {
         dispatch([{ type: "SET_INVALID", payload: true }]);
+        const toast = useToast();
+        toast.showToast({
+          type: "ERROR",
+          message: "Email already exists",
+          duration: 3000,
+        });
         resetForm(formContainer);
         console.log(state());
       }, 3000);
