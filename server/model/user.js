@@ -15,12 +15,12 @@ const User = connectDB.define("user", {
   },
   phoneNumber: {
     type: DT.STRING(25),
-    allowNull: false,
+    allowNull: true,
     unique: false,
   },
   address: {
     type: DT.STRING(30),
-    allowNull: false,
+    allowNull: true,
     unique: false,
   },
   password: {
