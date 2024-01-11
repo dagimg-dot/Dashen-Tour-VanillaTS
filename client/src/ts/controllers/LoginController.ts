@@ -20,24 +20,28 @@ const LoginController = ({ root, title }: CoreElements) => {
     isInvalid: false,
   };
 
-  (() => {
-    title.innerText = "Dashen Tour - Login";
+  // TODO: Implement GlobalState for Authentication
+  const authenticated = true;
 
-    // Initial Render
-    LoginView.render(initialState);
-  })();
+  if (authenticated) {
+    const toast = useToast();
+    toast.showToast({ type: "ERROR", message: "You are already logged in" });
+    const router = useRouter();
+    router.push("/");
+    return;
+  }
+
+  title.innerText = "Dashen Tour - Login";
+  LoginView.render(initialState);
 
   const [state, dispatch, subscribe] = useReducer<LoginState, LOGINACTIONS>(
     reducer,
     initialState
   );
 
-  // Subscribe to state changes
   subscribe(() => {
     const newState = state();
-    // Update the view with the new state
     LoginView.update(newState);
-    // console.log(newState);
   });
 
   const resetForm = (formContainer: HTMLFormElement) => {
@@ -72,7 +76,6 @@ const LoginController = ({ root, title }: CoreElements) => {
     return errorFound;
   };
 
-  // Event Handlers
   LoginView.handleSubmit((event) => {
     event.preventDefault();
 

@@ -27,10 +27,19 @@ const SignUpController = ({ root, title }: CoreElements) => {
     isInvalid: false,
   };
 
-  (() => {
-    title.innerText = "Dashen Tour - Signup";
-    SignupView.render(initialState);
-  })();
+  // TODO: Implement GlobalState for Authentication
+  const authenticated = true;
+
+  if (authenticated) {
+    const toast = useToast();
+    toast.showToast({ type: "ERROR", message: "You are already logged in" });
+    const router = useRouter();
+    router.push("/");
+    return;
+  }
+
+  title.innerText = "Dashen Tour - Signup";
+  SignupView.render(initialState);
 
   const [state, dispatch, subscribe] = useReducer<SignUpState, SIGNUPACTIONS>(
     reducer,
