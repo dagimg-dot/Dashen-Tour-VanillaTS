@@ -62,12 +62,10 @@ const registerUser = async (req, res) => {
       status: 201,
       message: "Success",
       data: {
-        data: {
-          fullName: user.fullName,
-          email: user.email,
-          phoneNumber: user.phoneNumber,
-          address: user.address,
-        },
+        fullName: user.fullName,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        address: user.address,
       },
     });
   } catch (error) {
