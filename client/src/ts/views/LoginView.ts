@@ -121,7 +121,7 @@ class LoginView {
                 id="errorModal"
                 class="error-container${state.isInvalid ? `` : ` hidden`}"
               >
-                <span class="message">Incorrect username or password</span>
+                <span class="message">Incorrect email or password</span>
                 <div id="closeBtn" onclick="" class="close-btn">
                   <svg
                     width="24"

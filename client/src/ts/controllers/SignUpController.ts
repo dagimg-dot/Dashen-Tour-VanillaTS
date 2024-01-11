@@ -114,7 +114,13 @@ const SignUpController = ({ root, title }: CoreElements) => {
 
       signUp(formData)
         .then((response: Response) => {
-          if (response.ok) {
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error.message);
+          } else {
+            console.log(data);
             const toast = useToast();
             toast.showToast({
               type: "SUCCESS",
@@ -123,16 +129,9 @@ const SignUpController = ({ root, title }: CoreElements) => {
             });
             const router = useRouter();
             router.push("/login");
-          } else {
-            return response.json();
           }
         })
-        .then((errorData) => {
-          console.log(errorData);
-          const toast = useToast();
-          toast.showToast({ type: "ERROR", message: errorData.error.message });
-        })
-        .catch((error) => {
+        .catch((error: Error) => {
           const toast = useToast();
           toast.showToast({ type: "ERROR", message: error.message });
         })
