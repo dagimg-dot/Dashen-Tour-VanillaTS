@@ -7,6 +7,7 @@ import reducer from "../reducers/LoginReducer";
 import LoginView from "../views/LoginView";
 import { login } from "../api/auth.api";
 import useToast from "../hooks/useToast";
+import errorHandler from "../utils/errorHandler";
 
 const LoginController = ({ root, title }: CoreElements) => {
   const initialState: LoginState = {
@@ -81,8 +82,6 @@ const LoginController = ({ root, title }: CoreElements) => {
       return;
     }
 
-    console.log("submitted");
-
     if (state().isInvalid) {
       dispatch([{ type: "SET_INVALID", payload: false }]);
     }
@@ -120,7 +119,8 @@ const LoginController = ({ root, title }: CoreElements) => {
             dispatch([{ type: "SET_INVALID", payload: true }]);
           } else {
             const toast = useToast();
-            toast.showToast({ type: "ERROR", message: error.message });
+            const message = errorHandler(error);
+            toast.showToast({ type: "ERROR", message: message });
           }
         })
         .finally(() => {
