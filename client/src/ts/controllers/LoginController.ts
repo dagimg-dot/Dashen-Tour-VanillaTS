@@ -83,6 +83,10 @@ const LoginController = ({ root, title }: CoreElements) => {
 
     console.log("submitted");
 
+    if (state().isInvalid) {
+      dispatch([{ type: "SET_INVALID", payload: false }]);
+    }
+
     if (state().isLoading) {
       dispatch([{ type: "SET_LOADING", payload: false }]);
     } else {
