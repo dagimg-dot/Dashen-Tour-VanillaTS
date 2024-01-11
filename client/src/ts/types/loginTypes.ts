@@ -28,3 +28,8 @@ export type LoginReactiveElements = ReactiveElements & {
   closeBtn: HTMLButtonElement | null;
   logo: HTMLDivElement | null;
 };
+
+export type LoginFormData = {
+  email: string;
+  password: string;
+};
