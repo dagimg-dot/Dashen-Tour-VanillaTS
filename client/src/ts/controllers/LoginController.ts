@@ -1,10 +1,12 @@
 import { CoreElements } from "../types/types";
-import { LoginState, LOGINACTIONS } from "../types/loginTypes";
+import { LoginState, LOGINACTIONS, LoginFormData } from "../types/loginTypes";
 
 import useReducer from "../hooks/useReducer";
 import useRouter from "../hooks/useRouter";
 import reducer from "../reducers/LoginReducer";
 import LoginView from "../views/LoginView";
+import { login } from "../api/auth.api";
+import useToast from "../hooks/useToast";
 
 const LoginController = ({ root, title }: CoreElements) => {
   const initialState: LoginState = {
@@ -86,12 +88,41 @@ const LoginController = ({ root, title }: CoreElements) => {
     } else {
       dispatch([{ type: "SET_LOADING", payload: true }]);
 
-      // Imitating api request
-      setTimeout(() => {
-        dispatch([{ type: "SET_INVALID", payload: true }]);
-        resetForm(formContainer);
-        console.log(state());
-      }, 3000);
+      const formData: LoginFormData = {
+        email: state().email,
+        password: state().password,
+      };
+
+      login(formData)
+        .then((response: Response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error.message);
+          } else {
+            console.log(data);
+            const toast = useToast();
+            toast.showToast({
+              type: "SUCCESS",
+              message: "You are successfully logged in.",
+            });
+            const router = useRouter();
+            router.push("/destinations");
+          }
+        })
+        .catch((error: Error) => {
+          if (error.message === "Incorrect email or password") {
+            dispatch([{ type: "SET_INVALID", payload: true }]);
+          } else {
+            const toast = useToast();
+            toast.showToast({ type: "ERROR", message: error.message });
+          }
+        })
+        .finally(() => {
+          dispatch([{ type: "SET_LOADING", payload: false }]);
+          resetForm(formContainer);
+        });
     }
   });
 
