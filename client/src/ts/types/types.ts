@@ -5,7 +5,7 @@ export type CoreElements = {
 
 export type Controller = (coreElements: CoreElements) => void;
 
-export type RoutePath = "" | "/" | "/signup" | "/login";
+export type RoutePath = "" | "/" | "/signup" | "/login" | "/destinations";
 
 export type Route = {
   path: RoutePath;
