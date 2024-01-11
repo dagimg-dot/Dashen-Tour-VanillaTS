@@ -20,7 +20,6 @@ const loginReducer = (
       return {
         ...state,
         isLoading: action.payload,
-        isInvalid: false,
       };
     case "SET_INVALID":
       return {
