@@ -1,7 +1,13 @@
+import { signUp } from "../api/auth.api";
 import useReducer from "../hooks/useReducer";
+import useRouter from "../hooks/useRouter";
 import useToast from "../hooks/useToast";
 import reducer from "../reducers/SignUpReducer";
-import { SIGNUPACTIONS, SignUpState } from "../types/signupTypes";
+import {
+  SIGNUPACTIONS,
+  SignUpFormData,
+  SignUpState,
+} from "../types/signupTypes";
 import { CoreElements } from "../types/types";
 import SignupView from "../views/SignupView";
 
@@ -100,18 +106,40 @@ const SignUpController = ({ root, title }: CoreElements) => {
     } else {
       dispatch([{ type: "SET_LOADING", payload: true }]);
 
-      // Imitating api request
-      setTimeout(() => {
-        dispatch([{ type: "SET_INVALID", payload: true }]);
-        const toast = useToast();
-        toast.showToast({
-          type: "ERROR",
-          message: "Email already exists",
-          duration: 3000,
+      const formData: SignUpFormData = {
+        fullName: state().fullName,
+        email: state().email,
+        password: state().password,
+      };
+
+      signUp(formData)
+        .then((response: Response) => {
+          if (response.ok) {
+            const toast = useToast();
+            toast.showToast({
+              type: "SUCCESS",
+              message: "The sign up was successfull. Please, login to continue",
+              duration: 3000,
+            });
+            const router = useRouter();
+            router.push("/login");
+          } else {
+            return response.json();
+          }
+        })
+        .then((errorData) => {
+          console.log(errorData);
+          const toast = useToast();
+          toast.showToast({ type: "ERROR", message: errorData.error.message });
+        })
+        .catch((error) => {
+          const toast = useToast();
+          toast.showToast({ type: "ERROR", message: error.message });
+        })
+        .finally(() => {
+          dispatch([{ type: "SET_LOADING", payload: false }]);
+          resetForm(formContainer);
         });
-        resetForm(formContainer);
-        console.log(state());
-      }, 3000);
     }
   });
 
