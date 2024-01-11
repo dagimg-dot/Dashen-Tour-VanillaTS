@@ -9,9 +9,10 @@ const errorHandler = (error, res) => {
       },
     });
   } else {
+    console.log(error);
     res.status(400).json({
       error: {
-        message: `${error}`,
+        message: "Something went wrong when processing the request",
       },
     });
   }
