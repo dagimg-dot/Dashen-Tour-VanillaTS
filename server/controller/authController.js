@@ -5,7 +5,6 @@ import errorHandler from "../utils/errorHandler.js";
 
 const login = (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
 
   if (!email || !password) {
     res.status(400).json({
@@ -28,7 +27,12 @@ const login = (req, res) => {
               ? res.status(200).json({
                   status: 200,
                   message: "Success",
-                  data: { user },
+                  data: {
+                    fullName: user.fullName,
+                    email: user.email,
+                    phoneNumber: user.phoneNumber,
+                    address: user.address,
+                  },
                 })
               : res
                   .status(401)
@@ -54,9 +58,18 @@ const registerUser = (req, res) => {
       password: hash,
     })
       .then((user) => {
-        res
-          .status(201)
-          .json({ status: 201, message: "Success", data: { user } });
+        res.status(201).json({
+          status: 201,
+          message: "Success",
+          data: {
+            data: {
+              fullName: user.fullName,
+              email: user.email,
+              phoneNumber: user.phoneNumber,
+              address: user.address,
+            },
+          },
+        });
       })
       .catch((error) => {
         errorHandler(error, res);
