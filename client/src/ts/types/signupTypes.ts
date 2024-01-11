@@ -38,3 +38,9 @@ export type SignupReactiveElements = ReactiveElements & {
   signUpBtn: HTMLButtonElement | null;
   signUpForm: HTMLFormElement | null;
 };
+
+export type SignUpFormData = {
+  fullName: string;
+  email: string;
+  password: string;
+};
