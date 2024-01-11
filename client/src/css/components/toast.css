@@ -6,7 +6,7 @@
 
 .toast {
     position: absolute;
-    width: 270px;
+    max-width: 300px;
     top: 15px;
     right: 0;
     margin-left: auto;
