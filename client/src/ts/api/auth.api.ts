@@ -1,10 +1,10 @@
 import { LoginFormData } from "../types/loginTypes";
 import { SignUpFormData } from "../types/signupTypes";
 
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "/api";
 
 const signUp = async (formData: SignUpFormData): Promise<Response> => {
-  const url = `${API_BASE_URL}/api/register`;
+  const url = `${API_BASE_URL}/register`;
 
   return fetch(url, {
     method: "POST",
@@ -16,7 +16,7 @@ const signUp = async (formData: SignUpFormData): Promise<Response> => {
 };
 
 const login = async (formData: LoginFormData): Promise<Response> => {
-  const url = `${API_BASE_URL}/api/login`;
+  const url = `${API_BASE_URL}/login`;
 
   return fetch(url, {
     method: "POST",
