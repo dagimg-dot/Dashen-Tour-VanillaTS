@@ -44,7 +44,6 @@ const login = async (req, res) => {
 
           res.cookie("authToken", token, {
             httpOnly: true,
-            sameSite: "None",
             expires: new Date(Date.now() + 1000 * 60 * 5),
           });
 
