@@ -1,7 +1,23 @@
 import bcrypt from "bcryptjs";
-
+import jwt from "jsonwebtoken";
 import User from "../model/user.js";
 import errorHandler from "../utils/errorHandler.js";
+import "../config/env.config.js";
+
+const generateToken = (user) => {
+  const token = jwt.sign(
+    {
+      userId: user.id,
+      email: user.email,
+    },
+    process.env.JWT_SECRET_KEY,
+    {
+      expiresIn: "1h",
+    }
+  );
+
+  return token;
+};
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -24,6 +40,14 @@ const login = async (req, res) => {
       } else {
         const result = await bcrypt.compare(password, user.password);
         if (result) {
+          const token = generateToken(user);
+
+          res.cookie("authToken", token, {
+            httpOnly: true,
+            sameSite: "None",
+            expires: new Date(Date.now() + 1000 * 60 * 5),
+          });
+
           res.status(200).json({
             status: 200,
             message: "Success",
