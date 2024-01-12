@@ -348,6 +348,7 @@
     font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 1.2rem;
+    color: inherit;
 }
 
 .cta-form input, .cta-form select, .cta-form textarea {
