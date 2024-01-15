@@ -5,7 +5,7 @@ import { logger } from '@utils/logger';
 
 const sequelize = new Sequelize.Sequelize({
   dialect: 'sqlite',
-  storage: './server/db/dashen-tour.db',
+  storage: './db/dashen-tour.db',
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',
