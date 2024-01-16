@@ -1,7 +1,7 @@
 import Container from 'typedi';
-import { UploadService } from '@/services/upload.service.js';
+import { UploadService } from '@/services/upload.service';
 import { NextFunction, Request, Response } from 'express';
-import { JsonResponse } from '@/utils/JsonResponse.js';
+import { JsonResponse } from '@/utils/JsonResponse';
 
 export class UploadController {
   public uploadService = Container.get(UploadService);
