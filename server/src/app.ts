@@ -27,6 +27,7 @@ export class App {
     this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
+    this.initializeStaticServerRoutes();
     this.initializeSwagger();
     this.initializeErrorHandling();
   }
@@ -63,6 +64,10 @@ export class App {
     routes.forEach(route => {
       this.app.use('/', route.router);
     });
+  }
+
+  private initializeStaticServerRoutes() {
+    this.app.use('/uploads', express.static('./uploads'));
   }
 
   private initializeSwagger() {

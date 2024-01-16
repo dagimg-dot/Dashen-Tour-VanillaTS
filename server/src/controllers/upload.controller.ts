@@ -1,21 +1,21 @@
-import "../config/env.config.js";
+import Container from 'typedi';
+import { UploadService } from '@/services/upload.service.js';
+import { NextFunction, Request, Response } from 'express';
+import { JsonResponse } from '@/utils/JsonResponse.js';
 
-const upload = (req, res) => {
-  if (!req.file) {
-    res.status(400).json({
-      error: {
-        message: "No image uploaded",
-      },
-    });
-    return;
-  }
+export class UploadController {
+  public uploadService = Container.get(UploadService);
 
-  const link = `http://localhost:${process.env.PORT}/uploads/${req.file.filename}`;
-  res.status(200).json({
-    status: "200",
-    message: "Success",
-    data: { url: link },
-  });
-};
-
-export default upload;
+  public upload = (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { file } = req;
+      const link: string = this.uploadService.upload(file);
+      const data = {
+        link,
+      };
+      res.status(200).json(new JsonResponse('/upload', 'upload successfull', data, 200));
+    } catch (error) {
+      next(error);
+    }
+  };
+}

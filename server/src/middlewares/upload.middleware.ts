@@ -1,9 +1,10 @@
 import { MulterError } from 'multer';
 import { unlinkSync } from 'fs';
+import { NextFunction, Request, Response } from 'express';
 
 const allowedExtensions = ['.jpg', '.jpeg', '.png'];
 
-const fileSizeLimitHandler = (err, req, res, next) => {
+const fileSizeLimitHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
       return res.status(413).json({
@@ -16,7 +17,7 @@ const fileSizeLimitHandler = (err, req, res, next) => {
   next(err);
 };
 
-const extenstionHandler = (req, res, next) => {
+const extenstionHandler = (req: Request, res: Response, next: NextFunction) => {
   const file = req.file;
   const originalFileName = file.originalname;
   const fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.')).toLowerCase();
