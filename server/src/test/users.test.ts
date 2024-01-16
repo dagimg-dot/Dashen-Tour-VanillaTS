@@ -18,16 +18,19 @@ describe('Testing Users', () => {
       users.findAll = jest.fn().mockReturnValue([
         {
           id: 1,
+          fullName: 'abebe',
           email: 'a@email.com',
           password: await bcrypt.hash('q1w2e3r4!', 10),
         },
         {
           id: 2,
+          fullName: 'abebe',
           email: 'b@email.com',
           password: await bcrypt.hash('a1s2d3f4!', 10),
         },
         {
           id: 3,
+          fullName: 'abebe',
           email: 'c@email.com',
           password: await bcrypt.hash('z1x2c3v4!', 10),
         },
@@ -48,6 +51,7 @@ describe('Testing Users', () => {
 
       users.findByPk = jest.fn().mockReturnValue({
         id: 1,
+        fullName: 'abebe',
         email: 'a@email.com',
         password: await bcrypt.hash('q1w2e3r4!', 10),
       });
@@ -61,6 +65,7 @@ describe('Testing Users', () => {
   describe('[POST] /users', () => {
     it('response Create user', async () => {
       const userData: CreateUserDto = {
+        fullName: 'abebe',
         email: 'test@email.com',
         password: 'q1w2e3r4!',
       };
@@ -71,6 +76,7 @@ describe('Testing Users', () => {
       users.findOne = jest.fn().mockReturnValue(null);
       users.create = jest.fn().mockReturnValue({
         id: 1,
+        fullName: userData.fullName,
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
@@ -85,6 +91,7 @@ describe('Testing Users', () => {
     it('response Update user', async () => {
       const userId = 1;
       const userData: CreateUserDto = {
+        fullName: 'abebe',
         email: 'test@email.com',
         password: '1q2w3e4r!',
       };
