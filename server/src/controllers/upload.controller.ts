@@ -11,7 +11,7 @@ export class UploadController {
       const { file } = req;
       const link: string = this.uploadService.upload(file);
       const data = {
-        link,
+        url: link,
       };
       res.status(200).json(new JsonResponse('/upload', 'upload successfull', data, 200));
     } catch (error) {
