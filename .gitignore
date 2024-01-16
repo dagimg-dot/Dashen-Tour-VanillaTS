@@ -11,7 +11,7 @@
 *.sql
 
 /server/node_modules
-/server/uploads
+/server/src/uploads
 
 # Logs
 logs
