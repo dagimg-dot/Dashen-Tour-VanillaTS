@@ -6,10 +6,10 @@ const uploadConfig = multer({
     fileSize: 2 * 1024 * 1024, // 5MB limit
   },
   storage: diskStorage({
-    destination: (req, file, cb) => {
+    destination: (_req, _file, cb) => {
       cb(null, './src/uploads');
     },
-    filename: (req, file, cb) => {
+    filename: (_req, file, cb) => {
       const randomValue = randomBytes(6).toString('hex');
       const ext = file.originalname.split('.').pop();
       cb(null, Date.now().toString() + randomValue + '.' + ext);
