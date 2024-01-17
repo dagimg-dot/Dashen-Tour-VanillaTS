@@ -63,7 +63,7 @@ describe('Testing Users', () => {
   });
 
   describe('[POST] /users', () => {
-    it('response Create user', async () => {
+    it('response Create user with out password', async () => {
       const userData: CreateUserDto = {
         fullName: 'abebe',
         email: 'test@email.com',
@@ -75,10 +75,12 @@ describe('Testing Users', () => {
 
       users.findOne = jest.fn().mockReturnValue(null);
       users.create = jest.fn().mockReturnValue({
-        id: 1,
-        fullName: userData.fullName,
-        email: userData.email,
-        password: await bcrypt.hash(userData.password, 10),
+        dataValues: {
+          id: 1,
+          fullName: userData.fullName,
+          email: userData.email,
+          password: await bcrypt.hash(userData.password, 10),
+        },
       });
 
       (Sequelize as any).authenticate = jest.fn();

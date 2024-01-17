@@ -4,6 +4,8 @@ import { DB } from '@database';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@/exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
+import { UserRes } from '@/interfaces/auth.interface';
+import { UserModel } from '@/models/users.model';
 
 @Service()
 export class UserService {
@@ -20,13 +22,15 @@ export class UserService {
     return findUser;
   }
 
-  public async createUser(userData: CreateUserDto): Promise<User> {
+  public async createUser(userData: CreateUserDto): Promise<UserRes> {
     const findUser: User = await DB.Users.findOne({ where: { email: userData.email } });
-    if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
+    if (findUser) throw new HttpException(409, `This email ${userData.email} is associated with an account try to login with your email`);
 
     const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await DB.Users.create({ ...userData, password: hashedPassword });
-    return createUserData;
+    const createUserData: UserModel = await DB.Users.create({ ...userData, password: hashedPassword });
+    
+    const { password, ...otherProp } = createUserData.dataValues;
+    return otherProp;
   }
 
   public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {

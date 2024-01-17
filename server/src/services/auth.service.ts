@@ -25,13 +25,12 @@ export class AuthService {
   public users = DB.Users;
   public async signup(userData: CreateUserDto): Promise<UserRes> {
     const findUser: User = await DB.Users.findOne({ where: { email: userData.email } });
-    if (findUser) throw new HttpException(409, `This email ${userData.email} is associated with an account tye to login with your email`);
+    if (findUser) throw new HttpException(409, `This email ${userData.email} is associated with an account try to login with your email`);
 
     const hashedPassword = await hash(userData.password, 10);
     const createUserData: UserModel = await DB.Users.create({ ...userData, password: hashedPassword });
 
     const { password, ...otherProp } = createUserData.dataValues;
-
     return otherProp;
   }
 
@@ -39,17 +38,17 @@ export class AuthService {
     const findUser: UserModel = await DB.Users.findOne({ where: { email: userData.email } });
     if (!findUser) throw new HttpException(401, 'Incorrect email or password');
 
-    const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
+    const isPasswordMatching: boolean = await compare(userData.password, findUser.dataValues.password);
     if (!isPasswordMatching) throw new HttpException(401, 'Incorrect email or password');
 
-    const tokenData = createToken(findUser);
+    const tokenData = createToken(findUser.dataValues);
     const cookie = createCookie(tokenData);
 
     const { password, ...otherProp } = findUser.dataValues;
-    
+
     return { cookie, findUser: otherProp };
   }
-  
+
   public async logout(userData: User): Promise<UserRes> {
     const findUser: UserModel = await DB.Users.findOne({ where: { email: userData.email, password: userData.password } });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
