@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { Sequelize } from 'sequelize';
 import request from 'supertest';
 import { App } from '@/app';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, LoginUserDto } from '@dtos/users.dto';
 import { AuthRoute } from '@routes/auth.route';
 
 afterAll(async () => {
@@ -11,9 +11,10 @@ afterAll(async () => {
 
 describe('Testing Auth', () => {
   describe('[POST] /signup', () => {
-    it('response should have the Create userData', async () => {
+    it('response should have the Create userData without password', async () => {
       const userData: CreateUserDto = {
-        email: 'test@email.com',
+        fullName: 'abebe',
+        email: 'tesft@email.com',
         password: 'q1w2e3r4!',
       };
 
@@ -22,9 +23,12 @@ describe('Testing Auth', () => {
 
       users.findOne = jest.fn().mockReturnValue(null);
       users.create = jest.fn().mockReturnValue({
-        id: 1,
-        email: userData.email,
-        password: await bcrypt.hash(userData.password, 10),
+        dataValues: {
+          id: 1,
+          fullName: userData.fullName,
+          email: userData.email,
+          password: await bcrypt.hash(userData.password, 10),
+        },
       });
 
       (Sequelize as any).authenticate = jest.fn();
@@ -35,7 +39,7 @@ describe('Testing Auth', () => {
 
   describe('[POST] /login', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
-      const userData: CreateUserDto = {
+      const userData: LoginUserDto = {
         email: 'test@email.com',
         password: 'q1w2e3r4!',
       };
@@ -44,9 +48,7 @@ describe('Testing Auth', () => {
       const users = authRoute.authController.authService.users;
 
       users.findOne = jest.fn().mockReturnValue({
-        id: 1,
-        email: userData.email,
-        password: await bcrypt.hash(userData.password, 10),
+        dataValues: { id: 1, email: userData.email, password: await bcrypt.hash(userData.password, 10) },
       });
 
       (Sequelize as any).authenticate = jest.fn();
