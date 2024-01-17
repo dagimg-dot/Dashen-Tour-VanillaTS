@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { Container } from 'typedi';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import { UserService } from '@services/users.service';
 import { UserRes } from '@/interfaces/auth.interface';
@@ -43,7 +43,7 @@ export class UserController {
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId = Number(req.params.id);
-      const userData: CreateUserDto = req.body;
+      const userData: UpdateUserDto = req.body;
       const updateUserData: User = await this.userService.updateUser(userId, userData);
 
       res.status(200).json({ data: updateUserData, message: 'updated' });

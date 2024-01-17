@@ -1,7 +1,7 @@
 import { hash } from 'bcrypt';
 import { Service } from 'typedi';
 import { DB } from '@database';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@/exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import { UserRes } from '@/interfaces/auth.interface';
@@ -33,7 +33,7 @@ export class UserService {
     return otherProp;
   }
 
-  public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
+  public async updateUser(userId: number, userData: UpdateUserDto): Promise<User> {
     const findUser: User = await DB.Users.findByPk(userId);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
