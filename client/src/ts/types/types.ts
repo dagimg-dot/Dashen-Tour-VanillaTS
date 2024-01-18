@@ -23,10 +23,20 @@ export type State = {
 
 export type EventCallBack<T extends Event> = (event: T) => void;
 
-export interface HTMLTemplateLiteral extends String {}
-
 export type Reducer<S, A> = (state: S, action: A) => S;
 
 type ReactiveElement = HTMLElement | null;
 
 export type ReactiveElements = Record<string, ReactiveElement>;
+
+export type UserInfo = {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+};
+
+export type GlobalState = {
+  user: UserInfo | null;
+  isAuthenticated: boolean;
+};
