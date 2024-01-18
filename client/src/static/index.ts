@@ -8,5 +8,7 @@ import instagram from "../assets/icons/instagram.svg";
 import twitter from "../assets/icons/twitter.svg";
 //@ts-ignore
 import youtube from "../assets/icons/youtube.svg";
+//@ts-ignore
+import noProfile from "../assets/icons/no-profile.png"
 
-export { companyLogo, facebook, instagram, twitter, youtube };
+export { companyLogo, facebook, instagram, twitter, youtube, noProfile };

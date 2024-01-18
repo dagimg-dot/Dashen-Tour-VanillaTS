@@ -1,7 +1,11 @@
 import { html } from "lit-html";
 import "../../css/components/navigationbar.css";
+import useAuth from "../hooks/useAuth";
+import { noProfile } from "../../static";
 
 const NavigationBar = () => {
+  const [authState] = useAuth();
+
   const template = html`<nav class="nav-bar container-p">
     <div>
       <a href="#/" class="nav-logo">
@@ -29,10 +33,16 @@ const NavigationBar = () => {
         <ul class="main-nav-list">
           <li><a href="#" class="main-nav-link">Contact</a></li>
           <li><a href="#" class="main-nav-link">Packages</a></li>
-          <li><a href="#/destinations" class="main-nav-link">Destinations</a></li>
+          <li>
+            <a href="#/destinations" class="main-nav-link">Destinations</a>
+          </li>
           <li><a href="#" class="main-nav-link">Booking</a></li>
           <li>
-            <a href="#/login" class="main-nav-link btn btn-fill">Login</a>
+            ${authState().isAuthenticated
+              ? html` <div class="img-wrapper"><img src=${noProfile} /></div> `
+              : html`
+                  <a href="#/login" class="main-nav-link btn btn-fill">Login</a>
+                `}
           </li>
         </ul>
       </nav>
