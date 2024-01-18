@@ -21,7 +21,7 @@ const LoginController = ({ root, title }: CoreElements) => {
   };
 
   // TODO: Implement GlobalState for Authentication
-  const authenticated = true;
+  const authenticated = false;
 
   if (authenticated) {
     const toast = useToast();
@@ -135,11 +135,6 @@ const LoginController = ({ root, title }: CoreElements) => {
 
   LoginView.handleClose(() => {
     dispatch([{ type: "SET_INVALID", payload: false }]);
-  });
-
-  LoginView.handleLogoClick(() => {
-    const router = useRouter();
-    router.push("/");
   });
 
   const validateEmailField = (value: string) => {

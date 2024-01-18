@@ -4,7 +4,7 @@ import "../../css/components/navigationbar.css";
 const NavigationBar = () => {
   const template = html`<nav class="nav-bar container-p">
     <div>
-      <a href="#" class="nav-logo">
+      <a href="#/" class="nav-logo">
         <svg
           width="50"
           height="45"
@@ -29,7 +29,7 @@ const NavigationBar = () => {
         <ul class="main-nav-list">
           <li><a href="#" class="main-nav-link">Contact</a></li>
           <li><a href="#" class="main-nav-link">Packages</a></li>
-          <li><a href="#" class="main-nav-link">Destinations</a></li>
+          <li><a href="#/destinations" class="main-nav-link">Destinations</a></li>
           <li><a href="#" class="main-nav-link">Booking</a></li>
           <li>
             <a href="#/login" class="main-nav-link btn btn-fill">Login</a>

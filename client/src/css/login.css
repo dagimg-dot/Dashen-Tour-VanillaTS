@@ -51,6 +51,11 @@ label {
     cursor: pointer;
 }
 
+.auth-logo {
+    text-decoration: none;
+    color: #411d0d
+}
+
 .logo svg {
     width: 4rem;
 }

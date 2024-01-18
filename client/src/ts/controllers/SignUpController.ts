@@ -28,7 +28,7 @@ const SignUpController = ({ root, title }: CoreElements) => {
   };
 
   // TODO: Implement GlobalState for Authentication
-  const authenticated = true;
+  const authenticated = false;
 
   if (authenticated) {
     const toast = useToast();
