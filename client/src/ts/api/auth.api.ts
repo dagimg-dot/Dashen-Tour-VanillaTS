@@ -4,7 +4,7 @@ import { SignUpFormData } from "../types/signupTypes";
 const API_BASE_URL = "/api";
 
 const signUp = async (formData: SignUpFormData): Promise<Response> => {
-  const url = `${API_BASE_URL}/register`;
+  const url = `${API_BASE_URL}/signup`;
 
   return fetch(url, {
     method: "POST",
