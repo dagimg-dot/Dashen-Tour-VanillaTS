@@ -1,4 +1,4 @@
-import { CoreElements } from "../types/types";
+import { CoreElements, UserInfo } from "../types/types";
 import { LoginState, LOGINACTIONS, LoginFormData } from "../types/loginTypes";
 
 import useReducer from "../hooks/useReducer";
@@ -8,6 +8,7 @@ import LoginView from "../views/LoginView";
 import { login } from "../api/auth.api";
 import useToast from "../hooks/useToast";
 import errorHandler from "../utils/errorHandler";
+import useAuth from "../hooks/useAuth";
 
 const LoginController = ({ root, title }: CoreElements) => {
   const initialState: LoginState = {
@@ -20,10 +21,9 @@ const LoginController = ({ root, title }: CoreElements) => {
     isInvalid: false,
   };
 
-  // TODO: Implement GlobalState for Authentication
-  const authenticated = false;
+  const [authState, updateAuth] = useAuth();
 
-  if (authenticated) {
+  if (authState().isAuthenticated) {
     const toast = useToast();
     toast.showToast({ type: "ERROR", message: "You are already logged in" });
     const router = useRouter();
@@ -112,6 +112,10 @@ const LoginController = ({ root, title }: CoreElements) => {
             toast.showToast({
               type: "SUCCESS",
               message: "You are successfully logged in.",
+            });
+            updateAuth({
+              user: data.data as UserInfo,
+              isAuthenticated: true,
             });
             const router = useRouter();
             router.push("/destinations");
