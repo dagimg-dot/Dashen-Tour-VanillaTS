@@ -1,6 +1,7 @@
 import { html, render } from "lit-html";
 import "../../css/style.css";
 import { HomeState } from "../types/homeTypes";
+import { companyLogo, twitter, facebook, youtube, instagram } from "../../static";
 
 class HomeView {
   root: HTMLDivElement | null = null;
@@ -22,10 +23,7 @@ class HomeView {
             <div class="hero grid grid-2-cols">
               <div class="blur-wrap">
                 <div class="main-logo container-p">
-                  <img
-                    src="./src/assets/icons/company-logo.svg"
-                    alt="company logo"
-                  />
+                  <img src=${companyLogo} alt="company logo" />
                 </div>
                 <div class="hero-text-box container-p">
                   <span class="right">das<br />to</span>
@@ -47,18 +45,18 @@ class HomeView {
               <div class="unblurred-wrap">
                 <div class="socials container-p">
                   <a href="#" class="href"
-                    ><img src="./src/assets/icons/facebook.svg" alt="facebook"
+                    ><img src=${facebook} alt="facebook"
                   /></a>
                   <a href="#" class="href"
                     ><img
-                      src="./src/assets/icons/instagram.svg"
+                      src=${instagram}
                       alt="instagram"
                   /></a>
                   <a href="#" class="href"
-                    ><img src="./src/assets/icons/twitter.svg" alt="twitter"
+                    ><img src=${twitter} alt="twitter"
                   /></a>
                   <a href="#" class="href"
-                    ><img src="./src/assets/icons/youtube.svg" alt="youtube"
+                    ><img src=${youtube} alt="youtube"
                   /></a>
                 </div>
                 <nav class="main-nav container-p">
@@ -77,6 +75,7 @@ class HomeView {
               </div>
             </div>
           </section>
+          <nav>hello</nav>
           <section class="section-top-dest">
             <div class="container-m">
               <span class="sub-heading">top destinations</span>
