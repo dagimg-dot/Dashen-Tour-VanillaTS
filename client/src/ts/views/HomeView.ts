@@ -9,20 +9,24 @@ import {
   instagram,
 } from "../../static";
 import NavigationBar from "../components/NavigationBar";
+import useAuth from "../hooks/useAuth";
+import { GlobalState } from "../types/types";
 
 class HomeView {
   root: HTMLDivElement | null = null;
 
   render(state: HomeState) {
     this.root = state.rootNode;
-    this._renderView(state);
+    const [authState] = useAuth();
+    this._renderView(state, authState());
   }
 
   update(state: HomeState) {
-    this._renderView(state);
+    const [authState] = useAuth();
+    this._renderView(state, authState());
   }
 
-  _renderView(state: HomeState) {
+  _renderView(state: HomeState, authState: GlobalState) {
     render(
       html`
         <main>
@@ -43,9 +47,13 @@ class HomeView {
                     you the best trip you can imagine. We have helped tourists
                     navigate Ethiopia better. No regrets in choosing us.
                   </p>
-                  <a href="#/signup" class="btn btn-fill margin-right-sm"
-                    >Start exploring</a
-                  >
+                  ${authState.isAuthenticated
+                    ? html``
+                    : html`<a
+                        href="#/signup"
+                        class="btn btn-fill margin-right-sm"
+                        >Start exploring</a
+                      >`}
                   <a href="#" class="btn btn-outline">Learn more &rarr;</a>
                 </div>
               </div>
@@ -71,9 +79,13 @@ class HomeView {
                     <li><a href="#" class="main-nav-link">Destinations</a></li>
                     <li><a href="#" class="main-nav-link">Booking</a></li>
                     <li>
-                      <a href="#/login" class="main-nav-link btn btn-fill"
-                        >Login</a
-                      >
+                      ${authState.isAuthenticated
+                        ? html``
+                        : html` <a
+                            href="#/login"
+                            class="main-nav-link btn btn-fill"
+                            >Login</a
+                          >`}
                     </li>
                   </ul>
                 </nav>
