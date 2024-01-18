@@ -1,7 +1,14 @@
 import { html, render } from "lit-html";
 import "../../css/style.css";
 import { HomeState } from "../types/homeTypes";
-import { companyLogo, twitter, facebook, youtube, instagram } from "../../static";
+import {
+  companyLogo,
+  twitter,
+  facebook,
+  youtube,
+  instagram,
+} from "../../static";
+import NavigationBar from "../components/NavigationBar";
 
 class HomeView {
   root: HTMLDivElement | null = null;
@@ -48,9 +55,7 @@ class HomeView {
                     ><img src=${facebook} alt="facebook"
                   /></a>
                   <a href="#" class="href"
-                    ><img
-                      src=${instagram}
-                      alt="instagram"
+                    ><img src=${instagram} alt="instagram"
                   /></a>
                   <a href="#" class="href"
                     ><img src=${twitter} alt="twitter"
@@ -75,7 +80,7 @@ class HomeView {
               </div>
             </div>
           </section>
-          <nav>hello</nav>
+          <div class="">${NavigationBar()}</div>
           <section class="section-top-dest">
             <div class="container-m">
               <span class="sub-heading">top destinations</span>
