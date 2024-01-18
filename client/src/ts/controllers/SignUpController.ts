@@ -1,4 +1,5 @@
 import { signUp } from "../api/auth.api";
+import useAuth from "../hooks/useAuth";
 import useReducer from "../hooks/useReducer";
 import useRouter from "../hooks/useRouter";
 import useToast from "../hooks/useToast";
@@ -27,10 +28,9 @@ const SignUpController = ({ root, title }: CoreElements) => {
     isInvalid: false,
   };
 
-  // TODO: Implement GlobalState for Authentication
-  const authenticated = false;
+  const [authState] = useAuth();
 
-  if (authenticated) {
+  if (authState().isAuthenticated) {
     const toast = useToast();
     toast.showToast({ type: "ERROR", message: "You are already logged in" });
     const router = useRouter();
