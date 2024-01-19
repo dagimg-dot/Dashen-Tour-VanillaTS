@@ -18,7 +18,6 @@ class LoginView {
     emailInput: null,
     loginForm: null,
     closeBtn: null,
-    logo: null,
   };
 
   render(state: LoginState) {
@@ -40,7 +39,7 @@ class LoginView {
   }
 
   handleSubmit(handler: EventCallBack<SubmitEvent>) {
-    this.reactiveElements.loginForm!["onsubmit"] = handler;
+    this.reactiveElements.loginForm!["onsubmit"] = handler as EventListener;
   }
 
   handleClose(handler: EventCallBack<PointerEvent>) {
