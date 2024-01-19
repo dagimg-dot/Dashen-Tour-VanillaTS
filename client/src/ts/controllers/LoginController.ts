@@ -7,7 +7,6 @@ import reducer from "../reducers/LoginReducer";
 import LoginView from "../views/LoginView";
 import { login } from "../api/auth.api";
 import useToast from "../hooks/useToast";
-import errorHandler from "../utils/errorHandler";
 import useAuth from "../hooks/useAuth";
 
 const LoginController = ({ root, title }: CoreElements) => {
@@ -126,7 +125,7 @@ const LoginController = ({ root, title }: CoreElements) => {
             dispatch([{ type: "SET_INVALID", payload: true }]);
           } else {
             const toast = useToast();
-            const message = errorHandler(error);
+            const message = "Something went wrong, try again later";
             toast.showToast({ type: "ERROR", message: message });
           }
         })
