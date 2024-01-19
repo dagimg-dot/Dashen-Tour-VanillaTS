@@ -1,3 +1,4 @@
+import { NavigationBarController } from "../components/NavigationBar";
 import { HomeState } from "../types/homeTypes";
 import { CoreElements } from "../types/types";
 import { applyStickyNavBar } from "../utils/utilityFuncs";
@@ -12,6 +13,7 @@ const HomeController = ({ root, title }: CoreElements) => {
     title.innerText = "Dashen Tour";
     HomeView.render(initialState);
     applyStickyNavBar();
+    NavigationBarController()
   })();
 };
 

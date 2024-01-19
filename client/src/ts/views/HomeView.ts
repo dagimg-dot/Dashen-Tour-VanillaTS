@@ -8,7 +8,7 @@ import {
   youtube,
   instagram,
 } from "../../static";
-import NavigationBar from "../components/NavigationBar";
+import { NavigationBar } from "../components/NavigationBar";
 import useAuth from "../hooks/useAuth";
 import { GlobalState } from "../types/types";
 

@@ -6,7 +6,7 @@ import { noProfile } from "../../static";
 const NavigationBar = () => {
   const [authState] = useAuth();
 
-  const template = html`<nav class="nav-bar container-p">
+  const template = html`<nav class="nav-bar container-p" id="navBar">
     <div>
       <a href="#/" class="nav-logo">
         <svg
@@ -52,4 +52,13 @@ const NavigationBar = () => {
   return template;
 };
 
-export default NavigationBar;
+const NavigationBarController = () => {
+  const mainNav = document.getElementById("navBar") as HTMLElement;
+  mainNav.onclick = (event: MouseEvent) => {
+    if ((event.target as HTMLElement).nodeName === "IMG") {
+      console.log("profile logo clicked");
+    }
+  };
+};
+
+export { NavigationBar, NavigationBarController };
