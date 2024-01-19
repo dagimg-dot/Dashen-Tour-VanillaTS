@@ -5,6 +5,7 @@ import { noProfile } from "../../static";
 import { logout } from "../api/auth.api";
 import useRouter from "../hooks/useRouter";
 import useToast from "../hooks/useToast";
+import errorHandler from "../utils/errorHandler";
 
 const [authState, updateAuth] = useAuth();
 
@@ -77,7 +78,9 @@ const NavigationBarController = () => {
         .then((data) => {
           if (data.error) {
             const toast = useToast();
-            toast.showToast({ type: "ERROR", message: data.error });
+            const message = errorHandler(data.error);
+            toast.showToast({ type: "ERROR", message: message });
+            dropDown.classList.toggle("show-animate");
           } else {
             updateAuth({
               user: null,
@@ -100,6 +103,7 @@ const NavigationBarController = () => {
         .catch((error: Error) => {
           const toast = useToast();
           toast.showToast({ type: "ERROR", message: error.message });
+          dropDown.classList.toggle("show-animate");
         });
     } else if (dropDown.classList.contains("show-animate")) {
       dropDown.classList.toggle("show-animate");
