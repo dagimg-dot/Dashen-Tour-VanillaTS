@@ -42,7 +42,11 @@ const NavigationBar = () => {
           <li><a href="#" class="main-nav-link">Booking</a></li>
           <li>
             ${authState().isAuthenticated
-              ? html` <div class="img-wrapper"><img src=${noProfile} /></div> `
+              ? html`
+                  <div class="img-wrapper">
+                    <img class="profile-image" src=${noProfile} />
+                  </div>
+                `
               : html`
                   <a href="#/login" class="main-nav-link btn btn-fill">Login</a>
                 `}
@@ -60,10 +64,10 @@ const NavigationBar = () => {
 };
 
 const NavigationBarController = () => {
-  const mainNav = document.getElementById("navBar") as HTMLElement;
   const dropDown = document.querySelector(".drop-down-menu") as HTMLDivElement;
-  mainNav.onclick = (event: MouseEvent) => {
-    if ((event.target as HTMLElement).nodeName === "IMG") {
+
+  document.onclick = (event: MouseEvent) => {
+    if ((event.target as HTMLElement).className === "profile-image") {
       dropDown.classList.toggle("show-animate");
     } else if ((event.target as HTMLSpanElement).className === "logout-btn") {
       logout()
@@ -80,7 +84,10 @@ const NavigationBarController = () => {
               isAuthenticated: false,
             });
             const toast = useToast();
-            toast.showToast({ type: "SUCCESS", message: "You are logged out" });
+            toast.showToast({
+              type: "SUCCESS",
+              message: "You are logged out",
+            });
             const router = useRouter();
             dropDown.classList.toggle("show-animate");
             if (router.getCurrentRoute()?.path === "/") {
@@ -94,6 +101,8 @@ const NavigationBarController = () => {
           const toast = useToast();
           toast.showToast({ type: "ERROR", message: error.message });
         });
+    } else if (dropDown.classList.contains("show-animate")) {
+      dropDown.classList.toggle("show-animate");
     }
   };
 };
