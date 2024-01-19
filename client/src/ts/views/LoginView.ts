@@ -39,8 +39,6 @@ class LoginView {
     });
   }
 
-  getElements = () => this.reactiveElements;
-
   handleSubmit(handler: EventCallBack<SubmitEvent>) {
     this.reactiveElements.loginForm!["onsubmit"] = handler;
   }
