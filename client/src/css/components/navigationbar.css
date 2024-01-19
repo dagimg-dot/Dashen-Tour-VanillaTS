@@ -43,3 +43,41 @@
     border: 3px solid #411d0d;
     border-radius: 100%;
 }
+
+.drop-down-menu {
+    border-radius: 11px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 2rem;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #411d0d;
+}
+
+.main-nav {
+    position: relative;
+}
+
+.drop-down-menu span {
+    padding: 1.2rem 2.4rem;
+    border-radius: 9px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.drop-down-menu a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.drop-down-menu span:hover {
+    background-color: #411d0d;
+    color: white;
+}

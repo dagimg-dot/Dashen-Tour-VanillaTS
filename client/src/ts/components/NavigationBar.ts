@@ -45,6 +45,10 @@ const NavigationBar = () => {
                 `}
           </li>
         </ul>
+        <div class="drop-down-menu">
+          <span><a href="#/">Profile</a></span>
+          <span>Logout</span>
+        </div>
       </nav>
     </div>
   </nav>`;
@@ -54,9 +58,10 @@ const NavigationBar = () => {
 
 const NavigationBarController = () => {
   const mainNav = document.getElementById("navBar") as HTMLElement;
+  const dropDown = document.querySelector(".drop-down-menu") as HTMLDivElement;
   mainNav.onclick = (event: MouseEvent) => {
     if ((event.target as HTMLElement).nodeName === "IMG") {
-      console.log("profile logo clicked");
+      dropDown.classList.toggle("show-animate");
     }
   };
 };
