@@ -22,13 +22,16 @@ class Router {
     PageNotFound.renderView(this.coreElements.root);
   }
 
-  push(path: RoutePath) {
+  push(path: RoutePath, revalidate = false) {
     const route = this.#getRoute(path);
 
     if (route) {
       const newHash = "#" + path;
       this.currentRoute = route;
       window.location.hash = newHash;
+      if (revalidate) {
+        location.reload();
+      }
     } else {
       this.#renderPageNotFound();
     }

@@ -82,7 +82,12 @@ const NavigationBarController = () => {
             const toast = useToast();
             toast.showToast({ type: "SUCCESS", message: "You are logged out" });
             const router = useRouter();
-            router.push("/");
+            dropDown.classList.toggle("show-animate");
+            if (router.getCurrentRoute()?.path === "/") {
+              router.push("/", true);
+            } else {
+              router.push("/");
+            }
           }
         })
         .catch((error: Error) => {
