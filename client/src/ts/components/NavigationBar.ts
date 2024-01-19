@@ -2,10 +2,13 @@ import { html } from "lit-html";
 import "../../css/components/navigationbar.css";
 import useAuth from "../hooks/useAuth";
 import { noProfile } from "../../static";
+import { logout } from "../api/auth.api";
+import useRouter from "../hooks/useRouter";
+import useToast from "../hooks/useToast";
+
+const [authState, updateAuth] = useAuth();
 
 const NavigationBar = () => {
-  const [authState] = useAuth();
-
   const template = html`<nav class="nav-bar container-p" id="navBar">
     <div>
       <a href="#/" class="nav-logo">
@@ -47,7 +50,7 @@ const NavigationBar = () => {
         </ul>
         <div class="drop-down-menu">
           <span><a href="#/">Profile</a></span>
-          <span>Logout</span>
+          <span class="logout-btn">Logout</span>
         </div>
       </nav>
     </div>
@@ -62,6 +65,30 @@ const NavigationBarController = () => {
   mainNav.onclick = (event: MouseEvent) => {
     if ((event.target as HTMLElement).nodeName === "IMG") {
       dropDown.classList.toggle("show-animate");
+    } else if ((event.target as HTMLSpanElement).className === "logout-btn") {
+      logout()
+        .then((response: Response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            const toast = useToast();
+            toast.showToast({ type: "ERROR", message: data.error });
+          } else {
+            updateAuth({
+              user: null,
+              isAuthenticated: false,
+            });
+            const toast = useToast();
+            toast.showToast({ type: "SUCCESS", message: "You are logged out" });
+            const router = useRouter();
+            router.push("/");
+          }
+        })
+        .catch((error: Error) => {
+          const toast = useToast();
+          toast.showToast({ type: "ERROR", message: error.message });
+        });
     }
   };
 };

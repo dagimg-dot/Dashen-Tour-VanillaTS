@@ -27,4 +27,13 @@ const login = async (formData: LoginFormData): Promise<Response> => {
   });
 };
 
-export { login, signUp };
+const logout = async (): Promise<Response> => {
+  const url = `${API_BASE_URL}/logout`;
+
+  return fetch(url, {
+    method: "POST",
+    credentials: "include",
+  });
+};
+
+export { login, signUp, logout };
