@@ -92,7 +92,7 @@ class HomeView {
               </div>
             </div>
           </section>
-          <div class="">${NavigationBar()}</div>
+          <div>${NavigationBar()}</div>
           <section class="section-top-dest">
             <div class="container-m">
               <span class="sub-heading">top destinations</span>
