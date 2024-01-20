@@ -1,5 +1,14 @@
+import { Route, Router } from "@solidjs/router";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+
 function App() {
-  return <h1 class="text-3xl">hello</h1>;
+  return (
+    <Router>
+      <Route path={"/"} component={Dashboard} />
+      <Route path={"/login"} component={Login} />
+    </Router>
+  );
 }
 
 export default App;
