@@ -13,6 +13,8 @@
 /server/node_modules
 /server/src/uploads
 
+/admin/node_modules
+
 # Logs
 logs
 *.log
