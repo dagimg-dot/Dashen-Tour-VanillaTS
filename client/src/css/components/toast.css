@@ -13,7 +13,7 @@
     margin-right: auto;
     border-radius: 6px 0 0 6px;
     background-color: var(--toast-background);
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.514);
     transform: translateX(0);
     opacity: 0;
     visibility: hidden;
