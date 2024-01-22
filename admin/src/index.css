@@ -5,3 +5,9 @@
 html {
     font-family: Inter;
 }
+
+.login {
+    background-image: linear-gradient(#3d22229d, #461414b9), url("./assets/bluenile-1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
