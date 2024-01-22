@@ -66,6 +66,8 @@ const NavigationBar = () => {
 
 const NavigationBarController = () => {
   const dropDown = document.querySelector(".drop-down-menu") as HTMLDivElement;
+  const toast = useToast();
+  const router = useRouter();
 
   document.onclick = (event: MouseEvent) => {
     if ((event.target as HTMLElement).className === "profile-image") {
@@ -77,7 +79,6 @@ const NavigationBarController = () => {
         })
         .then((data) => {
           if (data.error) {
-            const toast = useToast();
             const message = errorHandler(data.error);
             toast.showToast({ type: "ERROR", message: message });
             dropDown.classList.toggle("show-animate");
@@ -86,12 +87,10 @@ const NavigationBarController = () => {
               user: null,
               isAuthenticated: false,
             });
-            const toast = useToast();
             toast.showToast({
               type: "SUCCESS",
               message: "You are logged out",
             });
-            const router = useRouter();
             dropDown.classList.toggle("show-animate");
             if (router.getCurrentRoute()?.path === "/") {
               router.push("/", true);
@@ -101,7 +100,6 @@ const NavigationBarController = () => {
           }
         })
         .catch((error: Error) => {
-          const toast = useToast();
           toast.showToast({ type: "ERROR", message: error.message });
           dropDown.classList.toggle("show-animate");
         });
