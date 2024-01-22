@@ -1,4 +1,5 @@
 import { Show, createSignal } from "solid-js";
+import Spinner from "../components/Spinner";
 
 type FormData = {
   email: string;
@@ -33,6 +34,7 @@ const Login = () => {
   };
 
   const login = async (formData: FormData) => {
+    SetError("")
     setLoading(true);
     try {
       const res = await fetch("/api/login", {
@@ -116,9 +118,16 @@ const Login = () => {
 
             <button
               type="submit"
-              class="bg-[#411d0d] py-2 rounded-lg text-white"
+              class="bg-[#411d0d] py-2 rounded-lg text-white flex justify-center"
             >
-              {isLoading() ? "Logging in" : "Login"}
+              {isLoading() ? (
+                <div class="flex gap-3">
+                  <Spinner />
+                  Logging in
+                </div>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
         </div>
