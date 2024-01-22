@@ -1,5 +1,3 @@
-import LoginBackgroundImage from "../assets/bluenile-1.jpg";
-
 const Login = () => {
   const handleSubmit = (event: SubmitEvent) => {
     event.preventDefault();
@@ -9,11 +7,6 @@ const Login = () => {
 
   return (
     <>
-      {/* <img
-        class="login h-screen w-screen"
-        src={LoginBackgroundImage}
-        alt="Gheralta"
-      /> */}
       <div class="login w-screen h-screen">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 bg-slate-300 rounded-lg shadow-black shadow-2xl">
           <h1 class="text-center mb-6 text-3xl font-semibold">
