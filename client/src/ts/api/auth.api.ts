@@ -11,7 +11,7 @@ const signUp = async (formData: SignUpFormData): Promise<Response> => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify({...formData, role: 'USER'}),
   });
 };
 
