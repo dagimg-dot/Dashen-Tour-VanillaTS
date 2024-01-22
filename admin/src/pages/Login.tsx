@@ -24,8 +24,8 @@ const Login = () => {
     SetError("");
   };
 
-  const handleChange = (event: InputEvent) => {
-    const { name, value } = event.target as HTMLInputElement;
+  const handleChange = (event: { target: HTMLInputElement }) => {
+    const { name, value } = event.target;
 
     setFormData((prev) => ({
       ...prev,
@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   const login = async (formData: FormData) => {
-    SetError("")
+    SetError("");
     setLoading(true);
     try {
       const res = await fetch("/api/login", {
