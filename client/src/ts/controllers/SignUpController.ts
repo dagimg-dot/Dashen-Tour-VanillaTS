@@ -10,7 +10,6 @@ import {
   SignUpState,
 } from "../types/signupTypes";
 import { CoreElements } from "../types/types";
-import errorHandler from "../utils/errorHandler";
 import SignupView from "../views/SignupView";
 
 const SignUpController = ({ root, title }: CoreElements) => {
@@ -140,7 +139,6 @@ const SignUpController = ({ root, title }: CoreElements) => {
           }
         })
         .catch((error: Error) => {
-          const toast = useToast();
           // const message = errorHandler(error);
           toast.showToast({ type: "ERROR", message: error.message });
         })
