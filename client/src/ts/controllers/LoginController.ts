@@ -21,11 +21,11 @@ const LoginController = ({ root, title }: CoreElements) => {
   };
 
   const [authState, updateAuth] = useAuth();
+  const toast = useToast();
+  const router = useRouter();
 
   if (authState().isAuthenticated) {
-    const toast = useToast();
     toast.showToast({ type: "ERROR", message: "You are already logged in" });
-    const router = useRouter();
     router.push("/");
     return;
   }
@@ -107,7 +107,6 @@ const LoginController = ({ root, title }: CoreElements) => {
             throw new Error(data.error.message);
           } else {
             console.log(data);
-            const toast = useToast();
             toast.showToast({
               type: "SUCCESS",
               message: "You are successfully logged in.",
@@ -116,7 +115,6 @@ const LoginController = ({ root, title }: CoreElements) => {
               user: data.data as UserInfo,
               isAuthenticated: true,
             });
-            const router = useRouter();
             router.push("/destinations");
           }
         })
@@ -124,7 +122,6 @@ const LoginController = ({ root, title }: CoreElements) => {
           if (error.message === "Incorrect email or password") {
             dispatch([{ type: "SET_INVALID", payload: true }]);
           } else {
-            const toast = useToast();
             const message = "Something went wrong, try again later";
             toast.showToast({ type: "ERROR", message: message });
           }

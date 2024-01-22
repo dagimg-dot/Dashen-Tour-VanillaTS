@@ -29,11 +29,11 @@ const SignUpController = ({ root, title }: CoreElements) => {
   };
 
   const [authState] = useAuth();
+  const toast = useToast();
+  const router = useRouter();
 
   if (authState().isAuthenticated) {
-    const toast = useToast();
     toast.showToast({ type: "ERROR", message: "You are already logged in" });
-    const router = useRouter();
     router.push("/");
     return;
   }
@@ -131,20 +131,18 @@ const SignUpController = ({ root, title }: CoreElements) => {
             throw new Error(data.error.message);
           } else {
             console.log(data);
-            const toast = useToast();
             toast.showToast({
               type: "SUCCESS",
               message: "The sign up was successfull. Please, login to continue",
               duration: 3000,
             });
-            const router = useRouter();
             router.push("/login");
           }
         })
         .catch((error: Error) => {
           const toast = useToast();
-          const message = errorHandler(error);
-          toast.showToast({ type: "ERROR", message: message });
+          // const message = errorHandler(error);
+          toast.showToast({ type: "ERROR", message: error.message });
         })
         .finally(() => {
           dispatch([{ type: "SET_LOADING", payload: false }]);
