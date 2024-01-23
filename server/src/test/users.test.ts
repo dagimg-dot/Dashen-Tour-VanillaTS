@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { Sequelize } from 'sequelize';
 import request from 'supertest';
 import { App } from '@/app';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
 import { UserRoute } from '@routes/users.route';
 
 afterAll(async () => {
@@ -92,10 +92,11 @@ describe('Testing Users', () => {
   describe('[PUT] /users/:id', () => {
     it('response Update user', async () => {
       const userId = 1;
-      const userData: CreateUserDto = {
+      const userData: UpdateUserDto = {
         fullName: 'abebe',
-        email: 'test@email.com',
         password: '1q2w3e4r!',
+        phoneNumber: '0906290648',
+        address: 'Bahir Dar'
       };
 
       const usersRoute = new UserRoute();
@@ -103,13 +104,12 @@ describe('Testing Users', () => {
 
       users.findByPk = jest.fn().mockReturnValue({
         id: userId,
-        email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
+
       users.update = jest.fn().mockReturnValue([1]);
       users.findByPk = jest.fn().mockReturnValue({
         id: userId,
-        email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
 
