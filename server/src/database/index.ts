@@ -2,6 +2,7 @@ import Sequelize from 'sequelize';
 import { NODE_ENV } from '@config/index';
 import UserModel from '@models/users.model';
 import { logger } from '@utils/logger';
+import DestinationModel from '@/models/destinations.model';
 
 const sequelize = new Sequelize.Sequelize({
   dialect: 'sqlite',
@@ -27,6 +28,7 @@ sequelize.authenticate();
 
 export const DB = {
   Users: UserModel(sequelize),
+  Destinations: DestinationModel(sequelize),
   sequelize, // connection instance (RAW queries)
   Sequelize, // library
 };
