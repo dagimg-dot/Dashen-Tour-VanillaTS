@@ -50,10 +50,8 @@ const Login = () => {
         SetError(data.error.message);
         return;
       }
-    } catch {
-      (error: Error) => {
-        SetError(error.message);
-      };
+    } catch (error) {
+      SetError((error as Error).message);
     } finally {
       setLoading(false);
     }
