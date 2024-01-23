@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model, Optional } from 'sequelize';
 import { User } from '@interfaces/users.interface';
 
-export type UserCreationAttributes = Optional<User, 'id' | 'email' | 'password' | 'fullName' | 'phoneNumber' | 'address'>;
+export type UserCreationAttributes = Optional<User, 'id' | 'email' | 'password' | 'fullName' | 'phoneNumber' | 'address' | 'role'>;
 
 export class UserModel extends Model<User, UserCreationAttributes> implements User {
   public id: number;
@@ -10,6 +10,7 @@ export class UserModel extends Model<User, UserCreationAttributes> implements Us
   public password: string;
   public phoneNumber: string;
   public address: string;
+  public role: string;
 
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
@@ -44,6 +45,11 @@ export default function (sequelize: Sequelize): typeof UserModel {
       address: {
         type: DataTypes.STRING(30),
         allowNull: true,
+        unique: false,
+      },
+      role: {
+        type: DataTypes.STRING(10),
+        allowNull: false,
         unique: false,
       },
     },
