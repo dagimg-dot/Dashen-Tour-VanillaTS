@@ -22,13 +22,13 @@ const SideNavigation = () => {
             />
           }
           name="Dashboard"
-          activeClass={activeLink}
+          activeClass={pathname === "/" ? activeLink : ""}
         />
         <NavElement
           href="/destinations"
           icon={
             <DashBoardIcon
-              isActive={pathname === "/destinations"}
+              isActive={pathname.includes("/destinations")}
               activeIcon={"fill-main"}
             />
           }
