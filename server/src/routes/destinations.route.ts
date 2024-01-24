@@ -13,6 +13,9 @@ export class DestinationRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.destinationsController.getDestinations);
+    this.router.get(`${this.path}/:id(\\d+)`, this.destinationsController.getDestinationById);
     this.router.post(`${this.path}`, this.destinationsController.createDestination);
+    this.router.put(`${this.path}/:id(\\d+)`, this.destinationsController.updateDestination);
+    this.router.delete(`${this.path}/:id(\\d+)`, this.destinationsController.deleteDestination);
   }
 }
