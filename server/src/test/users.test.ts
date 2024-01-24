@@ -96,7 +96,7 @@ describe('Testing Users', () => {
         fullName: 'abebe',
         password: '1q2w3e4r!',
         phoneNumber: '0906290648',
-        address: 'Bahir Dar'
+        address: 'Bahir Dar',
       };
 
       const usersRoute = new UserRoute();
@@ -110,7 +110,9 @@ describe('Testing Users', () => {
       users.update = jest.fn().mockReturnValue([1]);
       users.findByPk = jest.fn().mockReturnValue({
         id: userId,
-        password: await bcrypt.hash(userData.password, 10),
+        fullName: 'abebe',
+        phoneNumber: '0906290648',
+        address: 'Bahir Dar',
       });
 
       (Sequelize as any).authenticate = jest.fn();
@@ -129,7 +131,9 @@ describe('Testing Users', () => {
       users.findByPk = jest.fn().mockReturnValue({
         id: userId,
         email: 'a@email.com',
-        password: await bcrypt.hash('q1w2e3r4!', 10),
+        fullName: 'abebe',
+        phoneNumber: '0906290648',
+        address: 'Bahir Dar',
       });
 
       (Sequelize as any).authenticate = jest.fn();

@@ -15,11 +15,12 @@ export class UserService {
     return allUser;
   }
 
-  public async findUserById(userId: number): Promise<User> {
-    const findUser: User = await DB.Users.findByPk(userId);
+  public async findUserById(userId: number): Promise<UserRes> {
+    const findUser: UserModel = await DB.Users.findByPk(userId);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
-    return findUser;
+    const { password, ...otherProp } = findUser.dataValues;
+    return otherProp;
   }
 
   public async createUser(userData: CreateUserDto): Promise<UserRes> {
@@ -28,20 +29,21 @@ export class UserService {
 
     const hashedPassword = await hash(userData.password, 10);
     const createUserData: UserModel = await DB.Users.create({ ...userData, password: hashedPassword });
-    
+
     const { password, ...otherProp } = createUserData.dataValues;
     return otherProp;
   }
 
-  public async updateUser(userId: number, userData: UpdateUserDto): Promise<User> {
+  public async updateUser(userId: number, userData: UpdateUserDto): Promise<UserRes> {
     const findUser: User = await DB.Users.findByPk(userId);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     const hashedPassword = await hash(userData.password, 10);
     await DB.Users.update({ ...userData, password: hashedPassword }, { where: { id: userId } });
 
-    const updateUser: User = await DB.Users.findByPk(userId);
-    return updateUser;
+    const updateUser: UserModel = await DB.Users.findByPk(userId);
+    const { password, ...otherProp } = updateUser.dataValues;
+    return otherProp;
   }
 
   public async deleteUser(userId: number): Promise<User> {
