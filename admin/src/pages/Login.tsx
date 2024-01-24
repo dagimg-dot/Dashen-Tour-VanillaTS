@@ -116,7 +116,7 @@ const Login = () => {
 
             <button
               type="submit"
-              class="bg-[#411d0d] py-2 rounded-lg text-white flex justify-center"
+              class="bg-main py-2 rounded-lg text-white flex justify-center"
             >
               {isLoading() ? (
                 <div class="flex gap-3">
