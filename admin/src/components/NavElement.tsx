@@ -12,7 +12,7 @@ const NavElement = ({ href, icon, name, activeClass }: NavElementProps) => {
   return (
     <A
       href={href}
-      class="flex gap-2 items-center p-1"
+      class="flex gap-2 items-center p-1 py-2"
       activeClass={activeClass}
     >
       {icon}
