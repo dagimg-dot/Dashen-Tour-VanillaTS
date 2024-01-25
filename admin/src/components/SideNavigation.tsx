@@ -1,6 +1,13 @@
 import { A, useLocation } from "@solidjs/router";
 import NavElement from "./NavElement";
-import { CompanyLogoIcon, DashBoardIcon } from "./Icons";
+import {
+  AdminIcon,
+  CompanyLogoIcon,
+  DashBoardIcon,
+  DestinationIcon,
+  MessageIcon,
+  PackageIcon,
+} from "./Icons";
 
 const SideNavigation = () => {
   const { pathname } = useLocation();
@@ -18,7 +25,7 @@ const SideNavigation = () => {
           icon={
             <DashBoardIcon
               isActive={pathname === "/"}
-              activeIcon={"fill-main"}
+              activeIcon={"stroke-main"}
             />
           }
           name="Dashboard"
@@ -27,9 +34,9 @@ const SideNavigation = () => {
         <NavElement
           href="/destinations"
           icon={
-            <DashBoardIcon
+            <DestinationIcon
               isActive={pathname.includes("/destinations")}
-              activeIcon={"fill-main"}
+              activeIcon={"stroke-main"}
             />
           }
           name="Destinations"
@@ -38,9 +45,9 @@ const SideNavigation = () => {
         <NavElement
           href="/packages"
           icon={
-            <DashBoardIcon
+            <PackageIcon
               isActive={pathname === "/packages"}
-              activeIcon={"fill-main"}
+              activeIcon={"stroke-main"}
             />
           }
           name="Packages"
@@ -49,9 +56,9 @@ const SideNavigation = () => {
         <NavElement
           href="/messages"
           icon={
-            <DashBoardIcon
+            <MessageIcon
               isActive={pathname === "/messages"}
-              activeIcon={"fill-main"}
+              activeIcon={"stroke-main"}
             />
           }
           name="Messages"
@@ -60,9 +67,9 @@ const SideNavigation = () => {
         <NavElement
           href="/admins"
           icon={
-            <DashBoardIcon
+            <AdminIcon
               isActive={pathname === "/admins"}
-              activeIcon={"fill-main"}
+              activeIcon={"stroke-main"}
             />
           }
           name="Admins"
