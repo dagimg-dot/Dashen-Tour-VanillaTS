@@ -19,7 +19,7 @@ const NewDestination = () => {
                   cols="30"
                   rows="4"
                   placeholder="description"
-                  class="border-2 border-main/60 text-main rounded-lg py-1 px-2 placeholder:text-main/60 focus:border-2 focus:border-main outline-none w-full"
+                  class="border-2 border-main/60 text-main rounded-lg py-1 px-2 placeholder:text-main/60 focus:border-2 focus:border-main outline-none w-full bg-white"
                 ></textarea>
               </div>
               <div class="flex flex-col gap-2">
