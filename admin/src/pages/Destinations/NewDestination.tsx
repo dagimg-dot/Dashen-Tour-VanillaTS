@@ -6,9 +6,6 @@ const NewDestination = () => {
   const uploadImage = async (imageData: FormData) => {
     const res = await fetch("/api/upload", {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       body: imageData,
     });
 
@@ -31,11 +28,7 @@ const NewDestination = () => {
       }
 
       const imageData = new FormData();
-      // for (let i = 0; i < file.length; i++) {
-      //   imageData.append("image", file.item(i));
-      // }
-
-      imageData.append("image", file);
+      imageData.append("image", file[0]);
 
       await uploadImage(imageData);
     }
