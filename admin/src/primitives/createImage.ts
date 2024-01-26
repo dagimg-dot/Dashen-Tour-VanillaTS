@@ -41,16 +41,24 @@ const createImage = () => {
     }
   };
 
-  const handleImageUpload = async (event: { target: HTMLInputElement }) => {
-    const files = event.target.files!;
-    if (files!.length > 0) {
-      validateImage(files.item(0)!);
-      if (error() === "") {
-        const imageData = new FormData();
-        imageData.append("image", files[0]);
+  const countImage = () => {
+    return destinationImages().length;
+  };
 
-        await uploadImage(imageData);
+  const handleImageUpload = async (event: { target: HTMLInputElement }) => {
+    if (countImage() < 6) {
+      const files = event.target.files!;
+      if (files!.length > 0) {
+        validateImage(files.item(0)!);
+        if (error() === "") {
+          const imageData = new FormData();
+          imageData.append("image", files[0]);
+
+          await uploadImage(imageData);
+        }
       }
+    } else {
+      toast.error("Number of images uploaded can not exceed the limit");
     }
   };
 
