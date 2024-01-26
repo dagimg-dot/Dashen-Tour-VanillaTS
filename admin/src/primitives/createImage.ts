@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import toast from "solid-toast";
 
 const ALLOWED_IMAGE_TYPE = ["png", "jpg", "jpeg"];
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
@@ -22,6 +23,7 @@ const createImage = () => {
       setDestinationImages((prev) => [...prev, data.data.url as string]);
     } catch (error) {
       setError(error.message);
+      toast.error(error.message);
     } finally {
       setIsUploading(false);
     }
@@ -30,10 +32,12 @@ const createImage = () => {
   const validateImage = (file: File) => {
     if (file?.size! > MAX_IMAGE_SIZE) {
       setError("Fize size exceeded the limit");
+      toast.error("Fize size exceeded the limit");
     }
 
     if (!ALLOWED_IMAGE_TYPE.includes(file?.name!.split(".").pop()!)) {
       setError("Invalid image extenstion");
+      toast.error("Invalid image extenstion");
     }
   };
 
@@ -47,8 +51,6 @@ const createImage = () => {
 
         await uploadImage(imageData);
       }
-
-      setError("");
     }
   };
 

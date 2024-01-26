@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "solid-js": "^1.8.5",
-    "@solidjs/router": "^0.10.9"
+    "@solidjs/router": "^0.10.9",
+    "solid-toast": "^0.5.0"
   },
   "devDependencies": {
     "vite": "latest",

@@ -38,6 +38,7 @@ const NewDestination = () => {
 
   return (
     <Default>
+      <Toaster />
       <div class="max-w-3xl mx-auto font-semibold">
         <div>
           <h1 class="text-main text-center font-semibold text-xl mb-6">
