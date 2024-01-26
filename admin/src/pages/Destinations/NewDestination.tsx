@@ -2,68 +2,17 @@ import { For, Show, createSignal } from "solid-js";
 import { UploadIcon } from "../../components/Icons";
 import Input from "../../components/Input";
 import Default from "../../layouts/Default";
-
-type DestinationFormData = {
-  destinationName: string;
-  destinationDescription: string;
-  destinationLocation: string;
-  destinationImages: string[];
-};
-
-const ALLOWED_IMAGE_TYPE = ["png", "jpg", "jpeg"];
+import createImage from "../../primitives/createImage";
+import { Toaster } from "solid-toast";
 
 const NewDestination = () => {
-  const [formData, setFormData] = createSignal<DestinationFormData>({
+  const [formData, setFormData] = createSignal({
     destinationName: "",
     destinationDescription: "",
     destinationLocation: "",
-    destinationImages: [],
   });
-  const [isUploading, setIsUploading] = createSignal(false);
 
-  const uploadImage = async (imageData: FormData) => {
-    setIsUploading(true);
-    try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: imageData,
-      });
-
-      const data = await res.json();
-      if (data.error) throw new Error(data.error.message);
-
-      setFormData((prev) => ({
-        ...prev,
-        destinationImages: [...formData().destinationImages, data.data.url],
-      }));
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsUploading(false);
-    }
-  };
-
-  const handleImageUpload = async (event: { target: HTMLInputElement }) => {
-    const files = event.target.files!;
-    if (files!.length > 0) {
-      if (files.item(0)?.size! > 2 * 1024 * 1024) {
-        console.log("Fize size exceeded the limit");
-        return;
-      }
-
-      if (
-        !ALLOWED_IMAGE_TYPE.includes(files.item(0)?.name!.split(".").pop()!)
-      ) {
-        console.log("Invalid image extenstion");
-        return;
-      }
-
-      const imageData = new FormData();
-      imageData.append("image", files[0]);
-
-      await uploadImage(imageData);
-    }
-  };
+  const { isUploading, handleImageUpload, destinationImages } = createImage();
 
   const handleChange = (event: {
     target: HTMLInputElement | HTMLTextAreaElement;
@@ -79,7 +28,12 @@ const NewDestination = () => {
   const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
-    console.log(formData());
+    const destinationForm = {
+      ...formData(),
+      destinationImages: destinationImages(),
+    };
+
+    console.log(destinationForm);
   };
 
   return (
@@ -131,8 +85,8 @@ const NewDestination = () => {
                       Uploading...
                     </div>
                   </Show>
-                  <Show when={formData().destinationImages.length > 0}>
-                    <For each={formData().destinationImages}>
+                  <Show when={destinationImages().length > 0}>
+                    <For each={destinationImages()}>
                       {(destinationImage, idx) => (
                         <div class="w-32 h-32 rounded-lg" data-index={idx()}>
                           <img
