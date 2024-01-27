@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import toast from "solid-toast";
 
 const ALLOWED_IMAGE_TYPE = ["png", "jpg", "jpeg"];
@@ -8,6 +8,12 @@ const createImage = () => {
   const [destinationImages, setDestinationImages] = createSignal<string[]>([]);
   const [isUploading, setIsUploading] = createSignal(false);
   const [error, setError] = createSignal("");
+
+  createEffect(() => {
+    if (error() !== "") {
+      toast.error(error());
+    }
+  });
 
   const uploadImage = async (imageData: FormData) => {
     setIsUploading(true);
@@ -22,8 +28,7 @@ const createImage = () => {
 
       setDestinationImages((prev) => [...prev, data.data.url as string]);
     } catch (error) {
-      setError(error.message);
-      toast.error(error.message);
+      setError((error as Error).message);
     } finally {
       setIsUploading(false);
     }
@@ -32,12 +37,10 @@ const createImage = () => {
   const validateImage = (file: File) => {
     if (file?.size! > MAX_IMAGE_SIZE) {
       setError("Fize size exceeded the limit");
-      toast.error("Fize size exceeded the limit");
     }
 
     if (!ALLOWED_IMAGE_TYPE.includes(file?.name!.split(".").pop()!)) {
       setError("Invalid image extenstion");
-      toast.error("Invalid image extenstion");
     }
   };
 
@@ -46,6 +49,7 @@ const createImage = () => {
   };
 
   const handleImageUpload = async (event: { target: HTMLInputElement }) => {
+    setError("");
     if (countImage() < 6) {
       const files = event.target.files!;
       if (files!.length > 0) {
