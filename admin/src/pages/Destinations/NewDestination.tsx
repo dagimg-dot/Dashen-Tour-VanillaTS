@@ -91,6 +91,7 @@ const NewDestination = () => {
                       {(destinationImage, idx) => (
                         <div class="w-32 h-32 rounded-lg" data-index={idx()}>
                           <img
+                            crossOrigin="anonymous"
                             class=" w-32 h-32 rounded-lg"
                             src={destinationImage}
                           />
