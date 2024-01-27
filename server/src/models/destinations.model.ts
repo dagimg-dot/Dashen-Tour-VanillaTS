@@ -1,12 +1,13 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { Destination } from '@/interfaces/destinations.interface';
 
-export type DestinationCreationAttributes = Optional<Destination, 'destinationID' | 'name' | 'description'>;
+export type DestinationCreationAttributes = Optional<Destination, 'destinationID' | 'name' | 'description' | 'location'>;
 
 export class DestinationModel extends Model<Destination, DestinationCreationAttributes> implements Destination {
   public destinationID: number;
   public name: string;
   public description: string;
+  public location: string;
 
   public readonly createdAt: Date;
   public readonly updatedAt: Date;
@@ -27,6 +28,10 @@ export default function (sequelize: Sequelize): typeof DestinationModel {
       },
       description: {
         type: DataTypes.TEXT,
+        unique: false,
+      },
+      location: {
+        type: DataTypes.STRING(20),
         unique: false,
       },
     },
