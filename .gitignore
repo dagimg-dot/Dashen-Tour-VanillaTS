@@ -12,6 +12,8 @@
 
 /server/node_modules
 /server/src/uploads
+/server/src/database/migrations/
+/server/src/database/seeders/
 
 /admin/node_modules
 
