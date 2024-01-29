@@ -8,7 +8,7 @@ type FormData = {
 
 const Login = () => {
   const [isLoading, setLoading] = createSignal(false);
-  const [Error, SetError] = createSignal("");
+  const [error, SetError] = createSignal("");
   const [formData, setFormData] = createSignal({
     email: "",
     password: "",
@@ -45,11 +45,7 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
-      if (data.error) {
-        SetError(data.error.message);
-        return;
-      }
+      if (data.error) throw new Error(data.error.message);
     } catch (error) {
       SetError((error as Error).message);
     } finally {
@@ -89,7 +85,7 @@ const Login = () => {
                 required
               />
             </div>
-            <Show when={Error() !== ""}>
+            <Show when={error() !== ""}>
               <div
                 class="flex border-2 p-3 rounded-lg border-red-600 text-red-600 justify-between mt-4"
                 onclick={handleErrorModalClick}
