@@ -11,3 +11,28 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+table.custom-table {
+    @apply w-full;
+}
+
+table.custom-table thead tr td {
+    @apply bg-main/10;
+}
+
+table.custom-table tr td {
+    @apply border border-main/10 p-2;
+}
+
+@layer base {
+    ::-webkit-scrollbar {
+        @apply bg-transparent;
+        @apply rounded-xl;
+        @apply w-2
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gradient-to-b from-main/90 to-main/50;
+        @apply rounded-xl
+    }
+}
