@@ -5,7 +5,16 @@ import Default from "../../layouts/Default";
 import createImage from "../../primitives/createImage";
 import { Toaster } from "solid-toast";
 
+type DestinationFormData = {
+  name: string;
+  description: string;
+  location: string;
+  images: { url: string }[];
+};
+
 const NewDestination = () => {
+  const [isLoading, setLoading] = createSignal(false);
+  const [Error, SetError] = createSignal("");
   const [formData, setFormData] = createSignal({
     destinationName: "",
     destinationDescription: "",
@@ -25,15 +34,42 @@ const NewDestination = () => {
     }));
   };
 
+  const createDestination = async (formData: DestinationFormData) => {
+    SetError("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/destinations", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      SetError((error as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (event: SubmitEvent) => {
     event.preventDefault();
 
-    const destinationForm = {
-      ...formData(),
-      destinationImages: destinationImages(),
+    const destinationFormData = {
+      name: formData().destinationName,
+      description: formData().destinationDescription,
+      location: formData().destinationLocation,
+      images: destinationImages().map((imageLink) => {
+        return {
+          url: imageLink,
+        };
+      }),
     };
 
-    console.log(destinationForm);
+    await createDestination(destinationFormData);
   };
 
   return (
@@ -115,7 +151,7 @@ const NewDestination = () => {
               type="submit"
               class="bg-main text-white rounded-lg px-4 py-2 hover:bg-main/90 mt-6"
             >
-              Save
+              {isLoading() ? "Saving..." : "Save"}
             </button>
           </form>
         </div>
