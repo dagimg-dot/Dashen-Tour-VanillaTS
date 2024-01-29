@@ -1,9 +1,9 @@
-import { For, Show, createSignal } from "solid-js";
+import { For, Show, createEffect, createSignal } from "solid-js";
 import { UploadIcon } from "../../components/Icons";
 import Input from "../../components/Input";
 import Default from "../../layouts/Default";
 import createImage from "../../primitives/createImage";
-import { Toaster } from "solid-toast";
+import toast, { Toaster } from "solid-toast";
 
 type DestinationFormData = {
   name: string;
@@ -14,11 +14,17 @@ type DestinationFormData = {
 
 const NewDestination = () => {
   const [isLoading, setLoading] = createSignal(false);
-  const [Error, SetError] = createSignal("");
+  const [error, SetError] = createSignal("");
   const [formData, setFormData] = createSignal({
     destinationName: "",
     destinationDescription: "",
     destinationLocation: "",
+  });
+
+  createEffect(() => {
+    if (error() !== "") {
+      toast.error(error());
+    }
   });
 
   const { isUploading, handleImageUpload, destinationImages } = createImage();
@@ -47,7 +53,8 @@ const NewDestination = () => {
       });
 
       const data = await res.json();
-      console.log(data);
+      if (data.error) throw new Error(data.error.message);
+      toast.success("Destination created successfully");
     } catch (error) {
       SetError((error as Error).message);
     } finally {
