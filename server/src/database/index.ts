@@ -3,6 +3,8 @@ import { NODE_ENV } from '@config/index';
 import UserModel from '@models/users.model';
 import { logger } from '@utils/logger';
 import DestinationModel from '@/models/destinations.model';
+import DestinationImageModel from '@/models/destinationImages.model';
+import { initializeAssociations } from '@/database/associations';
 
 const sequelize = new Sequelize.Sequelize({
   dialect: 'sqlite',
@@ -29,6 +31,9 @@ sequelize.authenticate();
 export const DB = {
   Users: UserModel(sequelize),
   Destinations: DestinationModel(sequelize),
+  DestinationImages: DestinationImageModel(sequelize),
   sequelize, // connection instance (RAW queries)
   Sequelize, // library
 };
+
+initializeAssociations();

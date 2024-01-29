@@ -13,32 +13,37 @@ export class DestinationService {
   }
 
   public async findDestinationById(destinationId: number): Promise<Destination> {
-    const findDestination: Destination = await DB.Destinations.findByPk(destinationId);
+    const findDestination = await DB.Destinations.findByPk(destinationId, {
+      include: 'images',
+    });
     if (!findDestination) throw new HttpException(404, "Destination doesn't exist");
 
     return findDestination;
   }
 
   public async createDestination(destinationdData: Destination): Promise<Destination> {
-    const createDestinatonData: Destination = await DB.Destinations.create(destinationdData);
+    const createDestinatonData: Destination = await DB.Destinations.create(destinationdData, {
+      include: 'images',
+    });
+
     return createDestinatonData;
   }
 
   public async updateDestination(destinationId: number, destinationData: Destination): Promise<Destination> {
-    const findDestination: Destination = await DB.Destinations.findByPk(destinationId);
+    const findDestination = await DB.Destinations.findByPk(destinationId);
     if (!findDestination) throw new HttpException(404, "Destination doesn't exist");
 
-    await DB.Destinations.update({ ...destinationData }, { where: { destinationID: destinationId } });
+    await DB.Destinations.update({ ...destinationData }, { where: { destinationId: destinationId } });
 
     const updateDestination: Destination = await DB.Destinations.findByPk(destinationId);
     return updateDestination;
   }
 
   public async deleteDestination(destinationId: number): Promise<Destination> {
-    const findDestination: Destination = await DB.Destinations.findByPk(destinationId);
+    const findDestination = await DB.Destinations.findByPk(destinationId);
     if (!findDestination) throw new HttpException(404, "Destination doesn't exist");
 
-    await DB.Destinations.destroy({ where: { destinationID: destinationId } });
+    await DB.Destinations.destroy({ where: { destinationId: destinationId } });
 
     return findDestination;
   }

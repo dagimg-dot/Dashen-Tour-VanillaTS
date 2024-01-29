@@ -1,22 +1,27 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
 import { Destination } from '@/interfaces/destinations.interface';
+import { DB } from '@/database';
 
-export type DestinationCreationAttributes = Optional<Destination, 'destinationID' | 'name' | 'description' | 'location'>;
+export type DestinationCreationAttributes = Optional<Destination, 'destinationId' | 'name' | 'description' | 'location'>;
 
 export class DestinationModel extends Model<Destination, DestinationCreationAttributes> implements Destination {
-  public destinationID: number;
+  public destinationId: number;
   public name: string;
   public description: string;
   public location: string;
 
-  public readonly createdAt: Date;
-  public readonly updatedAt: Date;
+  public static associate(): void {
+    DestinationModel.hasMany(DB.DestinationImages, {
+      foreignKey: 'destinationId',
+      as: 'images',
+    });
+  }
 }
 
 export default function (sequelize: Sequelize): typeof DestinationModel {
   DestinationModel.init(
     {
-      destinationID: {
+      destinationId: {
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,

@@ -19,7 +19,7 @@ export class DestinationController {
   public getDestinationById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const destinationID = Number(req.params.id);
-      const findDestinationData: Destination = await this.destinationService.findDestinationById(destinationID);
+      const findDestinationData = await this.destinationService.findDestinationById(destinationID);
 
       res.status(200).json({ data: findDestinationData, message: 'findOne' });
     } catch (error) {

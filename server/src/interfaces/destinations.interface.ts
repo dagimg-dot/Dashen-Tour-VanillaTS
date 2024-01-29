@@ -1,5 +1,5 @@
 export interface Destination {
-  destinationID?: number;
+  destinationId?: number;
   name: string;
   description: string;
   location: string;
