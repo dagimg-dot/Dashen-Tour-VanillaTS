@@ -4,6 +4,7 @@ import Input from "./Input";
 import toast from "solid-toast";
 import createImage from "../primitives/createImage";
 import { Destination } from "../types/types";
+import Chip from "./Chip";
 
 interface DestinationFormProps {
   destinationInfo?: Destination;
@@ -162,7 +163,14 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
               />
             </div>
             <div class="flex flex-col gap-2">
-              <label>Destination Images (Max: 6, Each: {"<"} 2MB )</label>
+              <label>
+                <div class="flex gap-2 items-center">
+                  <span>Destination Images</span>
+                  <Chip text={"Max: 6"} />
+                  <Chip text={"Each < 2MB"} />
+                  <Chip text={`Current: ${allImages().length}`} />
+                </div>
+              </label>
               <div class="flex flex-wrap gap-4">
                 <Show when={isUploading()}>
                   <div class="bg-gray-200 w-32 h-32 rounded-lg flex justify-center items-center">
