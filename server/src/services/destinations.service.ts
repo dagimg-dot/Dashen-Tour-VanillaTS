@@ -8,7 +8,7 @@ export class DestinationService {
   public destinations = DB.Destinations;
 
   public async findAllDestinations(): Promise<Destination[]> {
-    const allDestinations: Destination[] = await DB.Destinations.findAll();
+    const allDestinations: Destination[] = await DB.Destinations.findAll({ include: 'images' });
     return allDestinations;
   }
 
@@ -31,11 +31,24 @@ export class DestinationService {
 
   public async updateDestination(destinationId: number, destinationData: Destination): Promise<Destination> {
     const findDestination = await DB.Destinations.findByPk(destinationId);
+
     if (!findDestination) throw new HttpException(404, "Destination doesn't exist");
+
+    const newImages = await Promise.all(
+      destinationData.images.map(async imageData => {
+        const image = await DB.DestinationImages.create({ ...imageData, destinationId: destinationId });
+        return image;
+      }),
+    );
+
+    await findDestination.addImages(newImages);
 
     await DB.Destinations.update({ ...destinationData }, { where: { destinationId: destinationId } });
 
-    const updateDestination: Destination = await DB.Destinations.findByPk(destinationId);
+    const updateDestination: Destination = await DB.Destinations.findByPk(destinationId, {
+      include: 'images',
+    });
+
     return updateDestination;
   }
 
