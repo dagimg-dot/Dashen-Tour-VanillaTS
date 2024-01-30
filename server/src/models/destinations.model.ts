@@ -1,6 +1,7 @@
-import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { DataTypes, HasManyAddAssociationsMixin, Model, Optional, Sequelize } from 'sequelize';
 import { Destination } from '@/interfaces/destinations.interface';
 import { DB } from '@/database';
+import { DestinationImage } from '@/interfaces/destinationImage.interface';
 
 export type DestinationCreationAttributes = Optional<Destination, 'destinationId' | 'name' | 'description' | 'location'>;
 
@@ -9,6 +10,7 @@ export class DestinationModel extends Model<Destination, DestinationCreationAttr
   public name: string;
   public description: string;
   public location: string;
+  declare addImages: HasManyAddAssociationsMixin<DestinationImage, 'imageId'>;
 
   public static associate(): void {
     DestinationModel.hasMany(DB.DestinationImages, {
