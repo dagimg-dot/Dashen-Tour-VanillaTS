@@ -19,6 +19,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
   });
 
   const flattenImageList = (imageList: { url: string }[]) => {
+    if (!imageList) return [];
     const flattenList = imageList.map((image) => {
       return image.url;
     });
