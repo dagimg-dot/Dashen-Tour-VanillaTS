@@ -24,7 +24,11 @@ const Destinations = () => {
         <Show when={!destinations.loading} fallback={"loading ..."}>
           <Show
             when={destinations()!.length > 0}
-            fallback={"The destination list is empty"}
+            fallback={
+              <div class="text-center text-lg mt-10 font-semibold">
+                The destination record is empty
+              </div>
+            }
           >
             <table class="custom-table mt-6">
               <thead>
