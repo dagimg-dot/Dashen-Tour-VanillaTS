@@ -4,7 +4,7 @@ import toast from "solid-toast";
 const ALLOWED_IMAGE_TYPE = ["png", "jpg", "jpeg"];
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
 
-const createImage = () => {
+const createImage = (currentImagesLength: number) => {
   const [destinationImages, setDestinationImages] = createSignal<string[]>([]);
   const [isUploading, setIsUploading] = createSignal(false);
   const [error, setError] = createSignal("");
@@ -45,7 +45,7 @@ const createImage = () => {
   };
 
   const countImage = () => {
-    return destinationImages().length;
+    return currentImagesLength + destinationImages().length;
   };
 
   const handleImageUpload = async (event: { target: HTMLInputElement }) => {

@@ -40,7 +40,9 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     console.log("Editing mode");
   }
 
-  const { isUploading, handleImageUpload, destinationImages } = createImage();
+  const { isUploading, handleImageUpload, destinationImages } = createImage(
+    oldImages().length
+  );
 
   const allImages = createMemo(() => [...oldImages(), ...destinationImages()]);
 
