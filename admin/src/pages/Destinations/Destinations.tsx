@@ -2,19 +2,29 @@ import { A } from "@solidjs/router";
 import Default from "../../layouts/Default";
 import { For, Show, createResource } from "solid-js";
 import { Destination } from "../../types/types";
-
-const fetchDestinations = async () => {
-  const res = await fetch("/api/destinations");
-  const data = await res.json();
-  return data.data;
-};
+import {
+  deleteDestination,
+  fetchDestinations,
+} from "../../api/destination.api";
+import toast, { Toaster } from "solid-toast";
 
 const Destinations = () => {
-  const [destinations] = createResource<Destination[]>(fetchDestinations);
+  const [destinations, { refetch }] =
+    createResource<Destination[]>(fetchDestinations);
+
+  const handleDeleteClick = async (destination: Destination) => {
+    const data = await deleteDestination(destination.destinationId!);
+    if (data) {
+      toast.success(`${destination.name} is deleted successfully`);
+      refetch();
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <Default>
-      {" "}
+      <Toaster />{" "}
       <A href="/destinations/new">
         <button class="bg-main text-white rounded-lg px-2 py-2 hover:bg-main/90 ">
           Add new destination
@@ -45,12 +55,18 @@ const Destinations = () => {
                       <td>{destination.location}</td>
                       <td>
                         <div class="flex gap-2 justify-center">
-                          <button class="bg-main text-white text-sm rounded-lg px-2 py-1 hover:bg-main/90 ">
+                          <button class="bg-main text-white text-sm rounded-lg px-2 py-1 hover:bg-main/90">
                             <A
                               href={`/destinations/${destination.destinationId}`}
                             >
                               Edit
                             </A>
+                          </button>
+                          <button
+                            class="bg-main text-white text-sm rounded-lg px-2 py-1 hover:bg-main/90"
+                            onclick={() => handleDeleteClick(destination)}
+                          >
+                            Delete
                           </button>
                         </div>
                       </td>
