@@ -64,6 +64,10 @@ const createImage = () => {
     } else {
       toast.error("Number of images uploaded can not exceed the limit");
     }
+
+    //@ts-ignore
+    // This resets the input element and triggers an event for every upload
+    event.target.value = null;
   };
 
   return { isUploading, handleImageUpload, destinationImages };
