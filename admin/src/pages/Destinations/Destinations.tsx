@@ -1,25 +1,24 @@
 import { A } from "@solidjs/router";
 import Default from "../../layouts/Default";
-import { For, Show, createResource } from "solid-js";
+import { For, Show, createResource, createSignal } from "solid-js";
 import { Destination } from "../../types/types";
 import {
   deleteDestination,
   fetchDestinations,
 } from "../../api/destination.api";
 import toast, { Toaster } from "solid-toast";
+import Modal from "../../components/Modal";
 
 const Destinations = () => {
   const [destinations, { refetch }] =
     createResource<Destination[]>(fetchDestinations);
+  const [isModalOpen, setIsModalOpen] = createSignal(false);
+  const [selectedDestination, setSelectedDestination] =
+    createSignal<Destination | null>(null);
 
   const handleDeleteClick = async (destination: Destination) => {
-    const data = await deleteDestination(destination.destinationId!);
-    if (data) {
-      toast.success(`${destination.name} is deleted successfully`);
-      refetch();
-    } else {
-      toast.error("Something went wrong");
-    }
+    setIsModalOpen(true);
+    setSelectedDestination(destination);
   };
 
   return (
@@ -31,6 +30,28 @@ const Destinations = () => {
         </button>
       </A>
       <div>
+        <Show when={isModalOpen()}>
+          <Modal
+            message={`Are you sure you want to delete ${
+              selectedDestination()?.name
+            } ?`}
+            onCancel={(): boolean => setIsModalOpen(false)}
+            onConfirm={async () => {
+              const data = await deleteDestination(
+                selectedDestination()?.destinationId!
+              );
+              if (data) {
+                toast.success(
+                  `${selectedDestination()?.name} is deleted successfully`
+                );
+                refetch();
+              } else {
+                toast.error("Something went wrong");
+              }
+              setIsModalOpen(false);
+            }}
+          />
+        </Show>
         <Show when={!destinations.loading} fallback={"loading ..."}>
           <Show
             when={destinations()!.length > 0}
