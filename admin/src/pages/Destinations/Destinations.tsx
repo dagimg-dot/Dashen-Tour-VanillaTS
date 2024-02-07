@@ -8,6 +8,7 @@ import {
 } from "../../api/destination.api";
 import toast, { Toaster } from "solid-toast";
 import Modal from "../../components/Modal";
+import { SpinnerTwo } from "../../components/Spinner";
 
 const Destinations = () => {
   const [destinations, { refetch }] =
@@ -52,7 +53,10 @@ const Destinations = () => {
             }}
           />
         </Show>
-        <Show when={!destinations.loading} fallback={"loading ..."}>
+        <Show
+          when={!destinations.loading}
+          fallback={<SpinnerTwo message="Loading destinations" />}
+        >
           <Show
             when={destinations()!.length > 0}
             fallback={

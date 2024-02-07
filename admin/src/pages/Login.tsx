@@ -1,5 +1,5 @@
 import { Show, createSignal } from "solid-js";
-import Spinner from "../components/Spinner";
+import { SpinnerOne } from "../components/Spinner";
 
 type FormData = {
   email: string;
@@ -116,7 +116,7 @@ const Login = () => {
             >
               {isLoading() ? (
                 <div class="flex gap-3">
-                  <Spinner />
+                  <SpinnerOne />
                   Logging in
                 </div>
               ) : (
