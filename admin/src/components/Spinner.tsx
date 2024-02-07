@@ -30,4 +30,8 @@ const SpinnerTwo = (props: SpinnerProps) => {
   );
 };
 
-export { SpinnerOne, SpinnerTwo };
+const SpinnerThree = () => {
+  return <div class="lds-hourglass"></div>;
+};
+
+export { SpinnerOne, SpinnerTwo, SpinnerThree };

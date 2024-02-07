@@ -5,6 +5,7 @@ import toast from "solid-toast";
 import createImage from "../primitives/createImage";
 import { Destination } from "../types/types";
 import Chip from "./Chip";
+import { SpinnerThree } from "./Spinner";
 
 interface DestinationFormProps {
   destinationInfo?: Destination;
@@ -176,7 +177,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
               <div class="flex flex-wrap gap-4">
                 <Show when={isUploading()}>
                   <div class="bg-gray-200 w-32 h-32 rounded-lg flex justify-center items-center">
-                    Uploading...
+                    <SpinnerThree />
                   </div>
                 </Show>
                 <Show when={allImages().length > 0}>
