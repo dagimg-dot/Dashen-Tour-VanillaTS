@@ -183,16 +183,15 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 <Show when={allImages().length > 0}>
                   <For each={allImages()}>
                     {(destinationImage, idx) => (
-                      <div class="w-32 h-32 rounded-lg" data-index={idx()}>
-                        <img
-                          crossOrigin="anonymous"
-                          class=" w-32 h-32 rounded-lg"
-                          src={destinationImage}
-                          alt={`destination image for ${
-                            formData().destinationName
-                          }`}
-                        />
-                      </div>
+                      <img
+                        crossOrigin="anonymous"
+                        class=" w-32 h-32 rounded-lg"
+                        src={destinationImage}
+                        alt={`destination image for ${
+                          formData().destinationName
+                        }`}
+                        data-index={idx()}
+                      />
                     )}
                   </For>
                 </Show>
