@@ -5,6 +5,7 @@ import { Destination } from "../../types/types";
 import { Toaster } from "solid-toast";
 import DestinationForm from "../../components/DestinationForm";
 import { fetchDestination } from "../../api/destination.api";
+import { SpinnerTwo } from "../../components/Spinner";
 
 const getDestinationId = (pathName: string) => {
   return +pathName.split("/").pop()!;
@@ -27,7 +28,10 @@ const EditDestination = () => {
       <Show
         when={destination.error}
         fallback={
-          <Show when={!destination.loading} fallback={"loading..."}>
+          <Show
+            when={!destination.loading}
+            fallback={<SpinnerTwo message="Loading destination" />}
+          >
             <DestinationForm destinationInfo={destination()} />
           </Show>
         }
