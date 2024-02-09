@@ -188,6 +188,9 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                           crossOrigin="anonymous"
                           class=" w-32 h-32 rounded-lg"
                           src={destinationImage}
+                          alt={`destination image for ${
+                            formData().destinationName
+                          }`}
                         />
                       </div>
                     )}
