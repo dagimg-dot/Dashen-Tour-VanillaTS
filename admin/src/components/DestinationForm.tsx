@@ -1,5 +1,5 @@
 import { Show, For, createSignal, createEffect, createMemo } from "solid-js";
-import { UploadIcon } from "./Icons";
+import { DeleteIcon, UploadIcon } from "./Icons";
 import Input from "./Input";
 import toast from "solid-toast";
 import createImage from "../primitives/createImage";
@@ -128,6 +128,20 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     }
   };
 
+  const applyHover = (element: HTMLDivElement) => {
+    element.style.display = "flex";
+  };
+
+  const removeHover = (element: HTMLDivElement) => {
+    element.style.display = "none";
+  };
+
+  const overlayRef: { [index: string]: HTMLDivElement | null } = {};
+
+  allImages().map((_image, idx) => {
+    overlayRef[idx] = null;
+  });
+
   return (
     <div class="max-w-3xl mx-auto font-semibold">
       <div>
@@ -183,15 +197,40 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 <Show when={allImages().length > 0}>
                   <For each={allImages()}>
                     {(destinationImage, idx) => (
-                      <img
-                        crossOrigin="anonymous"
-                        class=" w-32 h-32 rounded-lg"
-                        src={destinationImage}
-                        alt={`destination image for ${
-                          formData().destinationName
-                        }`}
-                        data-index={idx()}
-                      />
+                      <div>
+                        <div
+                          class="absolute z-10 w-32 h-32 rounded-lg bg-slate-800/50 justify-center items-center hidden"
+                          ref={overlayRef[idx()]!}
+                          onmouseover={() =>
+                            applyHover(overlayRef[idx().toString()]!)
+                          }
+                          onmouseout={() =>
+                            removeHover(overlayRef[idx().toString()]!)
+                          }
+                        >
+                          <button
+                            type="button"
+                            onclick={() => console.log(idx(), "del clicked")}
+                          >
+                            <DeleteIcon />
+                          </button>
+                        </div>
+                        <img
+                          crossOrigin="anonymous"
+                          class=" w-32 h-32 rounded-lg relative"
+                          src={destinationImage}
+                          alt={`destination image for ${
+                            formData().destinationName
+                          }`}
+                          data-index={idx()}
+                          onmouseover={() =>
+                            applyHover(overlayRef[idx().toString()]!)
+                          }
+                          onmouseout={() =>
+                            removeHover(overlayRef[idx().toString()]!)
+                          }
+                        />
+                      </div>
                     )}
                   </For>
                 </Show>
