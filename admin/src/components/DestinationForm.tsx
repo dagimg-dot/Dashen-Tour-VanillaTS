@@ -29,21 +29,28 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     return flattenList;
   };
 
-  const [oldImages] = createSignal(flattenImageList(destinationInfo?.images!));
+  const [oldImages, setOldImages] = createSignal(
+    flattenImageList(destinationInfo?.images!)
+  );
 
   createEffect(() => {
     if (error() !== "") {
       toast.error(error());
     }
+
+    console.log(oldImages().length);
   });
 
   if (destinationInfo?.destinationId) {
     console.log("Editing mode");
   }
 
-  const { isUploading, handleImageUpload, destinationImages } = createImage(
-    oldImages().length
-  );
+  const {
+    isUploading,
+    handleImageUpload,
+    destinationImages,
+    setDestinationImages,
+  } = createImage(oldImages().length);
 
   const allImages = createMemo(() => [...oldImages(), ...destinationImages()]);
 
@@ -122,10 +129,21 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
         destinationId: destinationInfo.destinationId,
         ...destinationFormData,
       });
+      setOldImages(allImages());
+      setDestinationImages([]);
     } else {
       // Create
       await createDestination(destinationFormData);
     }
+  };
+
+  const isPersisted = (idx: number) => {
+    return oldImages().length > idx;
+  };
+
+  const handleImageDelete = (idx: number) => {
+    console.log(idx);
+    console.log(isPersisted(idx));
   };
 
   const applyHover = (element: HTMLDivElement) => {
@@ -210,7 +228,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                         >
                           <button
                             type="button"
-                            onclick={() => console.log(idx(), "del clicked")}
+                            onclick={() => handleImageDelete(idx())}
                           >
                             <DeleteIcon />
                           </button>

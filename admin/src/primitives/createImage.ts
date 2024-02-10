@@ -70,7 +70,7 @@ const createImage = (currentImagesLength: number) => {
     event.target.value = null;
   };
 
-  return { isUploading, handleImageUpload, destinationImages };
+  return { isUploading, handleImageUpload, destinationImages, setDestinationImages };
 };
 
 export default createImage;
