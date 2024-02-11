@@ -141,7 +141,16 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     return oldImages().length > idx;
   };
 
-  const handleImageDelete = (idx: number) => {
+  const handleImageDelete = (idx: number, destinationImage: string) => {
+    if (isPersisted(idx)) {
+      // TODO: Delete an image backend functionality
+    } else {
+      const filteredImages = destinationImages().filter(
+        (image) => image !== destinationImage
+      );
+
+      setDestinationImages(filteredImages);
+    }
     console.log(idx);
     console.log(isPersisted(idx));
   };
@@ -173,6 +182,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 required
                 value={formData().destinationName}
                 onchange={handleChange}
+                autofocus
               />
             </div>
             <div class="flex flex-col gap-2">
@@ -228,7 +238,9 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                         >
                           <button
                             type="button"
-                            onclick={() => handleImageDelete(idx())}
+                            onclick={() =>
+                              handleImageDelete(idx(), destinationImage)
+                            }
                           >
                             <DeleteIcon />
                           </button>
