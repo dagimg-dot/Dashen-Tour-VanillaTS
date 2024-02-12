@@ -6,6 +6,7 @@ import createImage from "../primitives/createImage";
 import { Destination } from "../types/types";
 import Chip from "./Chip";
 import { SpinnerThree } from "./Spinner";
+import { createStore } from "solid-js/store";
 
 interface DestinationFormProps {
   destinationInfo?: Destination;
@@ -15,7 +16,8 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
   const [isLoading, setLoading] = createSignal(false);
   const [error, SetError] = createSignal("");
   const [deletedImages, setDeletedImages] = createSignal<string[]>([]);
-  const [formData, setFormData] = createSignal({
+  const [isDisabled, setDisabled] = createSignal(true);
+  const [formData, setFormData] = createStore({
     destinationName: destinationInfo?.name || "",
     destinationDescription: destinationInfo?.description || "",
     destinationLocation: destinationInfo?.location || "",
@@ -38,7 +40,25 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     if (error() !== "") {
       toast.error(error());
     }
+
+    if (
+      deletedImages().length !== 0 ||
+      destinationImages().length !== 0 ||
+      isFormDataChanged()
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   });
+
+  const isFormDataChanged = () => {
+    return (
+      formData.destinationName !== destinationInfo?.name ||
+      formData.destinationDescription !== destinationInfo.description ||
+      formData.destinationLocation !== destinationInfo.location
+    );
+  };
 
   const {
     isUploading,
@@ -108,9 +128,9 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     event.preventDefault();
 
     const destinationFormData = {
-      name: formData().destinationName,
-      description: formData().destinationDescription,
-      location: formData().destinationLocation,
+      name: formData.destinationName,
+      description: formData.destinationDescription,
+      location: formData.destinationLocation,
       images: destinationImages().map((imageLink) => {
         return {
           url: imageLink,
@@ -129,9 +149,17 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
         destinationId: destinationInfo.destinationId,
         ...destinationFormData,
       });
-      console.log(destinationFormData.deletedImages);
+
+      // Reset Form including Images
       setOldImages(allImages());
       setDestinationImages([]);
+      destinationInfo = {
+        ...destinationInfo,
+        name: formData.destinationName,
+        description: formData.destinationDescription,
+        location: formData.destinationLocation,
+      };
+      setDisabled(true);
     } else {
       // Create
       await createDestination(destinationFormData);
@@ -183,8 +211,8 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 name="destinationName"
                 placeholder="name"
                 required
-                value={formData().destinationName}
-                onchange={handleChange}
+                value={formData.destinationName}
+                oninput={handleChange}
                 autofocus
               />
             </div>
@@ -196,8 +224,8 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 name="destinationDescription"
                 placeholder="description"
                 class="border-2 border-main/60 text-main rounded-lg py-1 px-2 placeholder:text-main/60 focus:border-2 focus:border-main outline-none w-full bg-white"
-                value={formData().destinationDescription}
-                onchange={handleChange}
+                value={formData.destinationDescription}
+                oninput={handleChange}
               ></textarea>
             </div>
             <div class="flex flex-col gap-2">
@@ -206,8 +234,8 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 placeholder="location"
                 name="destinationLocation"
                 required
-                value={formData().destinationLocation}
-                onchange={handleChange}
+                value={formData.destinationLocation}
+                oninput={handleChange}
               />
             </div>
             <div class="flex flex-col gap-4">
@@ -252,9 +280,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                           crossOrigin="anonymous"
                           class=" w-32 h-32 rounded-lg relative"
                           src={destinationImage}
-                          alt={`destination image for ${
-                            formData().destinationName
-                          }`}
+                          alt={`destination image for ${formData.destinationName}`}
                           data-index={idx()}
                           onmouseover={() =>
                             applyHover(overlayRef[idx().toString()]!)
@@ -281,7 +307,8 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
           </div>
           <button
             type="submit"
-            class="bg-main text-white rounded-lg px-4 py-2 hover:bg-main/90 mt-6"
+            disabled={isDisabled()}
+            class="bg-main text-white rounded-lg px-4 py-2 hover:bg-main/90 mt-6 disabled:bg-main/70"
           >
             {isLoading() ? "Saving..." : "Save"}
           </button>
