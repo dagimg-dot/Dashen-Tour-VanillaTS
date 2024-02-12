@@ -38,13 +38,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     if (error() !== "") {
       toast.error(error());
     }
-
-    console.log(oldImages().length);
   });
-
-  if (destinationInfo?.destinationId) {
-    console.log("Editing mode");
-  }
 
   const {
     isUploading,
@@ -162,8 +156,6 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
 
       setDestinationImages(filteredImages);
     }
-    console.log(idx);
-    console.log(isPersisted(idx));
   };
 
   const applyHover = (element: HTMLDivElement) => {
