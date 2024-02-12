@@ -207,7 +207,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
                 onchange={handleChange}
               />
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-4">
               <label>
                 <div class="flex gap-2 items-center">
                   <span>Destination Images</span>
