@@ -34,14 +34,22 @@ export class DestinationService {
 
     if (!findDestination) throw new HttpException(404, "Destination doesn't exist");
 
-    const newImages = await Promise.all(
-      destinationData.images.map(async imageData => {
-        const image = await DB.DestinationImages.create({ ...imageData, destinationId: destinationId });
-        return image;
-      }),
-    );
+    if (destinationData.deletedImages.length !== 0) {
+      destinationData.deletedImages.forEach(async imageData => {
+        await DB.DestinationImages.destroy({ where: { url: imageData.url } });
+      });
+    }
 
-    await findDestination.addImages(newImages);
+    if (destinationData.images.length !== 0) {
+      const newImages = await Promise.all(
+        destinationData.images.map(async imageData => {
+          const image = await DB.DestinationImages.create({ ...imageData, destinationId: destinationId });
+          return image;
+        }),
+      );
+
+      await findDestination.addImages(newImages);
+    }
 
     await DB.Destinations.update({ ...destinationData }, { where: { destinationId: destinationId } });
 

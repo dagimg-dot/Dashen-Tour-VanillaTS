@@ -14,6 +14,7 @@ interface DestinationFormProps {
 const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
   const [isLoading, setLoading] = createSignal(false);
   const [error, SetError] = createSignal("");
+  const [deletedImages, setDeletedImages] = createSignal<string[]>([]);
   const [formData, setFormData] = createSignal({
     destinationName: destinationInfo?.name || "",
     destinationDescription: destinationInfo?.description || "",
@@ -121,6 +122,11 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
           url: imageLink,
         };
       }),
+      deletedImages: deletedImages().map((imageLink) => {
+        return {
+          url: imageLink,
+        };
+      }),
     };
 
     if (destinationInfo?.destinationId) {
@@ -129,6 +135,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
         destinationId: destinationInfo.destinationId,
         ...destinationFormData,
       });
+      console.log(destinationFormData.deletedImages);
       setOldImages(allImages());
       setDestinationImages([]);
     } else {
@@ -143,7 +150,11 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
 
   const handleImageDelete = (idx: number, destinationImage: string) => {
     if (isPersisted(idx)) {
-      // TODO: Delete an image backend functionality
+      setDeletedImages((prev) => [...prev, destinationImage]);
+      const filteredImages = oldImages().filter(
+        (image) => image !== destinationImage
+      );
+      setOldImages(filteredImages);
     } else {
       const filteredImages = destinationImages().filter(
         (image) => image !== destinationImage
