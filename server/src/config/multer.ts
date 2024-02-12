@@ -1,5 +1,5 @@
 import multer, { diskStorage } from 'multer';
-import { randomBytes, randomFill } from 'crypto';
+import { randomBytes } from 'crypto';
 
 const generageImageName = (randomValue: string, ext: string) => {
   return Date.now().toString() + randomValue + '.' + ext;
@@ -7,7 +7,7 @@ const generageImageName = (randomValue: string, ext: string) => {
 
 const uploadConfig = multer({
   limits: {
-    fileSize: 2 * 1024 * 1024, // 5MB limit
+    fileSize: 2 * 1024 * 1024, // 2MB limit
   },
   storage: diskStorage({
     destination: (_req, _file, cb) => {
