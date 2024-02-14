@@ -2,6 +2,7 @@ import { A, useLocation } from "@solidjs/router";
 import NavElement from "./NavElement";
 import {
   AdminIcon,
+  BookingIcon,
   CompanyLogoIcon,
   DashBoardIcon,
   DestinationIcon,
@@ -51,6 +52,17 @@ const SideNavigation = () => {
             />
           }
           name="Packages"
+          activeClass={activeLink}
+        />
+        <NavElement
+          href="/packages"
+          icon={
+            <BookingIcon
+              isActive={pathname === "/packages"}
+              activeIcon={"fill-main"}
+            />
+          }
+          name="Bookings"
           activeClass={activeLink}
         />
         <NavElement
