@@ -104,8 +104,9 @@ const BookingIcon = ({ isActive, activeIcon }: IconProps) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={32}
+      stroke-width={2}
       viewBox="0 0 512 512"
-      class={isActive ? activeIcon : "fill-white"}
+      class={isActive ? activeIcon : "fill-white ml-1"}
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
       <g

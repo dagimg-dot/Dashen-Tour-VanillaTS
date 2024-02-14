@@ -55,11 +55,11 @@ const SideNavigation = () => {
           activeClass={activeLink}
         />
         <NavElement
-          href="/packages"
+          href="/destinations"
           icon={
             <BookingIcon
-              isActive={pathname === "/packages"}
-              activeIcon={"fill-main"}
+              isActive={pathname === "/destinations"}
+              activeIcon={"fill-main ml-1"}
             />
           }
           name="Bookings"
