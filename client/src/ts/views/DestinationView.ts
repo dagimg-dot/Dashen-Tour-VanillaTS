@@ -19,13 +19,12 @@ class DestinationView {
   _renderView(state: DestinationState) {
     render(
       html`<div>
-        <nav class="destination-nav">${NavigationBar()}</nav>
-        <div class="other">
-          <div>hello</div>
+          <nav class="destination-nav">${NavigationBar()}</nav>
+          <div class="other">
+            <div>hello</div>
+          </div>
         </div>
-      </div>
-      ${Footer()}
-      `,
+        ${Footer()} `,
       state.rootNode
     );
   }
