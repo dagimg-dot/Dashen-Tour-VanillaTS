@@ -24,4 +24,15 @@ const applyStickyNavBar = () => {
   window.onscroll = () => stickNavBar();
 };
 
-export { isObject, isEventFull, applyStickyNavBar };
+const cstyle = (
+  varToCheck: unknown,
+  condition: string,
+  conditionAgnosticStyle: string,
+  conditionalStyle: string
+) => {
+  const computedConditionalStyle =
+    varToCheck === condition ? conditionalStyle : "";
+  return conditionAgnosticStyle + " " + computedConditionalStyle;
+};
+
+export { isObject, isEventFull, applyStickyNavBar, cstyle };
