@@ -81,3 +81,7 @@
     background-color: #411d0d;
     color: white;
 }
+
+.active-nav {
+    font-weight: 700;
+}

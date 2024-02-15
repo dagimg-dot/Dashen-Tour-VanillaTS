@@ -6,10 +6,18 @@ import { logout } from "../api/auth.api";
 import useRouter from "../hooks/useRouter";
 import useToast from "../hooks/useToast";
 import errorHandler from "../utils/errorHandler";
+import useLocation from "../hooks/useLocation";
+import { cstyle } from "../utils/utilityFuncs";
 
 const [authState, updateAuth] = useAuth();
 
 const NavigationBar = () => {
+  const { pathname } = useLocation();
+
+  const activeNav = (condition: string) => {
+    return cstyle(pathname, condition, "main-nav-link", "active-nav");
+  };
+
   const template = html`<nav class="nav-bar container-p" id="navBar">
     <div>
       <a href="#/" class="nav-logo">
@@ -35,12 +43,16 @@ const NavigationBar = () => {
     <div>
       <nav class="main-nav secondary-nav">
         <ul class="main-nav-list">
-          <li><a href="#" class="main-nav-link">Contact</a></li>
-          <li><a href="#" class="main-nav-link">Packages</a></li>
           <li>
-            <a href="#/destinations" class="main-nav-link">Destinations</a>
+            <a href="#" class=${activeNav("/contact")}>Contact</a>
           </li>
-          <li><a href="#" class="main-nav-link">Booking</a></li>
+          <li><a href="#" class=${activeNav("/packages")}>Packages</a></li>
+          <li>
+            <a href="#/destinations" class=${activeNav("/destinations")}
+              >Destinations</a
+            >
+          </li>
+          <li><a href="#" class=${activeNav("/booking")}>Booking</a></li>
           <li>
             ${authState().isAuthenticated
               ? html`
