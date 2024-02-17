@@ -86,7 +86,7 @@ const Footer = () => {
     <div class="footer-copyright">
       <div class="footer-copyright-wrapper">
         <p class="footer-copyright-text">
-          Copyright &copy; ${`${year} by Dashen Tour PLC. All rights reserved.`}
+          Copyright &copy; ${year} by Dashen Tour PLC. All rights reserved.
         </p>
       </div>
     </div>
