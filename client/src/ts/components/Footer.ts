@@ -1,6 +1,8 @@
 import { html } from "lit-html";
 
 const Footer = () => {
+  const year = Date().split(" ")[3];
+
   return html`<footer class="footer">
     <div class="footer-wrapper">
       <div class="container-m grid grid-footer">
@@ -84,7 +86,7 @@ const Footer = () => {
     <div class="footer-copyright">
       <div class="footer-copyright-wrapper">
         <p class="footer-copyright-text">
-          Copyright &copy; 2023 by Dashen Tour PLC. All rights reserved.
+          Copyright &copy; ${`${year} by Dashen Tour PLC. All rights reserved.`}
         </p>
       </div>
     </div>
