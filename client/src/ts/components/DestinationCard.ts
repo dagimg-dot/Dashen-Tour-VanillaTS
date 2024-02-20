@@ -10,7 +10,7 @@ const DestinationCard = ({ destinationInfo }: DestinationProps) => {
   const template = html`
     <div class="dest-wrapper">
       <div class="dest-image">
-        <img src=${destinationInfo.images[0].url} />
+        <img src=${destinationInfo.images[0].url} crossorigin="anonymous" />
         <div class="dest-info">
           <span>${destinationInfo.name}</span>
           <span>${destinationInfo.location}</span>

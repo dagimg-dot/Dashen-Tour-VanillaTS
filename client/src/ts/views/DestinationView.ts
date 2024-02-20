@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import { SearchIcon } from "../components/Icons";
 import { DestinationCard } from "../components/DestinationCard";
 import "../../css/components/navigationbar.css";
-import { Destination } from "../models/models";
 
 class DestinationView {
   root: HTMLDivElement | null = null;
@@ -20,19 +19,11 @@ class DestinationView {
     this._renderView(state);
   }
 
-  _renderView(state: DestinationState) {
-    const destinationInfo: Destination = {
-      destinationId: 32,
-      name: "Lake Tana",
-      location: "Bahir Dar",
-      description: "the best lake",
-      images: [
-        {
-          url: "./src/assets/images/destinations/001.jpg",
-        },
-      ],
-    };
+  onPageLoad(handler: Function) {
+    handler();
+  }
 
+  _renderView(state: DestinationState) {
     render(
       html`<div>
           <nav class="destination-nav">${NavigationBar()}</nav>
@@ -49,14 +40,15 @@ class DestinationView {
                 </select>
               </div>
             </header>
-            <div class="destinations-container">
-              ${DestinationCard({ destinationInfo })}
-              ${DestinationCard({ destinationInfo })}
-              ${DestinationCard({ destinationInfo })}
-              ${DestinationCard({ destinationInfo })}
-              ${DestinationCard({ destinationInfo })}
-              ${DestinationCard({ destinationInfo })}
-            </div>
+            ${state.isLoading
+              ? html`<h1 class="dest-messages">Loading destinations. . .</h1>`
+              : state.destinationList.length == 0
+              ? html`<h1 class="dest-messages">There are no destinations</h1>`
+              : html`<div class="destinations-container">
+                  ${state.destinationList.map((destinationInfo) => {
+                    return DestinationCard({ destinationInfo });
+                  })}
+                </div>`}
             <!-- Pagination -->
             <div>Pagination</div>
           </div>
