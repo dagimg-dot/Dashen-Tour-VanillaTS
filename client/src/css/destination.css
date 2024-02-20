@@ -2,6 +2,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 99;
 }
 
 .main {
@@ -38,14 +39,13 @@
 
 .destinations-container {
     margin-bottom: 3.2rem;
-}
-
-.dest-wrapper {
-    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
 }
 
 .dest-image {
-    width: 60rem;
+    position: relative;
     height: 35rem;
 }
 
@@ -56,13 +56,14 @@
     object-fit: cover;
 }
 
-.dest-name {
+.dest-info {
     font-size: 2rem;
     font-weight: 600;
     position: absolute;
     display: flex;
     justify-content: space-between;
-    bottom:  0;
+    width: 100%;
+    bottom: 0;
     color: white;
     gap: 4px;
     padding: 1.6rem 2.4rem;
@@ -70,7 +71,9 @@
 
 .dest-rating {
     position: absolute;
+    padding: 1.6rem 2.4rem;
     top: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
     color: white;
