@@ -16,7 +16,7 @@ const errorHandler = (error: Error): string => {
       isAuthenticated: false,
     });
     const router = useRouter();
-    router.push("/");
+    router.push("/", true);
     return "Your session has expired. Please log in again";
   } else {
     return "Something went wrong. Please try again later";
