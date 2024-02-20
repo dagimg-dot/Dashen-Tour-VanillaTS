@@ -67,7 +67,7 @@ class SignupView {
           <div class="signup-form">
             <div class="form-header">
               <a href="#/" class="auth-logo">
-                <div id="logo" class="logo">${CompanyLogoIcon}</div>
+                <div class="logo">${CompanyLogoIcon}</div>
               </a>
               <div class="form-heading">
                 <h2>Become a member and enjoy your unforgettable trips</h2>
