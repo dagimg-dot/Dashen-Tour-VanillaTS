@@ -1,5 +1,6 @@
 import { DestinationState } from "../types/destinationTypes";
 import { CoreElements } from "../types/types";
+import { scrollToTop } from "../utils/utilityFuncs";
 import DestinationView from "../views/DestinationView";
 
 const DestinationController = ({ root, title }: CoreElements) => {
@@ -10,6 +11,7 @@ const DestinationController = ({ root, title }: CoreElements) => {
   (() => {
     title.innerText = "Dashen Tour - Destinations";
     DestinationView.render(initialState);
+    scrollToTop();
   })();
 };
 

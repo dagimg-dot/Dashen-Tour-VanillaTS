@@ -35,4 +35,8 @@ const cstyle = (
   return conditionAgnosticStyle + " " + computedConditionalStyle;
 };
 
-export { isObject, isEventFull, applyStickyNavBar, cstyle };
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+export { isObject, isEventFull, applyStickyNavBar, cstyle, scrollToTop };
