@@ -19,6 +19,7 @@
     visibility: hidden;
     animation: fade-in 3s linear;
     padding: 3px 0 3px 3px;
+    z-index: 100;
 }
 
 .toast-error {
