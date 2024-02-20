@@ -6,7 +6,7 @@
     border-bottom: 1px solid #411d0d;
     position: sticky;
     backdrop-filter: blur(4rem);
-    z-index: 1;
+    z-index: 99;
 }
 
 .nav-logo {
