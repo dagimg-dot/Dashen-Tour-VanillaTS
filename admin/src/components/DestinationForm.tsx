@@ -65,7 +65,7 @@ const DestinationForm = ({ destinationInfo }: DestinationFormProps) => {
     handleImageUpload,
     destinationImages,
     setDestinationImages,
-  } = createImage(oldImages().length);
+  } = createImage(oldImages);
 
   const allImages = createMemo(() => [...oldImages(), ...destinationImages()]);
 

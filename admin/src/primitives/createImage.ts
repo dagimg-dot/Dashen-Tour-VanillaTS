@@ -1,10 +1,10 @@
-import { createEffect, createSignal } from "solid-js";
+import { Accessor, createEffect, createSignal } from "solid-js";
 import toast from "solid-toast";
 
 const ALLOWED_IMAGE_TYPE = ["png", "jpg", "jpeg"];
 const MAX_IMAGE_SIZE = 2 * 1024 * 1024;
 
-const createImage = (currentImagesLength: number) => {
+const createImage = (oldImages: Accessor<string[]>) => {
   const [destinationImages, setDestinationImages] = createSignal<string[]>([]);
   const [isUploading, setIsUploading] = createSignal(false);
   const [error, setError] = createSignal("");
@@ -45,7 +45,7 @@ const createImage = (currentImagesLength: number) => {
   };
 
   const countImage = () => {
-    return currentImagesLength + destinationImages().length;
+    return oldImages().length + destinationImages().length;
   };
 
   const handleImageUpload = async (event: { target: HTMLInputElement }) => {
@@ -70,7 +70,12 @@ const createImage = (currentImagesLength: number) => {
     event.target.value = null;
   };
 
-  return { isUploading, handleImageUpload, destinationImages, setDestinationImages };
+  return {
+    isUploading,
+    handleImageUpload,
+    destinationImages,
+    setDestinationImages,
+  };
 };
 
 export default createImage;
