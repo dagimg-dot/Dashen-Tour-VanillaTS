@@ -9,6 +9,16 @@ import twitter from "../assets/icons/twitter.svg";
 //@ts-ignore
 import youtube from "../assets/icons/youtube.svg";
 //@ts-ignore
-import noProfile from "../assets/icons/no-profile.png"
+import noProfile from "../assets/icons/no-profile.png";
+//@ts-ignore
+import trialDest from "../assets/images/destinations/001.jpg";
 
-export { companyLogo, facebook, instagram, twitter, youtube, noProfile };
+export {
+  companyLogo,
+  facebook,
+  instagram,
+  twitter,
+  youtube,
+  noProfile,
+  trialDest,
+};
