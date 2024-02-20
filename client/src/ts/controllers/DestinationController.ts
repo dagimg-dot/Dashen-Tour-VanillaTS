@@ -1,3 +1,4 @@
+import { NavigationBarController } from "../components/NavigationBar";
 import { DestinationState } from "../types/destinationTypes";
 import { CoreElements } from "../types/types";
 import { scrollToTop } from "../utils/utilityFuncs";
@@ -11,6 +12,7 @@ const DestinationController = ({ root, title }: CoreElements) => {
   (() => {
     title.innerText = "Dashen Tour - Destinations";
     DestinationView.render(initialState);
+    NavigationBarController();
     scrollToTop();
   })();
 };
