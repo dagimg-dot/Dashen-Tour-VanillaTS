@@ -79,6 +79,9 @@
     color: white;
 }
 
-.dest-grow {
-    flex-grow: 1;
+.dest-messages {
+    height: 100vh;
+    display: flex;
+    margin-top: 20rem;
+    justify-content: center;
 }
