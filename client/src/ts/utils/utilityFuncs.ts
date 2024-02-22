@@ -26,7 +26,7 @@ const applyStickyNavBar = () => {
 
 const cstyle = (
   varToCheck: unknown,
-  condition: string,
+  condition: unknown,
   conditionAgnosticStyle: string,
   conditionalStyle: string
 ) => {
