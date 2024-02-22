@@ -22,8 +22,6 @@ export class DestinationService {
       offset: (page - 1) * DESTINATION_PER_PAGE,
     });
 
-    const d = 5.4
-    
     return { destinations, numberOfPages };
   }
 
