@@ -15,12 +15,15 @@ export class DestinationService {
 
   public async findDestinations(page: number): Promise<{ destinations: Destination[]; numberOfPages: number }> {
     const destinationLength = await DB.Destinations.count();
-    const numberOfPages = +(destinationLength / DESTINATION_PER_PAGE).toFixed() + 1;
+    const numberOfPages = Math.ceil(destinationLength / DESTINATION_PER_PAGE);
     const destinations: Destination[] = await DB.Destinations.findAll({
       include: 'images',
       limit: DESTINATION_PER_PAGE,
       offset: (page - 1) * DESTINATION_PER_PAGE,
     });
+
+    const d = 5.4
+    
     return { destinations, numberOfPages };
   }
 
