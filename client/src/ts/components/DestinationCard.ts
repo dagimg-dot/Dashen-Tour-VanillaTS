@@ -9,7 +9,6 @@ interface DestinationProps {
 
 const DestinationCard = ({ destinationInfo }: DestinationProps) => {
   const template = html`
-    <div class="dest-wrapper">
       <div class="dest-image">
         ${
           destinationInfo.images.length == 0
@@ -31,7 +30,6 @@ const DestinationCard = ({ destinationInfo }: DestinationProps) => {
           ${StarIcon}
         </div>
       </div>
-    </div>
   </div>
 `;
 
