@@ -1,0 +1,56 @@
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 6.4rem 0;
+    gap: 1.6rem;
+}
+
+.icon {
+    height: 24px;
+    width: 24px;
+    fill: var(--primary);
+}
+
+.icon-btn, .page-btn {
+    outline: none;
+    background-color: white;
+    padding: 0.8rem;
+    border: 4px solid var(--primary);
+    border-radius: 100%;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.icon-btn:hover {
+    background-color: var(--primary);
+    scale: 1.15;
+    color: white;
+}
+
+.page-btn:hover {
+    background-color: var(--primary);
+    scale: 1.15;
+    color: white;
+}
+
+.icon-btn:hover .icon {
+    fill: white;
+}
+
+.active-page {
+    background-color: var(--primary);
+    color: white;
+}

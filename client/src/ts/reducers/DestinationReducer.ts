@@ -19,6 +19,17 @@ const DestinationReducer = (
         ...state,
         destinationList: action.payload,
       };
+    case "SET_CURRENT_PAGE":
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+
+    case "SET_TOTAL_PAGES":
+      return {
+        ...state,
+        totalPages: action.payload,
+      };
     default:
       return state;
   }

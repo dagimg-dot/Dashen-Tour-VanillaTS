@@ -6,7 +6,8 @@ import Footer from "../components/Footer";
 import { SearchIcon } from "../components/Icons";
 import { DestinationCard } from "../components/DestinationCard";
 import "../../css/components/navigationbar.css";
-import "../../css/components/destinationCard.css"
+import "../../css/components/destinationCard.css";
+import { Pagination } from "../components/Pagination";
 
 class DestinationView {
   root: HTMLDivElement | null = null;
@@ -50,7 +51,10 @@ class DestinationView {
                     return DestinationCard({ destinationInfo });
                   })}
                 </div>`}
-            <!-- Pagination -->
+            ${Pagination({
+              currentPage: state.currentPage,
+              totalPages: 5,
+            })}
           </div>
         </div>
         ${Footer()}`,
