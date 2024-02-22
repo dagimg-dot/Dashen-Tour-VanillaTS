@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import { SearchIcon } from "../components/Icons";
 import { DestinationCard } from "../components/DestinationCard";
 import "../../css/components/navigationbar.css";
+import "../../css/components/destinationCard.css"
 
 class DestinationView {
   root: HTMLDivElement | null = null;
@@ -50,7 +51,6 @@ class DestinationView {
                   })}
                 </div>`}
             <!-- Pagination -->
-            <div>Pagination</div>
           </div>
         </div>
         ${Footer()}`,
