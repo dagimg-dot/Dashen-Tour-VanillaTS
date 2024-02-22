@@ -53,7 +53,7 @@ class DestinationView {
                 </div>`}
             ${Pagination({
               currentPage: state.currentPage,
-              totalPages: 5,
+              totalPages: state.totalPages,
             })}
           </div>
         </div>

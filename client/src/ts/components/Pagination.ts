@@ -38,11 +38,22 @@ const PaginationController = (
     document.querySelector(".active-page") as HTMLButtonElement
   ).dataset.pagenum as string;
 
-  const pageBtns = document.querySelectorAll(
+  let pageBtns = document.querySelectorAll(
     ".page-btn"
   ) as unknown as HTMLButtonElement[];
 
+  const runSideEffect = () => {
+    pageBtns = document.querySelectorAll(
+      ".page-btn"
+    ) as unknown as HTMLButtonElement[];
+
+    pageBtns.forEach((pageBtn) => {
+      pageBtn.onclick = () => handlePageBtnClick(+pageBtn.dataset.pagenum!);
+    });
+  };
+
   const handleRightChevronClick = () => {
+    runSideEffect();
     if (+currentPage == pageBtns.length) return;
     const newPageNumber = +currentPage + 1;
     dispatch([{ type: "SET_LOADING", payload: true }]);
@@ -51,6 +62,7 @@ const PaginationController = (
   };
 
   const handleLeftChevronClick = () => {
+    runSideEffect();
     if (+currentPage == 1) return;
     const newPageNumber = +currentPage - 1;
     dispatch([{ type: "SET_LOADING", payload: true }]);
@@ -59,6 +71,8 @@ const PaginationController = (
   };
 
   const handlePageBtnClick = (clickedPageNum: number) => {
+    runSideEffect();
+    if (+currentPage == clickedPageNum) return;
     dispatch([{ type: "SET_LOADING", payload: true }]);
     fetchDestWithQuery(clickedPageNum);
     currentPage = clickedPageNum.toString();

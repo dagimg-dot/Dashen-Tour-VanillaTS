@@ -17,7 +17,7 @@ const DestinationController = ({ root, title }: CoreElements) => {
     isLoading: true,
     destinationList: [],
     currentPage: 1,
-    totalPages: 0,
+    totalPages: 1,
   };
 
   title.innerText = "Dashen Tour - Destinations";
@@ -37,11 +37,12 @@ const DestinationController = ({ root, title }: CoreElements) => {
 
   const fetchDestWithQuery = async (pageNumber = 1) => {
     try {
-      const destinations = await fetchDestinations();
+      const { destinations, totalPages } = await fetchDestinations(pageNumber);
       dispatch([
         { type: "SET_DESTINATION_LIST", payload: destinations },
         { type: "SET_LOADING", payload: false },
         { type: "SET_CURRENT_PAGE", payload: pageNumber },
+        { type: "SET_TOTAL_PAGES", payload: totalPages },
       ]);
     } catch (error) {
       console.log((error as Error).message);
@@ -50,8 +51,8 @@ const DestinationController = ({ root, title }: CoreElements) => {
 
   PaginationController(fetchDestWithQuery, dispatch);
 
-  DestinationView.onPageLoad(() => {
-    fetchDestWithQuery();
+  DestinationView.onPageLoad(async () => {
+    await fetchDestWithQuery();
   });
 };
 
