@@ -11,7 +11,7 @@ import youtube from "../assets/icons/youtube.svg";
 //@ts-ignore
 import noProfile from "../assets/icons/no-profile.png";
 //@ts-ignore
-import trialDest from "../assets/images/destinations/001.jpg";
+import noImage from "../assets/images/others/no_image.png";
 
 export {
   companyLogo,
@@ -20,5 +20,5 @@ export {
   twitter,
   youtube,
   noProfile,
-  trialDest,
+  noImage,
 };

@@ -8,6 +8,12 @@
     height: 100%;
     border-radius: 12px;
     object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.dest-image:hover img {
+    border-radius: 20px;
+    scale: 1.1;
 }
 
 .dest-info {
@@ -32,4 +38,3 @@
     justify-content: space-between;
     color: white;
 }
-
