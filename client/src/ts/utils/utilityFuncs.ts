@@ -39,4 +39,21 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-export { isObject, isEventFull, applyStickyNavBar, cstyle, scrollToTop };
+const iterator = (range: number) => {
+  const arr = [];
+
+  for (let i = 0; i < range; i++) {
+    arr.push(i);
+  }
+
+  return arr;
+};
+
+export {
+  isObject,
+  isEventFull,
+  applyStickyNavBar,
+  cstyle,
+  scrollToTop,
+  iterator,
+};
