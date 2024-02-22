@@ -1,0 +1,3 @@
+const DESTINATION_PER_PAGE = 8;
+
+export { DESTINATION_PER_PAGE };

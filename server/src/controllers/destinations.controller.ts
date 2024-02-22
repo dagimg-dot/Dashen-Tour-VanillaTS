@@ -8,9 +8,16 @@ export class DestinationController {
 
   public getDestinations = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllDestinationsData = await this.destinationService.findAllDestinations();
+      if (req.query.page) {
+        const pageNumber = +req.query.page;
+        const { destinations: findAllDestinationsData, numberOfPages } = await this.destinationService.findDestinations(pageNumber);
 
-      res.status(200).json({ data: findAllDestinationsData, message: 'findAll' });
+        res.status(200).json({ data: findAllDestinationsData, totalPages: numberOfPages, message: 'findAll' });
+      } else {
+        const findAllDestinationsData = await this.destinationService.findAllDestinations();
+
+        res.status(200).json({ data: findAllDestinationsData, message: 'findAll' });
+      }
     } catch (error) {
       next(error);
     }

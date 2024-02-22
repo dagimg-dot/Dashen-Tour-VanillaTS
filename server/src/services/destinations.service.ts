@@ -1,6 +1,7 @@
 import { DB } from '@/database';
 import { HttpException } from '@/exceptions/HttpException';
 import { Destination } from '@/interfaces/destinations.interface';
+import { DESTINATION_PER_PAGE } from '@/utils/constants';
 import { Service } from 'typedi';
 
 @Service()
@@ -10,6 +11,17 @@ export class DestinationService {
   public async findAllDestinations(): Promise<Destination[]> {
     const allDestinations: Destination[] = await DB.Destinations.findAll({ include: 'images' });
     return allDestinations;
+  }
+
+  public async findDestinations(page: number): Promise<{ destinations: Destination[]; numberOfPages: number }> {
+    const destinationLength = await DB.Destinations.count();
+    const numberOfPages = +(destinationLength / DESTINATION_PER_PAGE).toFixed() + 1;
+    const destinations: Destination[] = await DB.Destinations.findAll({
+      include: 'images',
+      limit: DESTINATION_PER_PAGE,
+      offset: (page - 1) * DESTINATION_PER_PAGE,
+    });
+    return { destinations, numberOfPages };
   }
 
   public async findDestinationById(destinationId: number): Promise<Destination> {
