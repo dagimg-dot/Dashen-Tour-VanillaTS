@@ -50,18 +50,6 @@ class DestinationView {
                 </select>
               </div>
             </header>
-            <!-- ${state.isLoading
-              ? html`<h1 class="dest-messages">Loading destinations. . .</h1>`
-              : state.destinationList.length == 0
-              ? html`<h1 class="dest-messages">There are no destinations</h1>`
-              : html`<div class="destinations-container">
-                  ${state.destinationList.map((destinationInfo) => {
-                    return DestinationCard({
-                      destinationInfo,
-                      isLoading: state.isLoading,
-                    });
-                  })}
-                </div>`} -->
             ${state.isLoading
               ? html`<div class="destinations-container">
                   ${iterator(8).map(() => {
@@ -81,14 +69,6 @@ class DestinationView {
                     });
                   })}
                 </div>`}
-            <!-- <div class="destinations-container">
-              ${state.destinationList.map((destinationInfo) => {
-              return DestinationCard({
-                destinationInfo,
-                isLoading: state.isLoading,
-              });
-            })}
-            </div> -->
             ${Pagination({
               currentPage: state.currentPage,
               totalPages: state.totalPages,
