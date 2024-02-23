@@ -1,4 +1,5 @@
 import { html } from "lit-html";
+import { facebook, instagram, twitter, youtube } from "../../static";
 
 const Footer = () => {
   const year = Date().split(" ")[3];
@@ -29,22 +30,22 @@ const Footer = () => {
           <ul class="social-links">
             <li>
               <a class="footer-link" href="#" class="href"
-                ><img src="././src/assets/icons/facebook.svg" alt="facebook"
+                ><img src=${facebook} alt="facebook"
               /></a>
             </li>
             <li>
               <a class="footer-link" href="#" class="href"
-                ><img src="././src/assets/icons/instagram.svg" alt="instagram"
+                ><img src=${instagram} alt="instagram"
               /></a>
             </li>
             <li>
               <a class="footer-link" href="#" class="href"
-                ><img src="././src/assets/icons/twitter.svg" alt="twitter"
+                ><img src=${twitter} alt="twitter"
               /></a>
             </li>
             <li>
               <a class="footer-link" href="#" class="href"
-                ><img src="././src/assets/icons/youtube.svg" alt="youtube"
+                ><img src=${youtube} alt="youtube"
               /></a>
             </li>
           </ul>
