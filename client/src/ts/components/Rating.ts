@@ -8,13 +8,16 @@ interface RatingProps {
 
 const MAX_RATING = 5;
 
-const UnRated = html`<div>
-  ${StarIcon()} ${StarIcon()} ${StarIcon()} ${StarIcon()} ${StarIcon()}
-</div> `;
+const UnRated = html`
+  <div>
+    ${StarIcon("gray")} ${StarIcon("gray")} ${StarIcon("gray")}
+    ${StarIcon("gray")} ${StarIcon("gray")}
+  </div>
+`;
 
 const Rating = ({ rating }: RatingProps) => {
   const template = html`<div>
-    ${rating
+    ${rating !== null
       ? iterator(MAX_RATING).map((num) => {
           return num < rating ? StarIcon("orange") : StarIcon("white");
         })
