@@ -75,10 +75,10 @@ class HomeView {
                 </div>
                 <nav class="main-nav container-p">
                   <ul class="main-nav-list">
-                    <li><a href="#" class="main-nav-link">Contact</a></li>
-                    <li><a href="#" class="main-nav-link">Packages</a></li>
-                    <li><a href="#" class="main-nav-link">Destinations</a></li>
-                    <li><a href="#" class="main-nav-link">Booking</a></li>
+                    <li><a href="" class="main-nav-link">Contact</a></li>
+                    <li><a href="" class="main-nav-link">Packages</a></li>
+                    <li><a href="#/destinations" class="main-nav-link">Destinations</a></li>
+                    <li><a href="#/booking" class="main-nav-link">Booking</a></li>
                     <li>
                       ${authState.isAuthenticated
                         ? html``
@@ -556,7 +556,7 @@ class HomeView {
               </div>
             </div>
           </section>
-          <section class="section-cta">
+          <section class="section-cta" id="contact">
             <div class="container-m">
               <div class="cta">
                 <div class="cta-text-box">
