@@ -1,6 +1,38 @@
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 12px;
+}
+
+.skeleton-text {
+    animation: skeleton-loading-text 1s linear infinite alternate;
+    border-radius: 12px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@keyframes skeleton-loading-text {
+    0% {
+        background-color: hsl(200, 20%, 95%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 70%);
+    }
+}
+
+
 .dest-image {
     position: relative;
     height: 35rem;
+    border-radius: 12px;
 }
 
 .dest-image img {
@@ -27,6 +59,11 @@
     color: white;
     gap: 4px;
     padding: 1.6rem 2.4rem;
+}
+
+.dest-info-container {
+    width: 10rem;
+    height: 3rem;
 }
 
 .dest-rating {

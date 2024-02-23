@@ -8,6 +8,7 @@ import { DestinationCard } from "../components/DestinationCard";
 import "../../css/components/navigationbar.css";
 import "../../css/components/destinationCard.css";
 import { Pagination } from "../components/Pagination";
+import { iterator } from "../utils/utilityFuncs";
 
 class DestinationView {
   root: HTMLDivElement | null = null;
@@ -26,6 +27,13 @@ class DestinationView {
   }
 
   _renderView(state: DestinationState) {
+    const skeletonObj = {
+      name: "",
+      location: "",
+      description: "",
+      images: [{ url: "" }],
+    };
+
     render(
       html`<div>
           <nav class="destination-nav">${NavigationBar()}</nav>
@@ -42,15 +50,45 @@ class DestinationView {
                 </select>
               </div>
             </header>
-            ${state.isLoading
+            <!-- ${state.isLoading
               ? html`<h1 class="dest-messages">Loading destinations. . .</h1>`
               : state.destinationList.length == 0
               ? html`<h1 class="dest-messages">There are no destinations</h1>`
               : html`<div class="destinations-container">
                   ${state.destinationList.map((destinationInfo) => {
-                    return DestinationCard({ destinationInfo });
+                    return DestinationCard({
+                      destinationInfo,
+                      isLoading: state.isLoading,
+                    });
+                  })}
+                </div>`} -->
+            ${state.isLoading
+              ? html`<div class="destinations-container">
+                  ${iterator(8).map(() => {
+                    return DestinationCard({
+                      destinationInfo: skeletonObj,
+                      isLoading: true,
+                    });
+                  })}
+                </div>`
+              : state.destinationList.length == 0
+              ? html`<h1 class="dest-messages">There are no destinations</h1>`
+              : html`<div class="destinations-container">
+                  ${state.destinationList.map((destinationInfo) => {
+                    return DestinationCard({
+                      destinationInfo,
+                      isLoading: state.isLoading,
+                    });
                   })}
                 </div>`}
+            <!-- <div class="destinations-container">
+              ${state.destinationList.map((destinationInfo) => {
+              return DestinationCard({
+                destinationInfo,
+                isLoading: state.isLoading,
+              });
+            })}
+            </div> -->
             ${Pagination({
               currentPage: state.currentPage,
               totalPages: state.totalPages,
