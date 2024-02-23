@@ -5,6 +5,7 @@ export interface Destination {
   name: string;
   description: string;
   location: string;
+  rating: number;
   images?: DestinationImage[];
   deletedImages?: DestinationImage[];
 }

@@ -3,13 +3,14 @@ import { Destination } from '@/interfaces/destinations.interface';
 import { DB } from '@/database';
 import { DestinationImage } from '@/interfaces/destinationImage.interface';
 
-export type DestinationCreationAttributes = Optional<Destination, 'destinationId' | 'name' | 'description' | 'location'>;
+export type DestinationCreationAttributes = Optional<Destination, 'destinationId' | 'name' | 'description' | 'location' | 'rating'>;
 
 export class DestinationModel extends Model<Destination, DestinationCreationAttributes> implements Destination {
   public destinationId: number;
   public name: string;
   public description: string;
   public location: string;
+  public rating: number;
   declare addImages: HasManyAddAssociationsMixin<DestinationImage, 'imageId'>;
 
   public static associate(): void {
@@ -40,6 +41,10 @@ export default function (sequelize: Sequelize): typeof DestinationModel {
       location: {
         type: DataTypes.STRING(20),
         unique: false,
+      },
+      rating: {
+        type: DataTypes.NUMBER,
+        allowNull: true,
       },
     },
     {
