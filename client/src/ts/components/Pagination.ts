@@ -1,7 +1,7 @@
 import { html } from "lit-html";
 import "../../css/components/pagination.css";
 import { ChevronLeft, ChevronRight } from "./Icons";
-import { cstyle, iterator } from "../utils/utilityFuncs";
+import { cstyle, iterator, scrollToTop } from "../utils/utilityFuncs";
 import { DESTINATIONACTIONS } from "../types/destinationTypes";
 
 interface PaginationProps {
@@ -59,6 +59,7 @@ const PaginationController = (
     dispatch([{ type: "SET_LOADING", payload: true }]);
     fetchDestWithQuery(newPageNumber);
     currentPage = newPageNumber.toString();
+    scrollToTop();
   };
 
   const handleLeftChevronClick = () => {
@@ -68,6 +69,7 @@ const PaginationController = (
     dispatch([{ type: "SET_LOADING", payload: true }]);
     fetchDestWithQuery(newPageNumber);
     currentPage = newPageNumber.toString();
+    scrollToTop();
   };
 
   const handlePageBtnClick = (clickedPageNum: number) => {
@@ -76,6 +78,7 @@ const PaginationController = (
     dispatch([{ type: "SET_LOADING", payload: true }]);
     fetchDestWithQuery(clickedPageNum);
     currentPage = clickedPageNum.toString();
+    scrollToTop();
   };
 
   btnLeft.onclick = () => handleLeftChevronClick();
