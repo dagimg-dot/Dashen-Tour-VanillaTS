@@ -62,7 +62,7 @@ class LoginView {
           <div class="login-form">
             <div class="form-header">
               <a href="#/" class="auth-logo">
-                <div class="logo">${CompanyLogoIcon}</div>
+                <div class="logo">${CompanyLogoIcon()}</div>
               </a>
               <div class="form-heading">
                 <h2>Welcome back, Please login to your account</h2>

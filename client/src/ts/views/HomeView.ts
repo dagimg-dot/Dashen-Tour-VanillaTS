@@ -78,7 +78,7 @@ class HomeView {
                     <li><a href="" class="main-nav-link">Contact</a></li>
                     <li><a href="" class="main-nav-link">Packages</a></li>
                     <li><a href="#/destinations" class="main-nav-link">Destinations</a></li>
-                    <li><a href="#/booking" class="main-nav-link">Booking</a></li>
+                    <li><a href="#/" class="main-nav-link">Booking</a></li>
                     <li>
                       ${authState.isAuthenticated
                         ? html``

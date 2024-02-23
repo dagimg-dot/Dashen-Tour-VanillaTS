@@ -21,7 +21,7 @@ const NavigationBar = () => {
 
   const template = html`<nav class="nav-bar container-p" id="navBar">
     <div>
-      <a href="#/" class="nav-logo"> ${CompanyLogoIcon} </a>
+      <a href="#/" class="nav-logo"> ${CompanyLogoIcon()} </a>
     </div>
     <div>
       <nav class="main-nav secondary-nav">
