@@ -164,7 +164,7 @@ class HomeView {
               </div>
             </div>
             <div class="explore-more container-m">
-              <a href="#" class="explore-btn btn">Explore more</a>
+              <a href="#/destinations" class="explore-btn btn">Explore more</a>
             </div>
           </section>
           <section class="section-testimonials">
