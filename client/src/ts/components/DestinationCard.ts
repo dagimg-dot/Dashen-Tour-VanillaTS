@@ -1,8 +1,8 @@
 import { html } from "lit-html";
-import { StarIcon } from "./Icons";
 import { Destination } from "../models/models";
 import { noImage } from "../../static";
 import { cstyle } from "../utils/utilityFuncs";
+import { Rating } from "./Rating";
 
 interface DestinationProps {
   destinationInfo: Destination;
@@ -37,11 +37,7 @@ const DestinationCard = ({ destinationInfo, isLoading }: DestinationProps) => {
           )}>${destinationInfo.location}</span>
         </div>
         <div class="dest-rating">
-          ${StarIcon}
-          ${StarIcon}
-          ${StarIcon}
-          ${StarIcon}
-          ${StarIcon}
+          ${Rating({ rating: destinationInfo.rating })}
         </div>
       </div>
   </div>

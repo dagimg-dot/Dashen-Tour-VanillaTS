@@ -31,6 +31,7 @@ class DestinationView {
       name: "",
       location: "",
       description: "",
+      rating: null,
       images: [{ url: "" }],
     };
 

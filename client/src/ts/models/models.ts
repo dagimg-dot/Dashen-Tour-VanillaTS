@@ -1,8 +1,8 @@
 export type Destination = {
-    destinationId?: number;
-    name: string;
-    description: string;
-    location: string;
-    images: { url: string }[];
-  };
-  
+  destinationId?: number;
+  name: string;
+  description: string;
+  location: string;
+  rating: number | null;
+  images: { url: string }[];
+};
