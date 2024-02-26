@@ -16,9 +16,9 @@ const SideNavigation = () => {
 
   return (
     <aside class="text-white">
-      <A href="/" class="flex gap-2 items-center p-3 mb-4">
+      <A href="/" class="flex gap-2 items-center pl-4 pr-24 pb-4 pt-10 mb-4">
         <CompanyLogoIcon />
-        <span class="font-bold text-lg">Dashen Tour Admin</span>
+        <span class="font-bold text-lg">Admin</span>
       </A>
       <nav class="flex flex-col gap-4 p-3 pr-0">
         <NavElement
