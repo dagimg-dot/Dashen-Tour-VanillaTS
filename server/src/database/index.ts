@@ -4,6 +4,7 @@ import UserModel from '@models/users.model';
 import { logger } from '@utils/logger';
 import DestinationModel from '@/models/destinations.model';
 import DestinationImageModel from '@/models/destinationImages.model';
+import PackageModel from '@/models/packages.model';
 import { initializeAssociations } from '@/database/associations';
 
 const sequelize = new Sequelize.Sequelize({
@@ -32,6 +33,7 @@ export const DB = {
   Users: UserModel(sequelize),
   Destinations: DestinationModel(sequelize),
   DestinationImages: DestinationImageModel(sequelize),
+  Packages: PackageModel(sequelize),
   sequelize, // connection instance (RAW queries)
   Sequelize, // library
 };
