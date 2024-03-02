@@ -9,6 +9,7 @@ import {
 import toast, { Toaster } from "solid-toast";
 import Modal from "../../components/Modal";
 import { SpinnerTwo } from "../../components/Spinner";
+import Button from "../../components/Button";
 
 const Destinations = () => {
   const [destinations, { refetch }] =
@@ -26,9 +27,7 @@ const Destinations = () => {
     <Default>
       <Toaster />{" "}
       <A href="/destinations/new">
-        <button class="bg-main text-white rounded-lg px-2 py-2 hover:bg-main/90 ">
-          Add new destination
-        </button>
+        <Button name="Add new destination" />
       </A>
       <div>
         <Show when={isModalOpen()}>
@@ -67,9 +66,9 @@ const Destinations = () => {
           >
             <table class="custom-table mt-6">
               <thead>
-                <tr>
-                  <td class="text-lg font-semibold">Destination Name</td>
-                  <td class="text-lg font-semibold">Location</td>
+                <tr class="text-lg font-semibold">
+                  <td>Destination Name</td>
+                  <td>Location</td>
                 </tr>
               </thead>
               <tbody>
@@ -80,19 +79,15 @@ const Destinations = () => {
                       <td>{destination.location}</td>
                       <td>
                         <div class="flex gap-2 justify-center">
-                          <button class="bg-main text-white text-sm rounded-lg px-2 py-1 hover:bg-main/90">
-                            <A
-                              href={`/destinations/${destination.destinationId}`}
-                            >
-                              Edit
-                            </A>
-                          </button>
-                          <button
-                            class="bg-main text-white text-sm rounded-lg px-2 py-1 hover:bg-main/90"
-                            onclick={() => handleDeleteClick(destination)}
+                          <A
+                            href={`/destinations/${destination.destinationId}`}
                           >
-                            Delete
-                          </button>
+                            <Button name="Edit" />
+                          </A>
+                          <Button
+                            name="Delete"
+                            onClick={() => handleDeleteClick(destination)}
+                          />
                         </div>
                       </td>
                     </tr>
