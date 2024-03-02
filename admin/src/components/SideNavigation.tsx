@@ -47,7 +47,7 @@ const SideNavigation = () => {
           href="/packages"
           icon={
             <PackageIcon
-              isActive={pathname === "/packages"}
+              isActive={pathname.includes("/packages")}
               activeIcon={"stroke-main"}
             />
           }
