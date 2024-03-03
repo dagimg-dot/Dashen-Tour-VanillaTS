@@ -192,7 +192,7 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
                   type="checkbox"
                   name="isFeatured"
                   checked={formData.isFeatured}
-                  class="w-7 h-7"
+                  class="w-7 h-7 accent-main"
                   oninput={toggleCheckBox}
                 />
                 <span

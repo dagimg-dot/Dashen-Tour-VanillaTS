@@ -16,7 +16,7 @@ const Slider = (slider: SliderProps) => {
       <input
         type="range"
         name={DataSetFormMap[slider.type]}
-        class="w-full"
+        class="w-full accent-main"
         max={slider.max}
         value={slider.value}
         oninput={(event: { target: HTMLInputElement }) => slider.oninput(event)}
