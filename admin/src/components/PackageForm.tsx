@@ -186,7 +186,7 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
               />
             </div>
             <div class="flex flex-col gap-2">
-              <label>Featured</label>
+              <label>Featured in Home Page</label>
               <div class="flex gap-4 items-center">
                 <input
                   type="checkbox"
