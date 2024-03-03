@@ -185,14 +185,14 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
                 oninput={handleChange}
               />
             </div>
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-4">
               <label>Featured in Home Page</label>
               <div class="flex gap-4 items-center">
                 <input
                   type="checkbox"
                   name="isFeatured"
                   checked={formData.isFeatured}
-                  class="w-7 h-7 accent-main"
+                  class="w-7 h-7 accent-main cursor-pointer"
                   oninput={toggleCheckBox}
                 />
                 <span
