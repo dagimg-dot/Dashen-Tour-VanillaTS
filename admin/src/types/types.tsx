@@ -12,7 +12,7 @@ export interface Package {
   numberOfDays: number;
   hotelStar: number;
   numberOfLocations: number;
-  isFeatured: string;
+  isFeatured: boolean;
 }
 
 export const DataSetFormMap: { [index: string]: string } = {

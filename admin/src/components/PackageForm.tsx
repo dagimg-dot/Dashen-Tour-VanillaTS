@@ -18,7 +18,7 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
     numberOfDays: packageInfo?.numberOfDays || 1,
     hotelStar: packageInfo?.hotelStar || 1,
     numberOfLocations: packageInfo?.numberOfLocations || 1,
-    isFeatured: packageInfo?.isFeatured || "0",
+    isFeatured: packageInfo?.isFeatured || false,
   });
 
   createEffect(() => {
@@ -43,22 +43,20 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
     );
   };
 
+  const toggleCheckBox = () => {
+    setFormData((prev) => ({
+      ...prev,
+      isFeatured: !prev.isFeatured,
+    }));
+  };
+
   const handleChange = (event: { target: HTMLInputElement }) => {
     const { name, value } = event.target;
 
-    if (name == "isFeatured") {
-      setFormData((prev) => ({
-        ...prev,
-        isFeatured: value == "0" ? "1" : "0",
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
-
-    console.log(formData);
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSliderButtonClick = (event: MouseEvent, item: number) => {
@@ -185,6 +183,16 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
                 type="star"
                 onclick={handleSliderButtonClick}
                 oninput={handleChange}
+              />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label>Featured</label>
+              <input
+                type="checkbox"
+                name="isFeatured"
+                checked={formData.isFeatured}
+                class="w-fit"
+                oninput={toggleCheckBox}
               />
             </div>
           </div>
