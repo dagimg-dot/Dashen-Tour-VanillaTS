@@ -1,6 +1,6 @@
 import { html, render } from "lit-html";
 import "../../css/style.css";
-import { HomeState } from "../types/homeTypes";
+import { HomeReactiveElements, HomeState } from "../types/homeTypes";
 import {
   companyLogo,
   twitter,
@@ -10,21 +10,40 @@ import {
 } from "../../static";
 import { NavigationBar } from "../components/NavigationBar";
 import useAuth from "../hooks/useAuth";
-import { GlobalState } from "../types/types";
+import { EventCallBack, GlobalState } from "../types/types";
 import Footer from "../components/Footer";
 
 class HomeView {
   root: HTMLDivElement | null = null;
 
+  reactiveElements: HomeReactiveElements = {
+    contact: null,
+    packages: null,
+  };
+
   render(state: HomeState) {
     this.root = state.rootNode;
     const [authState] = useAuth();
     this._renderView(state, authState());
+    this._bindElements();
   }
 
   update(state: HomeState) {
     const [authState] = useAuth();
     this._renderView(state, authState());
+  }
+
+  _bindElements() {
+    const refs = Object.keys(this.reactiveElements);
+
+    refs.forEach((ref) => {
+      this.reactiveElements[ref] = document.getElementById(ref);
+    });
+  }
+
+  handleNavLinkClick(handler: EventCallBack<PointerEvent>) {
+    this.reactiveElements.contact!["onclick"] = handler as EventListener;
+    this.reactiveElements.packages!["onclick"] = handler as EventListener;
   }
 
   _renderView(state: HomeState, authState: GlobalState) {
@@ -75,9 +94,19 @@ class HomeView {
                 </div>
                 <nav class="main-nav container-p">
                   <ul class="main-nav-list">
-                    <li><a href="" class="main-nav-link">Contact</a></li>
-                    <li><a href="" class="main-nav-link">Packages</a></li>
-                    <li><a href="#/destinations" class="main-nav-link">Destinations</a></li>
+                    <li>
+                      <a href="" class="main-nav-link" id="contact">Contact</a>
+                    </li>
+                    <li>
+                      <a href="" class="main-nav-link" id="packages"
+                        >Packages</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#/destinations" class="main-nav-link"
+                        >Destinations</a
+                      >
+                    </li>
                     <li><a href="#/" class="main-nav-link">Booking</a></li>
                     <li>
                       ${authState.isAuthenticated
@@ -313,7 +342,7 @@ class HomeView {
               </figure>
             </div>
           </section>
-          <section class="section-packages">
+          <section class="section-packages" id="section-packages">
             <div class="container-m">
               <span class="sub-heading">packages</span>
               <h2 class="heading-secondary">
@@ -556,7 +585,7 @@ class HomeView {
               </div>
             </div>
           </section>
-          <section class="section-cta" id="contact">
+          <section class="section-cta" id="section-contact">
             <div class="container-m">
               <div class="cta">
                 <div class="cta-text-box">

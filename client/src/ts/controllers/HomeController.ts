@@ -9,12 +9,20 @@ const HomeController = ({ root, title }: CoreElements) => {
     rootNode: root,
   };
 
-  (() => {
-    title.innerText = "Dashen Tour";
-    HomeView.render(initialState);
-    applyStickyNavBar();
-    NavigationBarController()
-  })();
+  title.innerText = "Dashen Tour";
+  HomeView.render(initialState);
+  applyStickyNavBar();
+  NavigationBarController();
+
+  HomeView.handleNavLinkClick((event: PointerEvent) => {
+    event.preventDefault();
+
+    const navLinkId = (event.target as HTMLAnchorElement).id;
+    const sectionId = "section-" + navLinkId;
+    const el = document.getElementById(sectionId) as HTMLElement;
+
+    el.scrollIntoView({ behavior: "smooth" });
+  });
 };
 
 export default HomeController;
