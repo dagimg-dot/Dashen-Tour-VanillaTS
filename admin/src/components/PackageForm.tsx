@@ -187,13 +187,22 @@ const PackageForm = ({ packageInfo }: PackageFormProps) => {
             </div>
             <div class="flex flex-col gap-2">
               <label>Featured</label>
-              <input
-                type="checkbox"
-                name="isFeatured"
-                checked={formData.isFeatured}
-                class="w-fit"
-                oninput={toggleCheckBox}
-              />
+              <div class="flex gap-4 items-center">
+                <input
+                  type="checkbox"
+                  name="isFeatured"
+                  checked={formData.isFeatured}
+                  class="w-7 h-7"
+                  oninput={toggleCheckBox}
+                />
+                <span
+                  class={`text-white py-[2px] px-2 rounded-lg ${
+                    formData.isFeatured ? "bg-green-600" : "bg-red-600"
+                  }`}
+                >
+                  {formData.isFeatured ? "Featured" : "Not featured"}
+                </span>
+              </div>
             </div>
           </div>
           <button
