@@ -17,6 +17,13 @@
 }
 
 .dest-heading {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+    gap: 8px;
+}
+
+.dest-heading h1 {
     font-size: 3.2rem;
 }
 

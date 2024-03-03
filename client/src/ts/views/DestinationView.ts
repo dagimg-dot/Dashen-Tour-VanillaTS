@@ -40,7 +40,10 @@ class DestinationView {
           <nav class="destination-nav">${NavigationBar()}</nav>
           <div class="main container-m">
             <header class="destination-header">
-              <h1 class="dest-heading">All Destinations</h1>
+              <div class="dest-heading">
+                <h1>All Destinations</h1>
+                <h2>Page ${state.currentPage}</h2>
+              </div>
               <div class="dest-header-right">
                 <div>${SearchIcon}</div>
                 <select class="dest-filter">
