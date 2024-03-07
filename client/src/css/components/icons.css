@@ -1,11 +1,14 @@
 .icon {
     height: 24px;
     width: 24px;
-    fill: white;
+    fill: var(--primary);
 }
 
 .to-top {
     transform: rotate(-90deg);
+    height: 24px;
+    width: 24px;
+    fill: white
 }
 
 .to-top-container {
