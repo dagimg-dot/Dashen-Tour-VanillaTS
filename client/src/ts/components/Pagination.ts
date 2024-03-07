@@ -3,6 +3,7 @@ import "../../css/components/pagination.css";
 import { ChevronLeft, ChevronRight } from "./Icons";
 import { cstyle, iterator, scrollToTop } from "../utils/utilityFuncs";
 import { DESTINATIONACTIONS } from "../types/destinationTypes";
+import "../../css/components/icons.css"
 
 interface PaginationProps {
   currentPage: number;
