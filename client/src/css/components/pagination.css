@@ -6,12 +6,6 @@
     gap: 1.6rem;
 }
 
-.icon {
-    height: 24px;
-    width: 24px;
-    fill: var(--primary);
-}
-
 .icon-btn, .page-btn {
     outline: none;
     background-color: white;
