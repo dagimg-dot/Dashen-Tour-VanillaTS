@@ -1,7 +1,7 @@
 import { NavigationBarController } from "../components/NavigationBar";
 import { HomeState } from "../types/homeTypes";
 import { CoreElements } from "../types/types";
-import { applyStickyNavBar } from "../utils/utilityFuncs";
+import { applyScrollEvents, scrollToTop } from "../utils/utilityFuncs";
 import HomeView from "../views/HomeView";
 
 const HomeController = ({ root, title }: CoreElements) => {
@@ -11,7 +11,7 @@ const HomeController = ({ root, title }: CoreElements) => {
 
   title.innerText = "Dashen Tour";
   HomeView.render(initialState);
-  applyStickyNavBar();
+  applyScrollEvents();
   NavigationBarController();
 
   HomeView.handleNavLinkClick((event: PointerEvent) => {
@@ -23,6 +23,8 @@ const HomeController = ({ root, title }: CoreElements) => {
 
     el.scrollIntoView({ behavior: "smooth" });
   });
+
+  HomeView.handleToTopButtonClick(() => scrollToTop());
 };
 
 export default HomeController;

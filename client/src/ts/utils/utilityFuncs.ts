@@ -8,10 +8,10 @@ const isEventFull = (variable: Object) => {
 
 const applyStickyNavBar = () => {
   const nav = document.querySelector(".nav-bar") as HTMLElement;
-
+  
   const sticky = nav.offsetTop;
 
-  const stickNavBar = () => {
+  const stick = () => {
     if (window.scrollY >= sticky) {
       nav.classList.add("sticky");
       nav.classList.remove("hidden");
@@ -21,7 +21,40 @@ const applyStickyNavBar = () => {
     }
   };
 
-  window.onscroll = () => stickNavBar();
+  return stick;
+};
+
+const applyToTopBtn = () => {
+  const toTopBtn = document.getElementById("toTopBtn") as HTMLButtonElement;
+  const offset = document.querySelector(".offset") as HTMLDivElement;
+
+  const theOffset = offset.offsetTop;
+
+  const stick = () => {
+    if (window.scrollY > 250) {
+      toTopBtn.classList.add("sticky-totop");
+    } else {
+      toTopBtn.classList.remove("sticky-totop");
+    }
+
+    if (window.scrollY >= theOffset - 580) {
+      toTopBtn.style.position = "absolute";
+    } else {
+      toTopBtn.style.position = "fixed";
+    }
+  };
+
+  return stick;
+};
+
+const applyScrollEvents = () => {
+  const stickNavBar = applyStickyNavBar();
+  const stickToTopBtn = applyToTopBtn();
+
+  window.onscroll = () => {
+    stickNavBar();
+    stickToTopBtn();
+  };
 };
 
 const cstyle = (
@@ -52,7 +85,7 @@ const iterator = (range: number) => {
 export {
   isObject,
   isEventFull,
-  applyStickyNavBar,
+  applyScrollEvents,
   cstyle,
   scrollToTop,
   iterator,

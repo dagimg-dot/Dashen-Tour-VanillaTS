@@ -12,6 +12,7 @@ import { NavigationBar } from "../components/NavigationBar";
 import useAuth from "../hooks/useAuth";
 import { EventCallBack, GlobalState } from "../types/types";
 import Footer from "../components/Footer";
+import { ChevronUp } from "../components/Icons";
 
 class HomeView {
   root: HTMLDivElement | null = null;
@@ -19,6 +20,7 @@ class HomeView {
   reactiveElements: HomeReactiveElements = {
     contact: null,
     packages: null,
+    toTopBtn: null,
   };
 
   render(state: HomeState) {
@@ -46,10 +48,14 @@ class HomeView {
     this.reactiveElements.packages!["onclick"] = handler as EventListener;
   }
 
+  handleToTopButtonClick(handler: EventCallBack<PointerEvent>) {
+    this.reactiveElements.toTopBtn!["onclick"] = handler as EventListener;
+  }
+
   _renderView(state: HomeState, authState: GlobalState) {
     render(
       html`
-        <main>
+        <main class="main-page">
           <section class="section-hero">
             <div class="hero grid grid-2-cols">
               <div class="blur-wrap">
@@ -664,7 +670,11 @@ class HomeView {
                 ></div>
               </div>
             </div>
+            <div class="offset"></div>
           </section>
+          <div id="toTopBtn" class="to-top-container" title="Scroll to top">
+            ${ChevronUp}
+          </div>
         </main>
         ${Footer()}
       `,
