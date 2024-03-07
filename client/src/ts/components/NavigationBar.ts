@@ -27,9 +27,9 @@ const NavigationBar = () => {
       <nav class="main-nav secondary-nav">
         <ul class="main-nav-list">
           <li>
-            <a href="#" class=${activeNav("/about")}>About</a>
+            <a href="#/about" class=${activeNav("/about")}>About</a>
           </li>
-          <li><a href="#" class=${activeNav("/packages")}>Packages</a></li>
+          <li><a href="#/" class=${activeNav("/packages")}>Packages</a></li>
           <li>
             <a href="#/destinations" class=${activeNav("/destinations")}>
               Destinations
