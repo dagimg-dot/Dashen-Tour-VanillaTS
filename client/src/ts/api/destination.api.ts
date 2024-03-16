@@ -15,4 +15,16 @@ const fetchDestinations = async (
   return { destinations: data.data, totalPages: data.totalPages };
 };
 
-export { fetchDestinations };
+const fetchTopRatedDestinations = async (): Promise<Destination[]> => {
+  const url = `${API_BASE_URL}/destinations/toprated`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.error) {
+    throw new Error("Failed to fetch top destinations");
+  }
+
+  return data.data;
+};
+
+export { fetchDestinations, fetchTopRatedDestinations };

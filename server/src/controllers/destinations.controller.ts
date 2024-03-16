@@ -12,11 +12,34 @@ export class DestinationController {
         const pageNumber = +req.query.page;
         const { destinations: findAllDestinationsData, numberOfPages } = await this.destinationService.findDestinations(pageNumber);
 
+        // await new Promise(resolve => setTimeout(resolve, 4000));
+
         res.status(200).json({ data: findAllDestinationsData, totalPages: numberOfPages, message: 'findAll' });
       } else {
         const findAllDestinationsData = await this.destinationService.findAllDestinations();
 
         res.status(200).json({ data: findAllDestinationsData, message: 'findAll' });
+      }
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getTopRatedDestinations = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (req.query.max) {
+        const max = +req.query.max;
+        const topRatedDestinations = await this.destinationService.findTopRatedDestinations(max);
+
+        // await new Promise(resolve => setTimeout(resolve, 3000));
+
+        res.status(200).json({ data: topRatedDestinations, message: 'top rated' });
+      } else {
+        const topRatedDestinations = await this.destinationService.findTopRatedDestinations();
+
+        // await new Promise(resolve => setTimeout(resolve, 3000));
+
+        res.status(200).json({ data: topRatedDestinations, message: 'top rated' });
       }
     } catch (error) {
       next(error);

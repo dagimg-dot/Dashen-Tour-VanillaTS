@@ -25,6 +25,12 @@ export class DestinationService {
     return { destinations, numberOfPages };
   }
 
+  public async findTopRatedDestinations(max = 3): Promise<Destination[]> {
+    const destinations: Destination[] = await DB.Destinations.findAll({ include: 'images', order: [['rating', 'DESC']], limit: max });
+
+    return destinations;
+  }
+
   public async findDestinationById(destinationId: number): Promise<Destination> {
     const findDestination = await DB.Destinations.findByPk(destinationId, {
       include: 'images',

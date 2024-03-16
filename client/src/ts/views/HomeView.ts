@@ -13,6 +13,7 @@ import useAuth from "../hooks/useAuth";
 import { EventCallBack, GlobalState } from "../types/types";
 import Footer from "../components/Footer";
 import { ChevronUp } from "../components/Icons";
+import { TopRatedDestinations } from "../components/TopRatedDestinations";
 
 class HomeView {
   root: HTMLDivElement | null = null;
@@ -41,6 +42,10 @@ class HomeView {
     refs.forEach((ref) => {
       this.reactiveElements[ref] = document.getElementById(ref);
     });
+  }
+
+  onPageLoad(handler: Function) {
+    handler();
   }
 
   handleNavLinkClick(handler: EventCallBack<PointerEvent>) {
@@ -137,67 +142,7 @@ class HomeView {
                 package to
               </h2>
             </div>
-            <div class="container-m">
-              <div class="destinations grid grid-2-cols grid-center-v">
-                <!-- Top Destination 01 -->
-                <div class="top-dest-text-box">
-                  <p class="top-dest-number">፩</p>
-                  <h3 class="heading-tertiary">Fasiledes Castle</h3>
-                  <p class="top-dest-description">
-                    Fasiledes Castle is located in the beautiful and historical
-                    city of Gondar, a city in the amhara region. It is 650km
-                    away from the capital city Addis Ababa. This tourist
-                    location has a plenty of things to watch for like the whole
-                    city, the people, the culture and so on.
-                  </p>
-                </div>
-                <div class="top-dest-img-box">
-                  <img
-                    src="./src/assets/images/destinations/007.jpg"
-                    alt="Picture of Gondar Fasiledes Castle"
-                    class="top-dest-img"
-                  />
-                </div>
-                <!-- Top Destination 02 -->
-                <div class="top-dest-img-box">
-                  <img
-                    src="./src/assets/images/destinations/011.jpg"
-                    alt="Picture of Gondar Fasiledes Castle"
-                    class="top-dest-img"
-                  />
-                </div>
-                <div class="top-dest-text-box">
-                  <p class="top-dest-number">፪</p>
-                  <h3 class="heading-tertiary">Gerehalta</h3>
-                  <p class="top-dest-description">
-                    Fasiledes Castle is located in the beautiful and historical
-                    city of Gondar, a city in the amhara region. It is 650km
-                    away from the capital city Addis Ababa. This tourist
-                    location has a plenty of things to watch for like the whole
-                    city, the people, the culture and so on.
-                  </p>
-                </div>
-                <!-- Top Destination 03 -->
-                <div class="top-dest-text-box">
-                  <p class="top-dest-number">፫</p>
-                  <h3 class="heading-tertiary">Lalibela</h3>
-                  <p class="top-dest-description">
-                    Fasiledes Castle is located in the beautiful and historical
-                    city of Gondar, a city in the amhara region. It is 650km
-                    away from the capital city Addis Ababa. This tourist
-                    location has a plenty of things to watch for like the whole
-                    city, the people, the culture and so on.
-                  </p>
-                </div>
-                <div class="top-dest-img-box">
-                  <img
-                    src="./src/assets/images/destinations/016.jpg"
-                    alt="Picture of Gondar Fasiledes Castle"
-                    class="top-dest-img"
-                  />
-                </div>
-              </div>
-            </div>
+            <div class="container-m">${TopRatedDestinations(state)}</div>
             <div class="explore-more container-m">
               <a href="#/destinations" class="explore-btn btn">Explore more</a>
             </div>
