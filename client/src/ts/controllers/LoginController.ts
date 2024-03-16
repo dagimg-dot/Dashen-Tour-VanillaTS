@@ -1,4 +1,4 @@
-import { CoreElements, UserInfo } from "../types/types";
+import { CoreElements } from "../types/types";
 import { LoginState, LOGINACTIONS, LoginFormData } from "../types/loginTypes";
 
 import useReducer from "../hooks/useReducer";
@@ -8,6 +8,7 @@ import LoginView from "../views/LoginView";
 import { login } from "../api/auth.api";
 import useToast from "../hooks/useToast";
 import useAuth from "../hooks/useAuth";
+import { UserInfo } from "../models/models";
 
 const LoginController = ({ root, title }: CoreElements) => {
   const initialState: LoginState = {

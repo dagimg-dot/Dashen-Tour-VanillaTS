@@ -1,3 +1,5 @@
+import { UserInfo } from "../models/models";
+
 export type CoreElements = {
   root: HTMLDivElement;
   title: HTMLTitleElement;
@@ -28,13 +30,6 @@ export type Reducer<S, A> = (state: S, action: A) => S;
 type ReactiveElement = HTMLElement | null;
 
 export type ReactiveElements = Record<string, ReactiveElement>;
-
-export type UserInfo = {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-};
 
 export type GlobalState = {
   user: UserInfo | null;
