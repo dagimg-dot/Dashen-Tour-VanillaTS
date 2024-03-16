@@ -131,7 +131,7 @@ class HomeView {
           <div>${NavigationBar()}</div>
           <section class="section-top-dest">
             <div class="container-m">
-              <span class="sub-heading">top destinations</span>
+              <span class="sub-heading">top rated destinations</span>
               <h2 class="heading-secondary">
                 Some of the most popular and best locations that we provide
                 package to
