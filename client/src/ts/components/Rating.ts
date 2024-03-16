@@ -19,7 +19,7 @@ const Rating = ({ rating }: RatingProps) => {
   const template = html`<div>
     ${rating !== null
       ? iterator(MAX_RATING).map((num) => {
-          return num < rating ? StarIcon("orange") : StarIcon("white");
+          return num < rating ? StarIcon("orange") : StarIcon("#d5d5cf");
         })
       : UnRated}
   </div>`;
