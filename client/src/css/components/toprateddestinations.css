@@ -1,0 +1,105 @@
+.section-top-dest {
+    padding: 8.4rem 0;
+    margin-top: 5rem;
+}
+
+.top-dest-number {
+    font-size: 9.6rem;
+    font-weight: 600;
+    color: #ddd;
+    margin-bottom: 2.4rem;
+}
+
+.top-dest-description {
+    font-size: 2.4rem;
+    color: #333;
+    line-height: 1.2;
+}
+
+.top-dest-img-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-dest-img {
+    width: 50%;
+    border-radius: 20px;
+}
+
+.top-dest-rating {
+    margin: 2rem 0;
+}
+
+.explore-more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 4.8rem;
+}
+
+.explore-btn:link, .explore-btn:visited {
+    color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary);
+}
+
+.explore-btn:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 12px;
+}
+
+.skeleton-text {
+    animation: skeleton-loading-text 1s linear infinite alternate;
+    border-radius: 12px;
+}
+
+.top-dest-info-container {
+    width: 14rem;
+    height: 2rem;
+}
+
+.top-dest-desc-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.top-dest-img-skeleton {
+    width: 70%;
+    height: 20rem;
+}
+
+.line-1 {
+    width: 100%;
+    height: 2rem;
+}
+
+.line-2 {
+    width: 80%;
+    height: 2rem;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@keyframes skeleton-loading-text {
+    0% {
+        background-color: hsl(200, 20%, 95%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 70%);
+    }
+}
