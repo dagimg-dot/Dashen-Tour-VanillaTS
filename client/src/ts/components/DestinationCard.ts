@@ -3,6 +3,7 @@ import { Destination } from "../models/models";
 import { noImage } from "../../static";
 import { cstyle } from "../utils/utilityFuncs";
 import { Rating } from "./Rating";
+import { ifDefined } from "lit-html/directives/if-defined.js";
 
 interface DestinationProps {
   destinationInfo: Destination;
@@ -11,7 +12,12 @@ interface DestinationProps {
 
 const DestinationCard = ({ destinationInfo, isLoading }: DestinationProps) => {
   const template = html`
-      <div class=${cstyle(isLoading, true, "dest-image", "skeleton")}>
+      <div class=${cstyle(
+        isLoading,
+        true,
+        "dest-image",
+        "skeleton"
+      )} data-idx=${ifDefined(destinationInfo.destinationId)}>
         ${
           !isLoading
             ? destinationInfo.images.length == 0
@@ -46,4 +52,14 @@ const DestinationCard = ({ destinationInfo, isLoading }: DestinationProps) => {
   return template;
 };
 
-export { DestinationCard };
+const DestinationCardController = (controller: Function) => {
+  const destImage = document.querySelectorAll(
+    ".dest-image"
+  ) as unknown as HTMLDivElement[];
+
+  destImage.forEach((container) => {
+    container.onclick = () => controller(container.dataset.idx);
+  });
+};
+
+export { DestinationCard, DestinationCardController };
