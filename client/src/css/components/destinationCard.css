@@ -33,6 +33,7 @@
     position: relative;
     height: 35rem;
     border-radius: 12px;
+    cursor: pointer;
 }
 
 .dest-image img {
