@@ -1,4 +1,6 @@
 import { fetchDestinations } from "../api/destination.api";
+import { DestinationCardController } from "../components/DestinationCard";
+import { ModalController } from "../components/Modal";
 import { NavigationBarController } from "../components/NavigationBar";
 import { PaginationController } from "../components/Pagination";
 import useReducer from "../hooks/useReducer";
@@ -44,6 +46,9 @@ const DestinationController = ({ root, title }: CoreElements) => {
         { type: "SET_CURRENT_PAGE", payload: pageNumber },
         { type: "SET_TOTAL_PAGES", payload: totalPages },
       ]);
+
+      // Open modal to show destination images
+      DestinationCardController(ModalController);
     } catch (error) {
       console.log((error as Error).message);
     }

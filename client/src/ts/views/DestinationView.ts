@@ -9,6 +9,7 @@ import "../../css/components/navigationbar.css";
 import "../../css/components/destinationCard.css";
 import { Pagination } from "../components/Pagination";
 import { iterator } from "../utils/utilityFuncs";
+import { Modal } from "../components/Modal";
 
 class DestinationView {
   root: HTMLDivElement | null = null;
@@ -36,7 +37,8 @@ class DestinationView {
     };
 
     render(
-      html`<div>
+      html`${Modal()}
+        <div>
           <nav class="destination-nav">${NavigationBar()}</nav>
           <div class="main container-m">
             <header class="destination-header">
