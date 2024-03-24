@@ -1,42 +1,36 @@
-import { html } from "lit-html";
+import { html, render } from "lit-html";
 import "../../css/components/modal.css";
 import { CloseIcon } from "./Icons";
-// import { Destination } from "../models/models";
+import { Destination } from "../models/models";
+import { fetchDestination } from "../api/destination.api";
 
-// interface ModalProps {
-//   detinationInfo: Destination;
-// }
+interface ModalProps {
+  destinationInfo: Destination;
+}
 
-// const skeletonObj = {
-//   name: "",
-//   location: "",
-//   description: "",
-//   rating: null,
-//   images: [{ url: "" }],
-// };
+const skeletonObj = {
+  name: "",
+  location: "",
+  description: "",
+  rating: null,
+  images: [{ url: "" }],
+};
 
-const images = [
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-  "../../../src/assets/images/destinations/012.jpg",
-];
-
-const Modal = () => {
+const Modal = ({ destinationInfo }: ModalProps) => {
   const template = html`<div class="dest-overlay">
     <div class="dest-modal">
       <div class="dest-modal-header">
         <div></div>
-        <div class="dest-modal-heading">Lake tana | Bahir Dar</div>
+        <div class="dest-modal-heading">
+          ${destinationInfo.name + " | " + destinationInfo.location}
+        </div>
         <div class="close-container" id="closeBtn">${CloseIcon}</div>
       </div>
       <div class="dest-modal-imgs">
-        ${images.map((img) => {
-          return html`<div class="dest-modal-img"><img src=${img} /></div>`;
+        ${destinationInfo.images.map((img) => {
+          return html`<div class="dest-modal-img">
+            <img crossorigin="anonymous" src=${img.url} />
+          </div>`;
         })}
       </div>
     </div>
@@ -45,11 +39,26 @@ const Modal = () => {
   return template;
 };
 
-const ModalController = (destinationId: number) => {
+const useState = <S extends Destination>(container: HTMLElement) => {
+  function setState(newState: S) {
+    render(Modal({ destinationInfo: newState }), container);
+  }
+
+  return setState;
+};
+
+const ModalController = async (destinationId: number) => {
+  const modalCont = document.getElementById("modal") as HTMLDivElement;
+  render(Modal({ destinationInfo: skeletonObj }), modalCont);
+
+  const setDestination = useState<Destination>(modalCont);
+
+  const destinationInfo = await fetchDestination(destinationId);
+  setDestination(destinationInfo);
+
   const modal = document.querySelector(".dest-modal") as HTMLDivElement;
   const destOverlay = document.querySelector(".dest-overlay") as HTMLDivElement;
   const closeBtn = document.getElementById("closeBtn") as HTMLDivElement;
-
   const open = () => {
     modal.classList.add("active");
     destOverlay.classList.add("active");
@@ -76,8 +85,6 @@ const ModalController = (destinationId: number) => {
   };
 
   closeBtn.onclick = () => close();
-
-  console.log(destinationId);
 };
 
 export { Modal, ModalController };
