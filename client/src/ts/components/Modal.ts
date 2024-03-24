@@ -35,6 +35,10 @@ const Modal = ({ destinationInfo, isLoading }: ModalProps) => {
                 style="width: 45rem; height: 35rem"
               ></div>`;
             })
+          : destinationInfo?.images.length == 0
+          ? html`<span class="no-img"
+              >There are no images for ${destinationInfo.name}</span
+            >`
           : destinationInfo?.images.map((img) => {
               return html`<div class="dest-modal-img">
                 <img crossorigin="anonymous" src=${img.url} />
