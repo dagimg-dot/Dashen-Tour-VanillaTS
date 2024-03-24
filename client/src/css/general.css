@@ -202,11 +202,16 @@ body {
 
 .main-wrapper {
   display: flex;
-  /* align-items: center; */
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   max-width: 100vw;
   height: 100vh;
+  gap: 6rem;
   background: linear-gradient(to right bottom, var(--primary), #c27777);
+}
+
+.main-wrapper a {
+  width: fit-content;
 }
 
 .main-message {

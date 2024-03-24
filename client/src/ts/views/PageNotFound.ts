@@ -9,6 +9,7 @@ class PageNotFound {
             <h1 class="status-code">404</h1>
             <span class="status-message">Page not found</span>
           </div>
+          <a class="btn btn-fill" href="#/">Go back Home</a>
         </div>
       `,
       root
