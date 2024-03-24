@@ -101,3 +101,33 @@
     background-color: #857f7f;
     border-radius: 12px;
 }
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+    border-radius: 12px;
+}
+
+.skeleton-text {
+    animation: skeleton-loading-text 1s linear infinite alternate;
+    border-radius: 12px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+@keyframes skeleton-loading-text {
+    0% {
+        background-color: hsl(200, 20%, 95%);
+    }
+
+    100% {
+        background-color: hsl(200, 20%, 70%);
+    }
+}
