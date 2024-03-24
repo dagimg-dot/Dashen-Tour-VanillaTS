@@ -10,15 +10,7 @@ interface ModalProps {
   isLoading?: boolean;
 }
 
-const skeletonObj = {
-  name: "",
-  location: "",
-  description: "",
-  rating: null,
-  images: [{ url: "" }],
-};
-
-const Modal = ({ destinationInfo = skeletonObj, isLoading }: ModalProps) => {
+const Modal = ({ destinationInfo, isLoading }: ModalProps) => {
   const modalCont = document.getElementById("modal") as HTMLDivElement;
 
   const template = html`<div class="dest-overlay">
@@ -31,7 +23,7 @@ const Modal = ({ destinationInfo = skeletonObj, isLoading }: ModalProps) => {
               style="width: 23rem; height: 3rem"
             ></div>`
           : html`<div class="dest-modal-heading">
-              ${destinationInfo.name + " | " + destinationInfo.location}
+              ${destinationInfo?.name + " | " + destinationInfo?.location}
             </div>`}
         <div class="close-container" id="closeBtn">${CloseIcon}</div>
       </div>
@@ -43,7 +35,7 @@ const Modal = ({ destinationInfo = skeletonObj, isLoading }: ModalProps) => {
                 style="width: 45rem; height: 35rem"
               ></div>`;
             })
-          : destinationInfo.images.map((img) => {
+          : destinationInfo?.images.map((img) => {
               return html`<div class="dest-modal-img">
                 <img crossorigin="anonymous" src=${img.url} />
               </div>`;
