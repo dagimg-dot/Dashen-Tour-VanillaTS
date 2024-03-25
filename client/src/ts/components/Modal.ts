@@ -10,12 +10,8 @@ interface ModalProps {
   isLoading?: boolean;
 }
 
-let modalCont: HTMLDivElement | null = null;
-
 const Modal = ({ destinationInfo, isLoading }: ModalProps) => {
-  if (modalCont == null) {
-    modalCont = getContainer<HTMLDivElement>("modal");
-  }
+  const modalCont = getContainer<HTMLDivElement>("modal");
 
   const template = html`<div class="dest-overlay">
     <div class="dest-modal">
