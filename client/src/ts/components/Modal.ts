@@ -3,15 +3,19 @@ import "../../css/components/modal.css";
 import { CloseIcon } from "./Icons";
 import { Destination } from "../models/models";
 import { fetchDestination } from "../api/destination.api";
-import { iterator } from "../utils/utilityFuncs";
+import { getContainer, iterator } from "../utils/utilityFuncs";
 
 interface ModalProps {
   destinationInfo?: Destination;
   isLoading?: boolean;
 }
 
+let modalCont: HTMLDivElement | null = null;
+
 const Modal = ({ destinationInfo, isLoading }: ModalProps) => {
-  const modalCont = document.getElementById("modal") as HTMLDivElement;
+  if (modalCont == null) {
+    modalCont = getContainer<HTMLDivElement>("modal");
+  }
 
   const template = html`<div class="dest-overlay">
     <div class="dest-modal">

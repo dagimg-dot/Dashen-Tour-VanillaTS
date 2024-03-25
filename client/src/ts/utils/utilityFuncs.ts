@@ -8,7 +8,7 @@ const isEventFull = (variable: Object) => {
 
 const applyStickyNavBar = () => {
   const nav = document.querySelector(".nav-bar") as HTMLElement;
-  
+
   const sticky = nav.offsetTop;
 
   const stick = () => {
@@ -82,6 +82,10 @@ const iterator = (range: number) => {
   return arr;
 };
 
+const getContainer = <T>(id: string) => {
+  return document.getElementById(id) as T;
+};
+
 export {
   isObject,
   isEventFull,
@@ -89,4 +93,5 @@ export {
   cstyle,
   scrollToTop,
   iterator,
+  getContainer,
 };
